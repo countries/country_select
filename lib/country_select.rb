@@ -4,7 +4,7 @@ module ActionView
     module FormOptionsHelper
       # Return select and option tags for the given object and method, using country_options_for_select to generate the list of option tags.
       def country_select(object, method, priority_countries = nil, options = {}, html_options = {})
-        InstanceTag.new(object, method, self, nil, options.delete(:object)).to_country_select_tag(priority_countries, options, html_options)
+        InstanceTag.new(object, method, self, options.delete(:object)).to_country_select_tag(priority_countries, options, html_options)
       end
       # Returns a string of option tags for pretty much any country in the world. Supply a country name as +selected+ to
       # have it marked as the selected option tag. You can also supply an array of countries as +priority_countries+, so
