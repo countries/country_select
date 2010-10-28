@@ -17,6 +17,10 @@ module ActionView
         if priority_countries
           country_options += options_for_select(priority_countries, selected)
           country_options += "<option value=\"\" disabled=\"disabled\">-------------</option>\n"
+          # prevents selected from being included twice in the HTML which causes
+          # some browsers to select the second selected option (not priority)
+          # which makes it harder to select an alternative priority country
+          selected=nil if priority_countries.include?(selected)
         end
 
         return country_options + options_for_select(COUNTRIES, selected)
