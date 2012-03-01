@@ -14,11 +14,11 @@ module ActionView
       #
       # NOTE: Only the option tags are returned, you have to wrap this call in a regular HTML select tag.
       def country_options_for_select(selected = nil, priority_countries = nil)
-        country_options = ""
+        country_options = "".html_safe
 
         if priority_countries
           country_options += options_for_select(priority_countries, selected)
-          country_options += "<option value=\"\" disabled=\"disabled\">-------------</option>\n"
+          country_options += "<option value=\"\" disabled=\"disabled\">-------------</option>\n".html_safe
           # prevents selected from being included twice in the HTML which causes
           # some browsers to select the second selected option (not priority)
           # which makes it harder to select an alternative priority country
