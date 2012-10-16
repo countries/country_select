@@ -28,13 +28,7 @@ Supplying priority countries to be placed at the top of the list:
 
 Specifying which country to be selected:
 United Kingdom will be selected.
-country_select("user", "country_name", [ "+United Kingdom+", "France", "Germany" ])
 
-Example in a Rails form:
-Full list, with New Zealand Australia and United Kingdom prioritized (New Zealand selected
-by default)
-<%= country_select(:player, :nationality, [ "+New Zealand+", "Australia", "United Kingdom" ])
-%>
-
+    country_select("user", "country_name", [ "+United Kingdom+", "France", "Germany" ])
 
 Copyright (c) 2008 Michael Koziarski, released under the MIT license
