@@ -1,4 +1,4 @@
-Country-Select
+Country_Select
 
 Provides a simple helper to get an HTML select list of countries.  The list of countries comes
 from the ISO 3166 standard.  While it is a relatively neutral source of country names, it may
@@ -10,11 +10,11 @@ Users are strongly advised to evaluate the suitability of this list given their 
 
 Install as a gem using
 
-    gem install country-select
+    gem install country_select
 
 Or put the following in your Gemfile
 
-    gem 'country-select'
+    gem 'country_select'
 
 ## Example
 
