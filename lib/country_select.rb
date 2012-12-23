@@ -6,7 +6,12 @@ module ActionView
     module FormOptionsHelper
       # Return select and option tags for the given object and method, using country_options_for_select to generate the list of option tags.
       def country_select(object, method, priority_countries = nil, options = {}, html_options = {})
-        InstanceTag.new(object, method, self, options.delete(:object)).to_country_select_tag(priority_countries, options, html_options)
+        # check if InstanceTag defined and accepts more than zero attributes in new method
+        if defined?(ActionView::Helpers::InstanceTag) && ActionView::Helpers::InstanceTag.instance_method(:initialize).arity != 0
+          InstanceTag.new(object, method, self, options.delete(:object)).to_country_select_tag(priority_countries, options, html_options)
+        else
+          ActionView::Helpers::Tags::Base.new(object, method, self, options).to_country_select_tag(priority_countries, options, html_options)
+        end
       end
       # Returns a string of option tags for pretty much any country in the world. Supply a country name as +selected+ to
       # have it marked as the selected option tag. You can also supply an array of countries as +priority_countries+, so
@@ -67,7 +72,7 @@ module ActionView
         "Yemen", "Zambia", "Zimbabwe"] unless const_defined?("COUNTRIES")
     end
 
-    class InstanceTag
+    module ToCountrySelectTag
       def to_country_select_tag(priority_countries, options, html_options)
         html_options = html_options.stringify_keys
         add_default_name_and_id(html_options)
@@ -78,6 +83,63 @@ module ActionView
             options, value
           ), html_options
         )
+      end
+    end
+
+    if defined?(ActionView::Helpers::InstanceTag) && ActionView::Helpers::InstanceTag.instance_method(:initialize).arity != 0
+      class InstanceTag
+        include ToCountrySelectTag
+      end
+    else
+      module ::ActionView
+        module Helpers
+          module Tags
+            class Base
+              include ToCountrySelectTag
+
+              private
+                def add_default_name_and_id(options)
+                  if options.has_key?("index")
+                    options["name"] ||= tag_name_with_index(options["index"])
+                    options["id"] = options.fetch("id"){ tag_id_with_index(options["index"]) }
+                    options.delete("index")
+                  elsif defined?(@auto_index)
+                    options["name"] ||= tag_name_with_index(@auto_index)
+                    options["id"] = options.fetch("id"){ tag_id_with_index(@auto_index) }
+                  else
+                    options["name"] ||= tag_name + (options['multiple'] ? '[]' : '')
+                    options["id"] = options.fetch("id"){ tag_id }
+                  end
+                  options["id"] = [options.delete('namespace'), options["id"]].compact.join("_").presence
+                end
+
+                def tag_name
+                  "#{@object_name}[#{sanitized_method_name}]"
+                end
+
+                def tag_name_with_index(index)
+                  "#{@object_name}[#{index}][#{sanitized_method_name}]"
+                end
+
+                def tag_id
+                  "#{sanitized_object_name}_#{sanitized_method_name}"
+                end
+
+                def tag_id_with_index(index)
+                  "#{sanitized_object_name}_#{index}_#{sanitized_method_name}"
+                end
+
+                def sanitized_object_name
+                  @sanitized_object_name ||= @object_name.gsub(/\]\[|[^-a-zA-Z0-9:.]/, "_").sub(/_$/, "")
+                end
+
+                def sanitized_method_name
+                  @sanitized_method_name ||= @method_name.sub(/\?$/,"")
+                end
+
+            end
+          end
+        end
       end
     end
 
