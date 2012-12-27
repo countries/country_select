@@ -10,7 +10,7 @@ module ActionView
         if defined?(ActionView::Helpers::InstanceTag) && ActionView::Helpers::InstanceTag.instance_method(:initialize).arity != 0
           InstanceTag.new(object, method, self, options.delete(:object)).to_country_select_tag(priority_countries, options, html_options)
         else
-          ActionView::Helpers::Tags::Base.new(object, method, self, options).to_country_select_tag(priority_countries, options, html_options)
+          CountrySelect.new(object, method, self, options).to_country_select_tag(priority_countries, options, html_options)
         end
       end
       # Returns a string of option tags for pretty much any country in the world. Supply a country name as +selected+ to
@@ -91,55 +91,8 @@ module ActionView
         include ToCountrySelectTag
       end
     else
-      module ::ActionView
-        module Helpers
-          module Tags
-            class Base
-              include ToCountrySelectTag
-
-              private
-                def add_default_name_and_id(options)
-                  if options.has_key?("index")
-                    options["name"] ||= tag_name_with_index(options["index"])
-                    options["id"] = options.fetch("id"){ tag_id_with_index(options["index"]) }
-                    options.delete("index")
-                  elsif defined?(@auto_index)
-                    options["name"] ||= tag_name_with_index(@auto_index)
-                    options["id"] = options.fetch("id"){ tag_id_with_index(@auto_index) }
-                  else
-                    options["name"] ||= tag_name + (options['multiple'] ? '[]' : '')
-                    options["id"] = options.fetch("id"){ tag_id }
-                  end
-                  options["id"] = [options.delete('namespace'), options["id"]].compact.join("_").presence
-                end
-
-                def tag_name
-                  "#{@object_name}[#{sanitized_method_name}]"
-                end
-
-                def tag_name_with_index(index)
-                  "#{@object_name}[#{index}][#{sanitized_method_name}]"
-                end
-
-                def tag_id
-                  "#{sanitized_object_name}_#{sanitized_method_name}"
-                end
-
-                def tag_id_with_index(index)
-                  "#{sanitized_object_name}_#{index}_#{sanitized_method_name}"
-                end
-
-                def sanitized_object_name
-                  @sanitized_object_name ||= @object_name.gsub(/\]\[|[^-a-zA-Z0-9:.]/, "_").sub(/_$/, "")
-                end
-
-                def sanitized_method_name
-                  @sanitized_method_name ||= @method_name.sub(/\?$/,"")
-                end
-
-            end
-          end
-        end
+      class CountrySelect < Tags::Base
+        include ToCountrySelectTag
       end
     end
 
