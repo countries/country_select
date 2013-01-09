@@ -1,4 +1,5 @@
 *.gem
+*.sqlite
 .bundle
 Gemfile.lock
 pkg/*
