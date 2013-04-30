@@ -93,7 +93,7 @@ module ActionView
         "Saint Pierre and Miquelon", "Saint Vincent and the Grenadines", "Samoa", "San Marino",
         "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore",
         "Sint Maarten","Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa",
-        "South Georgia and the South Sandwich Islands", "Spain", "Sri Lanka", "Sudan", "Suriname",
+        "South Georgia and the South Sandwich Islands", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname",
         "Svalbard and Jan Mayen", "Swaziland", "Sweden", "Switzerland", "Syrian Arab Republic",
         "Taiwan", "Tajikistan", "Tanzania, United Republic of", "Thailand", "Timor-Leste",
         "Togo", "Tokelau", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan",
