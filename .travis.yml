@@ -1,4 +1,5 @@
 language: ruby
+script: "bundle exec rake appraisal:integration"
 rvm:
   - 2.0.0
   - 1.9.3

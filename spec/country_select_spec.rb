@@ -23,7 +23,7 @@ module ActionView
 
       let(:selected_us_option) do
         if defined?(Tags::Base)
-          content_tag(:option, 'United States', selected: :selected, value: 'us')
+          content_tag(:option, 'United States', :selected => :selected, :value => 'us')
         else
           "<option value=\"us\" selected=\"selected\">United States</option>"
         end
@@ -46,7 +46,7 @@ module ActionView
 
         it "creates option tags of the countries" do
           ::CountrySelect::COUNTRIES.each do |code,name|
-            tag.should include(content_tag(:option, name, value: code))
+            tag.should include(content_tag(:option, name, :value => code))
           end
         end
 
