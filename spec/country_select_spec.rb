@@ -20,7 +20,11 @@ module ActionView
       end
 
       let(:builder) do
-        FormBuilder.new(:walrus, walrus, template, {}, Proc.new { })
+        if defined?(Tags::Base)
+          FormBuilder.new(:walrus, walrus, template, {})
+        else
+          FormBuilder.new(:walrus, walrus, template, {}, Proc.new { })
+        end
       end
 
       describe "#country_select" do
