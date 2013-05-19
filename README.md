@@ -1,11 +1,14 @@
 # Rails – Country Select
 [![Build Status](https://travis-ci.org/stefanpenner/country_select.png?branch=master)](https://travis-ci.org/stefanpenner/country_select)
 
-Provides a simple helper to get an HTML select list of countries.  The list of countries comes
-from the ISO 3166 standard.  While it is a relatively neutral source of country names, it may
-still offend some users.
+Provides a simple helper to get an HTML select list of countries with
+their [ISO 3166-1 alpha-2 codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+as values and [ISO 3166-1 names](https://en.wikipedia.org/wiki/ISO_3166-1)
+as display strings. While it is a relatively neutral source of country
+names, it may still offend some users.
 
-Users are strongly advised to evaluate the suitability of this list given their user base.
+Users are strongly advised to evaluate the suitability of this list
+given their user base.
 
 ## Installation
 
@@ -32,20 +35,13 @@ bundle exec rspec
 Simple use supplying model and attribute as parameters:
 
 ```ruby
-country_select("user", "country_name")
+country_select("user", "country")
 ```
 
 Supplying priority countries to be placed at the top of the list:
 
 ```ruby
-country_select("user", "country_name", [ "United Kingdom", "France", "Germany" ])
-```
-
-Specifying which country to be selected:
-United Kingdom will be selected.
-
-```ruby
-country_select("user", "country_name", [ "+United Kingdom+", "France", "Germany" ])
+country_select("user", "country", [ "gb", "fr", "de" ])
 ```
 
 Copyright (c) 2008 Michael Koziarski, released under the MIT license

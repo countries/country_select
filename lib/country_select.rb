@@ -33,8 +33,6 @@ module ActionView
       #
       # Returns a string of option tags for
       # pretty much any country in the world.
-      # Supply a country name as +selected+ to
-      # have it marked as the selected option tag.
       #
       # You can also supply an array of countries as
       # +priority_countries+ so that they will be
