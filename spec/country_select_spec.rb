@@ -7,6 +7,8 @@ module ActionView
   module Helpers
 
     describe CountrySelect do
+      include TagHelper
+
       class Walrus
         attr_accessor :country_name
       end
@@ -17,6 +19,14 @@ module ActionView
 
       let(:select_tag) do
         "<select id=\"walrus_country_name\" name=\"walrus[country_name]\">"
+      end
+
+      let(:selected_us_option) do
+        if defined?(Tags::Base)
+          content_tag(:option, 'United States', selected: :selected, value: 'us')
+        else
+          "<option value=\"us\" selected=\"selected\">United States</option>"
+        end
       end
 
       let(:builder) do
@@ -36,15 +46,14 @@ module ActionView
 
         it "creates option tags of the countries" do
           ::CountrySelect::COUNTRIES.each do |code,name|
-            name.gsub!(/'/,'&#x27;')
-            tag.should include("<option value=\"#{code}\">#{name}</option>")
+            tag.should include(content_tag(:option, name, value: code))
           end
         end
 
         it "selects the value of country_name" do
           walrus.country_name = 'us'
           t = builder.country_select(:country_name)
-          t.should include("<option value=\"us\" selected=\"selected\">United States</option>")
+          t.should include(selected_us_option)
         end
       end
 
