@@ -1,17 +1,27 @@
 require 'spec_helper'
+
+require 'action_view'
 require 'country_select'
 
 module ActionView
   module Helpers
+
     describe CountrySelect do
-      let!(:walrus) { Walrus.new }
+      class Walrus
+        attr_accessor :country_name
+      end
+
+      let(:walrus) { Walrus.new }
+
       let!(:template) { ActionView::Base.new }
 
       let(:select_tag) do
         "<select id=\"walrus_country_name\" name=\"walrus[country_name]\">"
       end
 
-      let(:builder) { FormBuilder.new(:walrus, walrus, template, {}, Proc.new { }) }
+      let(:builder) do
+        FormBuilder.new(:walrus, walrus, template, {}, Proc.new { })
+      end
 
       describe "#country_select" do
         let(:tag) { builder.country_select(:country_name) }
@@ -21,9 +31,9 @@ module ActionView
         end
 
         it "creates option tags of the countries" do
-          COUNTRIES.each do |c|
-            c.gsub!(/'/,'&#x27;')
-            tag.should include("<option value=\"#{c}\">#{c}</option>")
+          COUNTRIES.each do |country|
+            country.gsub!(/'/,'&#x27;')
+            tag.should include("<option value=\"#{country}\">#{country}</option>")
           end
         end
 
