@@ -1,0 +1,59 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    actionpack (3.1.12)
+      activemodel (= 3.1.12)
+      activesupport (= 3.1.12)
+      builder (~> 3.0.0)
+      erubis (~> 2.7.0)
+      i18n (~> 0.6)
+      rack (~> 1.3.6)
+      rack-cache (~> 1.2)
+      rack-mount (~> 0.8.2)
+      rack-test (~> 0.6.1)
+      sprockets (~> 2.0.4)
+    activemodel (3.1.12)
+      activesupport (= 3.1.12)
+      builder (~> 3.0.0)
+      i18n (~> 0.6)
+    activesupport (3.1.12)
+      multi_json (~> 1.0)
+    appraisal (0.5.2)
+      bundler
+      rake
+    builder (3.0.4)
+    diff-lcs (1.2.4)
+    erubis (2.7.0)
+    hike (1.2.2)
+    i18n (0.6.4)
+    multi_json (1.7.3)
+    rack (1.3.10)
+    rack-cache (1.2)
+      rack (>= 0.4)
+    rack-mount (0.8.3)
+      rack (>= 1.0.0)
+    rack-test (0.6.2)
+      rack (>= 1.0)
+    rake (10.0.4)
+    rspec (2.13.0)
+      rspec-core (~> 2.13.0)
+      rspec-expectations (~> 2.13.0)
+      rspec-mocks (~> 2.13.0)
+    rspec-core (2.13.1)
+    rspec-expectations (2.13.0)
+      diff-lcs (>= 1.1.3, < 2.0)
+    rspec-mocks (2.13.1)
+    sprockets (2.0.4)
+      hike (~> 1.2)
+      rack (~> 1.0)
+      tilt (~> 1.1, != 1.3.0)
+    tilt (1.4.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  actionpack (~> 3.1.0)
+  appraisal
+  rake
+  rspec
