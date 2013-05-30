@@ -55,7 +55,7 @@ module CountrySelect
     "cd" => "Congo, the Democratic Republic of the",
     "ck" => "Cook Islands",
     "cr" => "Costa Rica",
-    "ci" => "Côte d'Ivoire",
+    "ci" => "Ivory Coast",
     "hr" => "Croatia",
     "cu" => "Cuba",
     "cw" => "Curaçao",
