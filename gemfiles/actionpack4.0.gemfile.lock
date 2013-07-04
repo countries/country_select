@@ -55,7 +55,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  actionpack (= 4.0.0)
+  actionpack (~> 4.0.0)
   appraisal
   country_select!
   pry

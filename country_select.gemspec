@@ -20,7 +20,11 @@ Gem::Specification.new do |s|
 
   # specify any dependencies here; for example:
   s.add_development_dependency 'rspec'
-  s.add_development_dependency 'actionpack'
+  if RUBY_VERSION < '1.9.3'
+    s.add_development_dependency 'actionpack', '~> 3.2.13'
+  else
+    s.add_development_dependency 'actionpack'
+  end
   s.add_development_dependency 'appraisal'
   s.add_development_dependency 'pry'
 end
