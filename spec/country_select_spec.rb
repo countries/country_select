@@ -23,7 +23,7 @@ module ActionView
 
       let(:selected_us_option) do
         if defined?(Tags::Base)
-          content_tag(:option, 'United States', :selected => :selected)
+          content_tag(:option, 'United States', :selected => :selected, value: "United States")
         else
           "<option value=\"United States\" selected=\"selected\">United States</option>"
         end
