@@ -51,6 +51,19 @@ country_select("user", "country", nil, iso_codes: true)
 country_select("user", "country", [ "gb", "fr", "de" ], iso_codes: true)
 ```
 
+#### Getting the Country from ISO codes
+
+```ruby
+class User < ActiveRecord::Base
+
+  # Assuming country_select is used with User attribute `country_code`
+  def country_name
+    ::CountrySelect::COUNTRIES[country_code]
+  end
+
+end
+```
+
 ## Tests
 
 ```shell
