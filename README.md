@@ -58,4 +58,10 @@ bundle
 bundle exec rspec
 ```
 
+### Running with multiple versions of actionpack
+
+```shell
+bundle exec appraisal
+```
+
 Copyright (c) 2008 Michael Koziarski, released under the MIT license
