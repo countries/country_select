@@ -45,43 +45,87 @@ module ActionView
         end
       end
 
-      describe "#country_select" do
-        let(:tag) { builder.country_select(:country_name) }
+      context "iso codes disabled" do
+        describe "#country_select" do
+          let(:tag) { builder.country_select(:country_name) }
 
-        it "creates a select tag" do
-          tag.should include(select_tag)
-        end
+          it "creates a select tag" do
+            tag.should include(select_tag)
+          end
 
-        it "creates option tags of the countries" do
-          ::CountrySelect::COUNTRIES.each do |code,name|
-            tag.should include(content_tag(:option, name, :value => name))
+          it "creates option tags of the countries" do
+            ::CountrySelect::COUNTRIES.each do |code,name|
+              tag.should include(content_tag(:option, name, :value => name))
+            end
+          end
+
+          it "selects the value of country_name" do
+            walrus.country_name = 'United States'
+            t = builder.country_select(:country_name)
+            t.should include(selected_us_option)
           end
         end
 
-        it "selects the value of country_name" do
-          walrus.country_name = 'United States'
-          t = builder.country_select(:country_name)
-          t.should include(selected_us_option)
+        describe "#priority_countries" do
+          let(:tag) { builder.country_select(:country_name, ['United States']) }
+
+          it "puts the countries at the top" do
+            tag.should include("#{select_tag}<option value=\"United States")
+          end
+
+          it "inserts a divider" do
+            tag.should include(">United States</option><option value=\"\" disabled=\"disabled\">-------------</option>")
+          end
+
+          it "does not mark two countries as selected" do
+            walrus.country_name = "United States"
+            str = <<-EOS.strip
+              </option>\n<option value="United States" selected="selected">United States</option>
+            EOS
+            tag.should_not include(str)
+          end
         end
       end
 
-      describe "#priority_countries" do
-        let(:tag) { builder.country_select(:country_name, ['United States']) }
+      context "iso codes enabled" do
+        describe "#country_select" do
+          let(:tag) { builder.country_select(:country_name, nil, iso_codes: true) }
 
-        it "puts the countries at the top" do
-          tag.should include("#{select_tag}<option value=\"United States")
+          it "creates a select tag" do
+            tag.should include(select_tag)
+          end
+
+          it "creates option tags of the countries" do
+            ::CountrySelect::COUNTRIES.each do |code,name|
+              tag.should include(content_tag(:option, name, :value => code))
+            end
+          end
+
+          it "selects the value of country_name" do
+            walrus.country_name = 'us'
+            t = builder.country_select(:country_name, nil, iso_codes: true)
+            t.should include(selected_iso_us_option)
+          end
         end
 
-        it "inserts a divider" do
-          tag.should include(">United States</option><option value=\"\" disabled=\"disabled\">-------------</option>")
-        end
+        describe "#priority_countries" do
+          let(:tag) { builder.country_select(:country_name, ['us'], iso_codes: true) }
 
-        it "does not mark two countries as selected" do
-          walrus.country_name = "United States"
-          str = <<-EOS.strip
-            </option>\n<option value="United States" selected="selected">United States</option>
-          EOS
-          tag.should_not include(str)
+          it "puts the countries at the top" do
+            tag.should include("#{select_tag}<option value=\"us")
+          end
+
+          it "inserts a divider" do
+            tag.should include(">United States</option><option value=\"\" disabled=\"disabled\">-------------</option>")
+          end
+
+          it "does not mark two countries as selected" do
+            walrus.country_name = "us"
+            str = <<-EOS.strip
+              </option>\n<option value="us" selected="selected">United States</option>
+            EOS
+            tag.should_not include(str)
+          end
         end
       end
     end
