@@ -46,9 +46,9 @@ module ActionView
         country_options = "".html_safe
 
         if priority_countries
-          priority_countries_options = priority_countries.map do |code|
-            [::CountrySelect::COUNTRIES[code], code]
-          end
+          priority_countries_options = priority_countries#.map do |code|
+            #[::CountrySelect::COUNTRIES[code], code]
+          #end
 
           country_options += options_for_select(priority_countries_options, selected)
           country_options += "<option value=\"\" disabled=\"disabled\">-------------</option>\n".html_safe
