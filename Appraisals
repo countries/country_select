@@ -15,5 +15,5 @@ appraise 'actionpack3.2' do
 end
 
 appraise 'actionpack4.0' do
-  gem 'actionpack', '4.0.0.rc1'
+  gem 'actionpack', '~> 4.0.0'
 end

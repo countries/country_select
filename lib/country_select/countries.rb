@@ -251,5 +251,6 @@ module CountrySelect
     "zm" => "Zambia",
   } unless const_defined?("COUNTRIES")
 
-  COUNTRIES_FOR_SELECT = COUNTRIES.invert unless const_defined?("COUNTRIES_FOR_SELECT")
+  ISO_COUNTRIES_FOR_SELECT = COUNTRIES.invert unless const_defined?("ISO_COUNTRIES_FOR_SELECT")
+  COUNTRIES_FOR_SELECT = COUNTRIES.values unless const_defined?("COUNTRIES_FOR_SELECT")
 end
