@@ -42,13 +42,20 @@ module ActionView
       # have to wrap this call in a regular HTML
       # select tag.
       #
-      def country_options_for_select(selected = nil, priority_countries = nil)
+      def country_options_for_select(selected = nil, priority_countries = nil, use_iso_codes = false)
         country_options = "".html_safe
 
         if priority_countries
-          priority_countries_options = priority_countries.map do |code|
-            [::CountrySelect::COUNTRIES[code], code]
-          end
+          priority_countries_options = if use_iso_codes
+                                         priority_countries.map do |code|
+                                           [
+                                             ::CountrySelect::COUNTRIES[code],
+                                             code
+                                           ]
+                                         end
+                                       else
+                                         priority_countries
+                                       end
 
           country_options += options_for_select(priority_countries_options, selected)
           country_options += "<option value=\"\" disabled=\"disabled\">-------------</option>\n".html_safe
@@ -63,7 +70,13 @@ module ActionView
           selected = nil if priority_countries.include?(selected)
         end
 
-        return country_options + options_for_select(::CountrySelect::COUNTRIES_FOR_SELECT, selected)
+        values = if use_iso_codes
+                   ::CountrySelect::ISO_COUNTRIES_FOR_SELECT
+                 else
+                   ::CountrySelect::COUNTRIES_FOR_SELECT
+                 end
+
+        return country_options + options_for_select(values, selected)
       end
 
       # All the countries included in the country_options output.
@@ -71,12 +84,13 @@ module ActionView
 
     module ToCountrySelectTag
       def to_country_select_tag(priority_countries, options, html_options)
+        use_iso_codes = options.delete(:iso_codes)
         html_options = html_options.stringify_keys
         add_default_name_and_id(html_options)
         value = value(object)
         content_tag("select",
           add_options(
-            country_options_for_select(value, priority_countries),
+            country_options_for_select(value, priority_countries, use_iso_codes),
             options, value
           ), html_options
         )
