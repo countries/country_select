@@ -41,14 +41,21 @@ Supplying priority countries to be placed at the top of the list:
 country_select("user", "country", [ "Great Britain", "France", "Germany" ])
 ```
 
-### Using ISO 3166-1 alpha-2 codes
+### Using ISO 3166-1 alpha-2 codes as values
+You can have the `option` tags use ISO 3166-1 alpha-2 codes as values
+and the country names as display strings. For example, the United States
+would appear as `<option value="us">United States</option>`
+
+If you're starting a new project, this is the recommended way to store
+your country data since it will be more resistant to country names
+changing.
 
 ```ruby
-country_select("user", "country", nil, iso_codes: true)
+country_select("user", "country_code", nil, iso_codes: true)
 ```
 
 ```ruby
-country_select("user", "country", [ "gb", "fr", "de" ], iso_codes: true)
+country_select("user", "country_code", [ "gb", "fr", "de" ], iso_codes: true)
 ```
 
 #### Getting the Country from ISO codes
