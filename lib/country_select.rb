@@ -46,7 +46,7 @@ module ActionView
         country_options = "".html_safe
 
         if priority_countries
-          priority_countries_options = if use_iso_codes
+          priority_countries_options = if use_iso_codes || ::CountrySelect.use_iso_codes
                                          priority_countries.map do |code|
                                            [
                                              ::CountrySelect::COUNTRIES[code],
@@ -70,7 +70,7 @@ module ActionView
           selected = nil if priority_countries.include?(selected)
         end
 
-        values = if use_iso_codes
+        values = if use_iso_codes || ::CountrySelect.use_iso_codes
                    ::CountrySelect::ISO_COUNTRIES_FOR_SELECT
                  else
                    ::CountrySelect::COUNTRIES_FOR_SELECT
