@@ -123,7 +123,7 @@ module ActionView
 
           it "selects the value of country_name" do
             walrus.country_name = 'us'
-            t = builder.country_select(:country_name, nil, :iso_codes => true)
+            t = builder.country_select(:country_name)
             t.should include(selected_iso_us_option)
           end
         end
