@@ -249,6 +249,7 @@ module CountrySelect
     "eh" => "Western Sahara",
     "ye" => "Yemen",
     "zm" => "Zambia",
+    "zw" => "Zimbabwe"
   } unless const_defined?("COUNTRIES")
 
   ISO_COUNTRIES_FOR_SELECT = COUNTRIES.invert unless const_defined?("ISO_COUNTRIES_FOR_SELECT")
