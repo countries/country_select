@@ -113,6 +113,10 @@ module ActionView
             ::CountrySelect.use_iso_codes = true
           end
 
+          after do
+            ::CountrySelect.use_iso_codes = false
+          end
+
           let(:tag) { builder.country_select(:country_name, nil) }
 
           it "creates option tags of the countries" do
