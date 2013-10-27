@@ -1,5 +1,13 @@
 # encoding: utf-8
 module CountrySelect
+  @@use_iso_codes = false
+  def self.use_iso_codes
+    @@use_iso_codes
+  end
+  def self.use_iso_codes=(use_iso_codes)
+    @@use_iso_codes = use_iso_codes
+  end
+
   COUNTRIES =  {
     "AF" => "Afghanistan",
     "AX" => "Åland Islands",
