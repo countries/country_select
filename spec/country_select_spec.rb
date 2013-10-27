@@ -108,6 +108,30 @@ module ActionView
           end
         end
 
+        describe "#country_select with global option" do
+          before do
+            ::CountrySelect.use_iso_codes = true
+          end
+
+          after do
+            ::CountrySelect.use_iso_codes = false
+          end
+
+          let(:tag) { builder.country_select(:country_name, nil) }
+
+          it "creates option tags of the countries" do
+            ::CountrySelect::COUNTRIES.each do |code,name|
+              tag.should include(content_tag(:option, name, :value => code))
+            end
+          end
+
+          it "selects the value of country_name" do
+            walrus.country_name = 'US'
+            t = builder.country_select(:country_name)
+            t.should include(selected_iso_us_option)
+          end
+        end
+
         describe "#priority_countries" do
           let(:tag) { builder.country_select(:country_name, ['US'], :iso_codes => true) }
 

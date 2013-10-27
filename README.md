@@ -58,6 +58,13 @@ country_select("user", "country_code", nil, iso_codes: true)
 country_select("user", "country_code", [ "gb", "fr", "de" ], iso_codes: true)
 ```
 
+#### Global configuration to always use ISO codes
+Add the following configuration to an initializer.
+
+```ruby
+::CountrySelect.use_iso_codes = true
+```
+
 #### Getting the Country from ISO codes
 
 ```ruby
