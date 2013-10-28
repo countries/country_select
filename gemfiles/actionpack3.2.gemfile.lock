@@ -1,7 +1,7 @@
 PATH
-  remote: /Users/scudco/projects/country_select
+  remote: /Users/stefan/src/country_select
   specs:
-    country_select (1.1.3)
+    country_select (1.2.0)
 
 GEM
   remote: https://rubygems.org/
