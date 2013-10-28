@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'countries'
+
 module CountrySelect
   @@use_iso_codes = false
   def self.use_iso_codes
