@@ -27,4 +27,5 @@ Gem::Specification.new do |s|
   end
   s.add_development_dependency 'appraisal'
   s.add_development_dependency 'pry'
+  s.add_dependency 'countries', '0.9.2'
 end
