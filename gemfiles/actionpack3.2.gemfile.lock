@@ -1,7 +1,8 @@
 PATH
-  remote: /Users/stefan/src/country_select
+  remote: /Users/Austin/Repositories/country_select
   specs:
     country_select (1.2.0)
+      countries (= 0.9.3)
 
 GEM
   remote: https://rubygems.org/
@@ -27,6 +28,9 @@ GEM
       rake
     builder (3.0.4)
     coderay (1.0.9)
+    countries (0.9.3)
+      currencies (~> 0.4.2)
+    currencies (0.4.2)
     diff-lcs (1.2.4)
     erubis (2.7.0)
     hike (1.2.2)
