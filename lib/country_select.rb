@@ -42,14 +42,14 @@ module ActionView
       # have to wrap this call in a regular HTML
       # select tag.
       #
-      def country_options_for_select(selected = nil, priority_countries = nil, use_iso_codes = false)
+      def country_options_for_select(selected = nil, priority_countries = nil, use_iso_codes = false, use_locale = nil)
         country_options = "".html_safe
 
         if priority_countries
           priority_countries_options = if use_iso_codes || ::CountrySelect.use_iso_codes
                                          priority_countries.map do |code|
                                            [
-                                             ::CountrySelect::COUNTRIES[code],
+                                             ::CountrySelect::countries(use_locale)[code],
                                              code
                                            ]
                                          end
@@ -71,9 +71,9 @@ module ActionView
         end
 
         values = if use_iso_codes || ::CountrySelect.use_iso_codes
-                   ::CountrySelect::ISO_COUNTRIES_FOR_SELECT
+                   ::CountrySelect::countries(use_locale).invert
                  else
-                   ::CountrySelect::COUNTRIES_FOR_SELECT
+                   ::CountrySelect::countries(use_locale).values
                  end
 
         return country_options + options_for_select(values, selected)
@@ -85,12 +85,13 @@ module ActionView
     module ToCountrySelectTag
       def to_country_select_tag(priority_countries, options, html_options)
         use_iso_codes = options.delete(:iso_codes)
+        use_locale = options.delete(:locale)
         html_options = html_options.stringify_keys
         add_default_name_and_id(html_options)
         value = value(object)
         content_tag("select",
           add_options(
-            country_options_for_select(value, priority_countries, use_iso_codes),
+            country_options_for_select(value, priority_countries, use_iso_codes, use_locale),
             options, value
           ), html_options
         )

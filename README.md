@@ -41,6 +41,22 @@ Supplying priority countries to be placed at the top of the list:
 country_select("user", "country", [ "Great Britain", "France", "Germany" ])
 ```
 
+### Using Country Name Localization
+You can localize the displayed/stored country name based on translations
+provided by [hexorx/Countries](https://github.com/hexorx/countries). 
+Current translations include:
+en, it, de, fr, es, ja, nl, but may not be complete. In the event a translation is 
+not available, it will revert to the globally assigned locale (by default, "en").
+
+This can be used locally:
+```ruby
+country_select(:country_name, ['US'], {:iso_codes => true, :locale => 'es'}) 
+```
+Or it can be set globally by adding the following configuration to an initializer.
+```ruby
+::CountrySelect.locale = 'es'
+```
+Currently available translations 
 ### Using ISO 3166-1 alpha-2 codes as values
 You can have the `option` tags use ISO 3166-1 alpha-2 codes as values
 and the country names as display strings. For example, the United States
@@ -63,6 +79,13 @@ Add the following configuration to an initializer.
 
 ```ruby
 ::CountrySelect.use_iso_codes = true
+```
+
+#### Global configuration to always use locale code
+Add the following configuration to an initializer.
+
+```ruby
+::CountrySelect.locale = 'es'
 ```
 
 #### Getting the Country from ISO codes
