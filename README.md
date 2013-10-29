@@ -55,7 +55,7 @@ country_select("user", "country_code", nil, iso_codes: true)
 ```
 
 ```ruby
-country_select("user", "country_code", [ "gb", "fr", "de" ], iso_codes: true)
+country_select("user", "country_code", [ "GB", "FR", "DE" ], iso_codes: true)
 ```
 
 #### Global configuration to always use ISO codes
