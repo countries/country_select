@@ -76,7 +76,7 @@ module ActionView
                    ::CountrySelect::COUNTRIES_FOR_SELECT
                  end
 
-        return country_options + options_for_select(values, selected)
+        return country_options + options_for_select(values.sort, selected)
       end
 
       # All the countries included in the country_options output.
