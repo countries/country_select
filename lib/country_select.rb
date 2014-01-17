@@ -16,7 +16,9 @@ module ActionView
       # generate the list of option tags.
       #
       def country_select(object, method, priority_countries = nil,
-                                         options = {},
+                                         options = {
+                                           :only_priority_countries => false
+                                         },
                                          html_options = {})
 
         tag = if defined?(ActionView::Helpers::InstanceTag) &&
@@ -42,7 +44,7 @@ module ActionView
       # have to wrap this call in a regular HTML
       # select tag.
       #
-      def country_options_for_select(selected = nil, priority_countries = nil, use_iso_codes = false)
+      def country_options_for_select(selected = nil, priority_countries = nil, use_iso_codes = false, only_priority_countries = false)
         country_options = "".html_safe
 
         if priority_countries
@@ -57,7 +59,7 @@ module ActionView
                                          priority_countries
                                        end
 
-          country_options += options_for_select(priority_countries_options, selected)
+          country_options += options_for_select(priority_countries_options.sort, selected)
           country_options += "<option value=\"\" disabled=\"disabled\">-------------</option>\n".html_safe
           #
           # prevents selected from being included
@@ -69,14 +71,17 @@ module ActionView
           #
           selected = nil if priority_countries.include?(selected)
         end
+        
+        unless only_priority_countries
+          values = if use_iso_codes || ::CountrySelect.use_iso_codes
+                     ::CountrySelect::ISO_COUNTRIES_FOR_SELECT
+                   else
+                     ::CountrySelect::COUNTRIES_FOR_SELECT
+                   end
+          country_options += options_for_select(values.sort, selected)
+        end
 
-        values = if use_iso_codes || ::CountrySelect.use_iso_codes
-                   ::CountrySelect::ISO_COUNTRIES_FOR_SELECT
-                 else
-                   ::CountrySelect::COUNTRIES_FOR_SELECT
-                 end
-
-        return country_options + options_for_select(values.sort, selected)
+        return country_options
       end
 
       # All the countries included in the country_options output.
@@ -90,7 +95,7 @@ module ActionView
         value = value(object)
         content_tag("select",
           add_options(
-            country_options_for_select(value, priority_countries, use_iso_codes),
+            country_options_for_select(value, priority_countries, use_iso_codes, options[:only_priority_countries]),
             options, value
           ), html_options
         )
