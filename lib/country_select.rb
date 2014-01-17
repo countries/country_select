@@ -59,7 +59,7 @@ module ActionView
                                          priority_countries
                                        end
 
-          country_options += options_for_select(priority_countries_options.sort, selected)
+          country_options += options_for_select(priority_countries_options, selected)
           country_options += "<option value=\"\" disabled=\"disabled\">-------------</option>\n".html_safe
           #
           # prevents selected from being included
