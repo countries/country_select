@@ -48,8 +48,9 @@ module ActionView
         if priority_countries
           priority_countries_options = if use_iso_codes || ::CountrySelect.use_iso_codes
                                          priority_countries.map do |code|
+                                           debugger
                                            [
-                                             "Hola", #::CountrySelect::COUNTRIES[code]
+                                             ::CountrySelect::COUNTRIES[code]
                                              code
                                            ]
                                          end
