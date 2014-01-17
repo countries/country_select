@@ -42,14 +42,14 @@ module ActionView
       # have to wrap this call in a regular HTML
       # select tag.
       #
-      def country_options_for_select(selected = nil, priority_countries = nil, use_iso_codes = false)
+      def country_options_for_select(selected = nil, priority_countries = nil, use_iso_codes = false, only_priority_countries = false)
         country_options = "".html_safe
 
         if priority_countries
           priority_countries_options = if use_iso_codes || ::CountrySelect.use_iso_codes
                                          priority_countries.map do |code|
                                            [
-                                             ::CountrySelect::COUNTRIES[code],
+                                             ::CountrySelect::COUNTRIES[code.upcase],
                                              code
                                            ]
                                          end
@@ -58,7 +58,6 @@ module ActionView
                                        end
 
           country_options += options_for_select(priority_countries_options, selected)
-          country_options += "<option value=\"\" disabled=\"disabled\">-------------</option>\n".html_safe
           #
           # prevents selected from being included
           # twice in the HTML which causes
@@ -69,14 +68,18 @@ module ActionView
           #
           selected = nil if priority_countries.include?(selected)
         end
+        
+        unless only_priority_countries
+          country_options += "<option value=\"\" disabled=\"disabled\">-------------</option>\n".html_safe
+          values = if use_iso_codes || ::CountrySelect.use_iso_codes
+                     ::CountrySelect::ISO_COUNTRIES_FOR_SELECT
+                   else
+                     ::CountrySelect::COUNTRIES_FOR_SELECT
+                   end
+          country_options += options_for_select(values.sort, selected)
+        end
 
-        values = if use_iso_codes || ::CountrySelect.use_iso_codes
-                   ::CountrySelect::ISO_COUNTRIES_FOR_SELECT
-                 else
-                   ::CountrySelect::COUNTRIES_FOR_SELECT
-                 end
-
-        return country_options + options_for_select(values.sort, selected)
+        return country_options
       end
 
       # All the countries included in the country_options output.
@@ -85,12 +88,13 @@ module ActionView
     module ToCountrySelectTag
       def to_country_select_tag(priority_countries, options, html_options)
         use_iso_codes = options.delete(:iso_codes)
+        only_priority_countries = options.delete(:only_priority_countries)
         html_options = html_options.stringify_keys
         add_default_name_and_id(html_options)
         value = value(object)
         content_tag("select",
           add_options(
-            country_options_for_select(value, priority_countries, use_iso_codes),
+            country_options_for_select(value, priority_countries, use_iso_codes, only_priority_countries),
             options, value
           ), html_options
         )
