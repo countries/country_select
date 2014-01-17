@@ -16,9 +16,7 @@ module ActionView
       # generate the list of option tags.
       #
       def country_select(object, method, priority_countries = nil,
-                                         options = {
-                                           :only_priority_countries => false
-                                         },
+                                         options = {},
                                          html_options = {})
 
         tag = if defined?(ActionView::Helpers::InstanceTag) &&
@@ -90,12 +88,13 @@ module ActionView
     module ToCountrySelectTag
       def to_country_select_tag(priority_countries, options, html_options)
         use_iso_codes = options.delete(:iso_codes)
+        only_priority_countries = options.delete(:only_priority_countries)
         html_options = html_options.stringify_keys
         add_default_name_and_id(html_options)
         value = value(object)
         content_tag("select",
           add_options(
-            country_options_for_select(value, priority_countries, use_iso_codes, options[:only_priority_countries]),
+            country_options_for_select(value, priority_countries, use_iso_codes, only_priority_countries),
             options, value
           ), html_options
         )
