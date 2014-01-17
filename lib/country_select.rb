@@ -50,7 +50,7 @@ module ActionView
                                          priority_countries.map do |code|
                                            debugger
                                            [
-                                             ::CountrySelect::COUNTRIES[code]
+                                             ::CountrySelect::COUNTRIES[code],
                                              code
                                            ]
                                          end
