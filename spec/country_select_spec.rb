@@ -66,23 +66,67 @@ module ActionView
           end
         end
 
-        describe "#priority_countries" do
-          let(:tag) { builder.country_select(:country_name, ['United States']) }
+        context "with priority_countries" do
+          describe "#priority_countries" do
+            let(:tag) { builder.country_select(:country_name, ['United States']) }
 
-          it "puts the countries at the top" do
-            tag.should include("#{select_tag}<option value=\"United States")
+            it "puts the countries at the top" do
+              tag.should include("#{select_tag}<option value=\"United States")
+            end
+
+            it "inserts a divider" do
+              tag.should include(">United States</option><option value=\"\" disabled=\"disabled\">-------------</option>")
+            end
+
+            it "does not mark two countries as selected" do
+              walrus.country_name = "United States"
+              str = <<-EOS.strip
+                </option>\n<option value="United States" selected="selected">United States</option>
+              EOS
+              tag.should_not include(str)
+            end
           end
 
-          it "inserts a divider" do
-            tag.should include(">United States</option><option value=\"\" disabled=\"disabled\">-------------</option>")
-          end
+          describe "#only_priority_countries" do
+            let(:tag) { builder.country_select(:country_name, ['United States'], {:only_priority_countries => true}) }
 
-          it "does not mark two countries as selected" do
-            walrus.country_name = "United States"
-            str = <<-EOS.strip
-              </option>\n<option value="United States" selected="selected">United States</option>
-            EOS
-            tag.should_not include(str)
+            it "puts the countries at the top" do
+              tag.should include("#{select_tag}<option value=\"United States")
+            end
+
+            it "does not inserts a divider" do
+              tag.should_not include(">United States</option><option value=\"\" disabled=\"disabled\">-------------</option>")
+            end
+
+            it "does not add the rest of the countries" do
+              select_with_only_priority_countries = <<-EOS.strip
+                <select id="walrus_country_name" name="walrus[country_name]"><option value="United States">United States</option></select>
+              EOS
+              tag.should include(select_with_only_priority_countries)
+              tag.length.should equal(select_with_only_priority_countries.length)
+            end
+          end
+        end
+
+        context "without priority_countries" do
+          describe "#only_priority_countries has no effect" do
+            let(:tag) { builder.country_select(:country_name, {:only_priority_countries => true}) }
+
+            it "does not put the countries at the top" do
+              tag.should_not include("#{select_tag}<option value=\"United States")
+            end
+
+            it "does not inserts a divider" do
+              tag.should_not include(">United States</option><option value=\"\" disabled=\"disabled\">-------------</option>")
+            end
+
+            it "does add the rest of the countries" do
+              select_with_only_priority_countries = <<-EOS.strip
+                <select id="walrus_country_name" name="walrus[country_name]"><option value="United States">United States</option></select>
+              EOS
+              tag.should_not include(select_with_only_priority_countries)
+              tag.length.should be > select_with_only_priority_countries.length
+            end
           end
         end
       end
@@ -132,23 +176,67 @@ module ActionView
           end
         end
 
-        describe "#priority_countries" do
-          let(:tag) { builder.country_select(:country_name, ['US'], :iso_codes => true) }
+        context "with priority_countries" do
+          describe "#priority_countries" do
+            let(:tag) { builder.country_select(:country_name, ['US'], :iso_codes => true) }
 
-          it "puts the countries at the top" do
-            tag.should include("#{select_tag}<option value=\"US")
+            it "puts the countries at the top" do
+              tag.should include("#{select_tag}<option value=\"US")
+            end
+
+            it "inserts a divider" do
+              tag.should include(">United States</option><option value=\"\" disabled=\"disabled\">-------------</option>")
+            end
+
+            it "does not mark two countries as selected" do
+              walrus.country_name = "US"
+              str = <<-EOS.strip
+                </option>\n<option value="US" selected="selected">United States</option>
+              EOS
+              tag.should_not include(str)
+            end
           end
 
-          it "inserts a divider" do
-            tag.should include(">United States</option><option value=\"\" disabled=\"disabled\">-------------</option>")
-          end
+          describe "#only_priority_countries" do
+            let(:tag) { builder.country_select(:country_name, ['US'], {:iso_codes => true, :only_priority_countries => true}) }
 
-          it "does not mark two countries as selected" do
-            walrus.country_name = "US"
-            str = <<-EOS.strip
-              </option>\n<option value="US" selected="selected">United States</option>
-            EOS
-            tag.should_not include(str)
+            it "puts the countries at the top" do
+              tag.should include("#{select_tag}<option value=\"US")
+            end
+
+            it "does not inserts a divider" do
+              tag.should_not include(">United States</option><option value=\"\" disabled=\"disabled\">-------------</option>")
+            end
+
+            it "does not add the rest of the countries" do
+              select_with_only_priority_countries = <<-EOS.strip
+                <select id="walrus_country_name" name="walrus[country_name]"><option value="US">United States</option></select>
+              EOS
+              tag.should include(select_with_only_priority_countries)
+              tag.length.should equal(select_with_only_priority_countries.length)
+            end
+          end
+        end
+
+        context "without priority_countries" do
+          describe "#only_priority_countries has no effect" do
+            let(:tag) { builder.country_select(:country_name, {:iso_codes => true, :only_priority_countries => true}) }
+
+            it "does not put the countries at the top" do
+              tag.should_not include("#{select_tag}<option value=\"US")
+            end
+
+            it "does not inserts a divider" do
+              tag.should_not include(">United States</option><option value=\"\" disabled=\"disabled\">-------------</option>")
+            end
+
+            it "does add the rest of the countries" do
+              select_with_only_priority_countries = <<-EOS.strip
+                <select id="walrus_country_name" name="walrus[country_name]"><option value="US">United States</option></select>
+              EOS
+              tag.should_not include(select_with_only_priority_countries)
+              tag.length.should be > select_with_only_priority_countries.length
+            end
           end
         end
       end
