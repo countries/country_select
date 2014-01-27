@@ -2,6 +2,13 @@
 
 source "https://rubygems.org"
 
+gem "appraisal", :github=>"thoughtbot/appraisal", :ref=>"6d599f"
 gem "actionpack", "~> 3.0.0"
 
-gemspec :path=>"../"
+platforms :rbx do
+  gem "racc"
+  gem "rubysl", "~> 2.0"
+  gem "psych"
+end
+
+gemspec :path=>".././"
