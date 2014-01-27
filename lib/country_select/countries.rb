@@ -2,30 +2,37 @@
 require 'countries'
 
 module CountrySelect
-  # Global ISO Code variable
-  @@use_iso_codes = false
+  DEFAULTS = {
+    :use_iso_codes => false,
+    :locale => "en"
+  }
+
+  Thread.current[:country_select] ||= DEFAULTS
+
   def self.use_iso_codes
-    @@use_iso_codes
-  end
-  def self.use_iso_codes=(use_iso_codes)
-    @@use_iso_codes = use_iso_codes
+    Thread.current[:country_select][:use_iso_codes]
   end
 
-  #Global Locale Code variable
-  @@locale = "en"
-  def self.locale
-    @@locale
+  def self.use_iso_codes=(val)
+    Thread.current[:country_select][:use_iso_codes] = val
   end
-  def self.locale=(locale)
-    @@locale = locale
+
+  def self.locale
+    I18n.locale
   end
 
   #Localized Countries list
-  def self.countries(use_locale = @@locale)
-    locale = use_locale ||= @@locale
-    @countries = ISO3166::Country.all.inject({}) do |r,s|
-        name = Country.new(s[1]).translations[locale]
-        r.merge!({s[1] => name.nil? ? s[0] : name})
+  def self.countries(with_locale=nil)
+    with_locale ||= locale
+
+    ISO3166::Country.all.inject({}) do |hash,country_pair|
+      default_name = country_pair.first
+      code = country_pair.last
+      country = Country.new(code)
+      localized_name = country.translations[with_locale.to_s]
+
+      hash[code] = localized_name || default_name
+      hash
     end
   end
 end

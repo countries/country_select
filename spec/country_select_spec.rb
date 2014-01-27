@@ -48,7 +48,7 @@ module ActionView
       context "iso codes disabled" do
         describe "#country_select" do
           let(:tag) { builder.country_select(:country_name) }
-          
+
           it "creates a select tag" do
             tag.should include(select_tag)
           end
@@ -153,29 +153,14 @@ module ActionView
         end
       end
       context "different language selected" do
-        describe "'es' selected as the instance language"
+        describe "'es' selected as the instance language" do
           let(:tag) { builder.country_select(:country_name, ['US'], {:iso_codes => true, :locale => 'es'}) }
 
           it "displays spanish names" do
             tag.should include(">Estados Unidos</option><option value=\"\" disabled=\"disabled\">-------------</option>")
           end
         end
-
-        describe "localization selected with global option" do
-          before do
-            ::CountrySelect.locale = 'es'
-          end
-
-          after do
-            ::CountrySelect.locale = 'en'
-          end
-
-          let(:tag) { builder.country_select(:country_name, ['US'], :iso_codes => true) }
-
-          it "displays spanish names" do
-            tag.should include(">Estados Unidos</option><option value=\"\" disabled=\"disabled\">-------------</option>")
-          end
-        end
       end
+    end
   end
 end
