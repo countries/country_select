@@ -2,6 +2,8 @@
 require 'countries'
 
 module CountrySelect
+  Thread.current[:country_select] ||= {}
+
   def self.use_iso_codes
     Thread.current[:country_select][:use_iso_codes] ||= false
   end
