@@ -2,15 +2,8 @@
 require 'countries'
 
 module CountrySelect
-  DEFAULTS = {
-    :use_iso_codes => false,
-    :locale => "en"
-  }
-
-  Thread.current[:country_select] ||= DEFAULTS
-
   def self.use_iso_codes
-    Thread.current[:country_select][:use_iso_codes]
+    Thread.current[:country_select][:use_iso_codes] ||= false
   end
 
   def self.use_iso_codes=(val)
