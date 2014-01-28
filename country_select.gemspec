@@ -21,14 +21,10 @@ Gem::Specification.new do |s|
 
   # specify any dependencies here; for example:
   s.add_development_dependency 'rspec', '~> 2'
-  if RUBY_VERSION < '1.9.3'
-    s.add_development_dependency 'actionpack', '~> 3.2.13'
-  else
-    s.add_development_dependency 'actionpack', '~> 3'
-  end
+  s.add_development_dependency 'actionpack', '~> 3'
   # Putting this directly in Gemfile until thoughtbot pushes latest version
   # that supports Bundler `platform` directive for rbx support in travis-ci
   #s.add_development_dependency 'appraisal'
   s.add_development_dependency 'pry', '~> 0'
-  s.add_dependency 'countries', '0.9.3'
+  s.add_dependency 'countries', '~> 0.9.3'
 end

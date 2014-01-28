@@ -115,7 +115,7 @@ module ActionView
                                  html_options = {})
 
         @template.country_select(@object_name, method, priority_countries,
-                                                       options.merge(:object => @object),
+                                                       options.merge(object: @object),
                                                        html_options)
       end
     end

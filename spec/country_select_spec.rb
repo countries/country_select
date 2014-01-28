@@ -23,7 +23,7 @@ module ActionView
 
       let(:selected_us_option) do
         if defined?(Tags::Base)
-          content_tag(:option, 'United States of America', :selected => :selected, :value => "United States of America")
+          content_tag(:option, 'United States of America', selected: :selected, value: "United States of America")
         else
           "<option value=\"United States of America\" selected=\"selected\">United States of America</option>"
         end
@@ -31,7 +31,7 @@ module ActionView
 
       let(:selected_iso_us_option) do
         if defined?(Tags::Base)
-          content_tag(:option, 'United States of America', :selected => :selected, :value => 'US')
+          content_tag(:option, 'United States of America', selected: :selected, value: 'US')
         else
           "<option value=\"US\" selected=\"selected\">United States of America</option>"
         end
@@ -55,7 +55,7 @@ module ActionView
 
           it "creates option tags of the countries" do
             ::CountrySelect::countries("en").each do |code,name|
-              tag.should include(content_tag(:option, name, :value => name))
+              tag.should include(content_tag(:option, name, value: name))
             end
           end
 
@@ -89,7 +89,7 @@ module ActionView
 
       context "iso codes enabled" do
         describe "#country_select" do
-          let(:tag) { builder.country_select(:country_name, nil, :iso_codes => true) }
+          let(:tag) { builder.country_select(:country_name, nil, iso_codes: true) }
 
           it "creates a select tag" do
             tag.should include(select_tag)
@@ -97,13 +97,13 @@ module ActionView
 
           it "creates option tags of the countries" do
             ::CountrySelect::countries("en").each do |code,name|
-              tag.should include(content_tag(:option, name, :value => code))
+              tag.should include(content_tag(:option, name, value: code))
             end
           end
 
           it "selects the value of country_name" do
             walrus.country_name = 'US'
-            t = builder.country_select(:country_name, nil, :iso_codes => true)
+            t = builder.country_select(:country_name, nil, iso_codes: true)
             t.should include(selected_iso_us_option)
           end
         end
@@ -121,7 +121,7 @@ module ActionView
 
           it "creates option tags of the countries" do
             ::CountrySelect::countries("en").each do |code,name|
-              tag.should include(content_tag(:option, name, :value => code))
+              tag.should include(content_tag(:option, name, value: code))
             end
           end
 
@@ -133,7 +133,7 @@ module ActionView
         end
 
         describe "#priority_countries" do
-          let(:tag) { builder.country_select(:country_name, ['US'], :iso_codes => true) }
+          let(:tag) { builder.country_select(:country_name, ['US'], iso_codes: true) }
 
           it "puts the countries at the top" do
             tag.should include("#{select_tag}<option value=\"US")
