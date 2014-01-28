@@ -279,8 +279,8 @@ DEPENDENCIES
   actionpack (~> 4.1.0.beta1)
   appraisal!
   country_select!
-  pry
+  pry (~> 0)
   psych
   racc
-  rspec
+  rspec (~> 2)
   rubysl (~> 2.0)
