@@ -5,6 +5,7 @@ require 'country_select/version'
 Gem::Specification.new do |s|
   s.name        = 'country_select'
   s.version     = CountrySelect::VERSION
+  s.licenses    = ['MIT']
   s.authors     = ['Stefan Penner']
   s.email       = ['stefan.penner@gmail.com']
   s.homepage    = 'https://github.com/stefanpenner/country_select'
@@ -19,15 +20,15 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   # specify any dependencies here; for example:
-  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'rspec', '~> 0'
   if RUBY_VERSION < '1.9.3'
     s.add_development_dependency 'actionpack', '~> 3.2.13'
   else
-    s.add_development_dependency 'actionpack'
+    s.add_development_dependency 'actionpack', '~> 0'
   end
   # Putting this directly in Gemfile until thoughtbot pushes latest version
   # that supports Bundler `platform` directive for rbx support in travis-ci
   #s.add_development_dependency 'appraisal'
-  s.add_development_dependency 'pry'
+  s.add_development_dependency 'pry', '~> 0'
   s.add_dependency 'countries', '0.9.3'
 end
