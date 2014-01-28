@@ -42,25 +42,23 @@ country_select("user", "country", [ "Great Britain", "France", "Germany" ])
 ```
 
 ### Using Country Name Localization
-You can localize the displayed/stored country name based on translations
-provided by [hexorx/Countries](https://github.com/hexorx/countries). 
+Country names are automatically localized based on the value of
+`I18n.locale` thanks to the wonderful
+[countries gem](https://github.com/hexorx/countries/).
+
 Current translations include:
 en, it, de, fr, es, ja, nl, but may not be complete. In the event a translation is 
 not available, it will revert to the globally assigned locale (by default, "en").
 
-This can be used locally:
+The locale can be overridden locally:
 ```ruby
 country_select(:country_name, ['US'], {:iso_codes => true, :locale => 'es'}) 
 ```
-Or it can be set globally by adding the following configuration to an initializer.
-```ruby
-::CountrySelect.locale = 'es'
-```
-Currently available translations 
+
 ### Using ISO 3166-1 alpha-2 codes as values
 You can have the `option` tags use ISO 3166-1 alpha-2 codes as values
 and the country names as display strings. For example, the United States
-would appear as `<option value="us">United States</option>`
+would appear as `<option value="US">United States</option>`
 
 If you're starting a new project, this is the recommended way to store
 your country data since it will be more resistant to country names
@@ -81,21 +79,17 @@ Add the following configuration to an initializer.
 ::CountrySelect.use_iso_codes = true
 ```
 
-#### Global configuration to always use locale code
-Add the following configuration to an initializer.
-
-```ruby
-::CountrySelect.locale = 'es'
-```
-
 #### Getting the Country from ISO codes
 
 ```ruby
 class User < ActiveRecord::Base
 
   # Assuming country_select is used with User attribute `country_code`
+  # This will attempt to translate the country name and use the default
+  # (usually English) name if no translation is available
   def country_name
-    ::CountrySelect::COUNTRIES[country_code]
+    country = Country[country_code]
+    country.translations[I18n.locale.to_s] || country.name
   end
 
 end

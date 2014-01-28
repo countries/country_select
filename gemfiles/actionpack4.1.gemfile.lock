@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .././
   specs:
-    country_select (1.2.0)
+    country_select (1.3.0)
       countries (= 0.9.3)
 
 GEM

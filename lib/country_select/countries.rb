@@ -2,14 +2,12 @@
 require 'countries'
 
 module CountrySelect
-  Thread.current[:country_select] ||= {}
-
   def self.use_iso_codes
-    Thread.current[:country_select][:use_iso_codes] ||= false
+    Thread.current[:country_select_use_iso_codes] ||= false
   end
 
   def self.use_iso_codes=(val)
-    Thread.current[:country_select][:use_iso_codes] = val
+    Thread.current[:country_select_use_iso_codes] = val
   end
 
   def self.locale
