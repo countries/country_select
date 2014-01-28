@@ -42,20 +42,16 @@ module ActionView
       # have to wrap this call in a regular HTML
       # select tag.
       #
-      def country_options_for_select(selected = nil, priority_countries = nil, use_iso_codes = false, use_locale = nil)
+      def country_options_for_select(selected = nil, priority_countries = nil, use_locale = nil)
         country_options = "".html_safe
 
         if priority_countries
-          priority_countries_options = if use_iso_codes || ::CountrySelect.use_iso_codes
-                                         priority_countries.map do |code|
-                                           [
-                                             ::CountrySelect::countries(use_locale)[code],
-                                             code
-                                           ]
-                                         end
-                                       else
-                                         priority_countries
-                                       end
+          priority_countries_options = priority_countries.map do |code|
+            [
+              ::CountrySelect::countries(use_locale)[code],
+              code
+            ]
+          end
 
           country_options += options_for_select(priority_countries_options, selected)
           country_options += "<option value=\"\" disabled=\"disabled\">-------------</option>\n".html_safe
@@ -70,11 +66,7 @@ module ActionView
           selected = nil if priority_countries.include?(selected)
         end
 
-        values = if use_iso_codes || ::CountrySelect.use_iso_codes
-                   ::CountrySelect::countries(use_locale).invert
-                 else
-                   ::CountrySelect::countries(use_locale).values
-                 end
+        values = ::CountrySelect::countries(use_locale).invert
 
         return country_options + options_for_select(values.sort, selected)
       end
@@ -84,14 +76,13 @@ module ActionView
 
     module ToCountrySelectTag
       def to_country_select_tag(priority_countries, options, html_options)
-        use_iso_codes = options.delete(:iso_codes)
         use_locale = options.delete(:locale)
         html_options = html_options.stringify_keys
         add_default_name_and_id(html_options)
         value = value(object)
         content_tag("select",
           add_options(
-            country_options_for_select(value, priority_countries, use_iso_codes, use_locale),
+            country_options_for_select(value, priority_countries, use_locale),
             options, value
           ), html_options
         )
