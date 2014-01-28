@@ -25,7 +25,9 @@ Gem::Specification.new do |s|
   else
     s.add_development_dependency 'actionpack'
   end
-  s.add_development_dependency 'appraisal'
+  # Putting this directly in Gemfile until thoughtbot pushes latest version
+  # that supports Bundler `platform` directive for rbx support in travis-ci
+  #s.add_development_dependency 'appraisal'
   s.add_development_dependency 'pry'
   s.add_dependency 'countries', '0.9.3'
 end
