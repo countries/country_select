@@ -24,7 +24,10 @@ module CountrySelect
       country = Country.new(code)
       localized_name = country.translations[with_locale.to_s]
 
-      hash[code] = localized_name || default_name
+      # Codes should not be downcased, but they were previous to 1.3
+      # which means they should continue to be until 2.0 is released in
+      # order to prevent breakage with existing implementations
+      hash[code.downcase] = localized_name || default_name
       hash
     end
   end
