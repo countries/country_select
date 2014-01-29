@@ -72,11 +72,6 @@ country_select("user", "country_code", nil, iso_codes: true)
 country_select("user", "country_code", [ "GB", "FR", "DE" ], iso_codes: true)
 ```
 
-## Example Application
-
-An example Rails application demonstrating the different options is available at [scudco/country_select_test](https://github.com/scudco/country_select_test). The relevant view file lives [here](https://github.com/scudco/country_select_test/blob/master/app/views/welcome/index.html.erb).
-
-
 #### Global configuration to always use ISO codes
 Add the following configuration to an initializer.
 
@@ -99,6 +94,9 @@ class User < ActiveRecord::Base
 
 end
 ```
+## Example Application
+
+An example Rails application demonstrating the different options is available at [scudco/country_select_test](https://github.com/scudco/country_select_test). The relevant view file lives [here](https://github.com/scudco/country_select_test/blob/master/app/views/welcome/index.html.erb).
 
 ## Tests
 
