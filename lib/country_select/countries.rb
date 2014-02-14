@@ -1,5 +1,5 @@
 # encoding: utf-8
-require 'countries'
+require 'iso3166'
 
 module CountrySelect
   def self.use_iso_codes
@@ -21,7 +21,7 @@ module CountrySelect
     ISO3166::Country.all.inject({}) do |hash,country_pair|
       default_name = country_pair.first
       code = country_pair.last
-      country = Country.new(code)
+      country = ISO3166::Country.new(code)
       localized_name = country.translations[with_locale.to_s]
 
       # Codes should not be downcased, but they were previous to 1.3
