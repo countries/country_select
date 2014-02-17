@@ -52,24 +52,26 @@ not available, it will revert to the globally assigned locale (by default, "en")
 
 The locale can be overridden locally:
 ```ruby
-country_select(:country_name, ['US'], {:iso_codes => true, :locale => 'es'}) 
+country_select(:country_name, ['us'], {:iso_codes => true, :locale => 'es'}) 
 ```
 
 ### Using ISO 3166-1 alpha-2 codes as values
 You can have the `option` tags use ISO 3166-1 alpha-2 codes as values
 and the country names as display strings. For example, the United States
-would appear as `<option value="US">United States</option>`
+would appear as `<option value="us">United States</option>`
 
 If you're starting a new project, this is the recommended way to store
 your country data since it will be more resistant to country names
 changing.
+
+Beware that version 1.x converts all codes to lowercase ('us' instead of 'US'). Version 2.x will as per ISO 3166 use uppercase for all codes.
 
 ```ruby
 country_select("user", "country_code", nil, iso_codes: true)
 ```
 
 ```ruby
-country_select("user", "country_code", [ "GB", "FR", "DE" ], iso_codes: true)
+country_select("user", "country_code", [ "gb", "fr", "de" ], iso_codes: true)
 ```
 
 #### Global configuration to always use ISO codes
