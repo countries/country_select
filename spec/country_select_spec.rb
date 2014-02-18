@@ -18,11 +18,16 @@ module ActionView
       let!(:template) { ActionView::Base.new }
 
       let(:select_tag) do
-        "<select id=\"walrus_country_code\" name=\"walrus[country_code]\">"
+        <<-EOS.chomp.strip
+        <select id="walrus_country_code" name="walrus[country_code]">
+        EOS
       end
 
       let(:selected_us_option) do
-        content_tag(:option, 'United States of America', selected: :selected, value: "US")
+        content_tag(:option,
+                    'United States of America',
+                    selected: :selected,
+                    value: "US")
       end
 
       let(:builder) do
@@ -32,26 +37,30 @@ module ActionView
       it "selects the value of country_code" do
         walrus.country_code = 'US'
         t = builder.country_select(:country_code)
-        t.should include(selected_us_option)
+        expect(t).to include(selected_us_option)
       end
 
       describe "#priority_countries" do
         let(:tag) { builder.country_select(:country_code, ['US']) }
 
         it "puts the countries at the top" do
-          tag.should include("#{select_tag}<option value=\"US")
+          expect(tag).to include("#{select_tag}<option value=\"US")
         end
 
         it "inserts a divider" do
-          tag.should include(">United States of America</option><option value=\"\" disabled=\"disabled\">-------------</option>")
+          divider = <<-EOS.chomp.strip
+>United States of America</option><option value="" disabled="disabled">-------------</option>
+          EOS
+
+          expect(tag).to include(divider)
         end
 
         it "does not mark two countries as selected" do
           walrus.country_code = "US"
-          str = <<-EOS.strip
+          str = <<-EOS.strip.chomp
               </option>\n<option value="US" selected="selected">United States</option>
           EOS
-          tag.should_not include(str)
+          expect(tag).to_not include(str)
         end
       end
 
@@ -60,7 +69,11 @@ module ActionView
           let(:tag) { builder.country_select(:country_code, ['US'], locale: 'es') }
 
           it "displays spanish names" do
-            tag.should include(">Estados Unidos</option><option value=\"\" disabled=\"disabled\">-------------</option>")
+            spanish_name = <<-EOS.strip.chomp
+>Estados Unidos</option><option value="" disabled="disabled">-------------</option>
+            EOS
+
+            expect(tag).to include(spanish_name)
           end
         end
       end
