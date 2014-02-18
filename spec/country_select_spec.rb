@@ -22,19 +22,11 @@ module ActionView
       end
 
       let(:selected_us_option) do
-        if defined?(Tags::Base)
-          content_tag(:option, 'United States of America', selected: :selected, value: "US")
-        else
-          "<option value=\"us\" selected=\"selected\">United States of America</option>"
-        end
+        content_tag(:option, 'United States of America', selected: :selected, value: "US")
       end
 
       let(:builder) do
-        if defined?(Tags::Base)
-          FormBuilder.new(:walrus, walrus, template, {})
-        else
-          FormBuilder.new(:walrus, walrus, template, {}, Proc.new { })
-        end
+        FormBuilder.new(:walrus, walrus, template, {})
       end
 
       it "selects the value of country_code" do

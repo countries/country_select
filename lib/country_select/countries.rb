@@ -2,30 +2,18 @@
 require 'iso3166'
 
 module CountrySelect
-  def self.use_iso_codes
-    Thread.current[:country_select_use_iso_codes] ||= false
-  end
+  # Localized Countries list
+  def self.countries(locale=nil)
+    I18n.with_locale(locale) do
+      ISO3166::Country.all.inject({}) do |hash,country_pair|
+        default_name = country_pair.first
+        code = country_pair.last
+        country = ISO3166::Country.new(code)
+        localized_name = country.translations[I18n.locale.to_s]
 
-  def self.use_iso_codes=(val)
-    Thread.current[:country_select_use_iso_codes] = val
-  end
-
-  def self.locale
-    I18n.locale
-  end
-
-  #Localized Countries list
-  def self.countries(with_locale=nil)
-    with_locale ||= locale
-
-    ISO3166::Country.all.inject({}) do |hash,country_pair|
-      default_name = country_pair.first
-      code = country_pair.last
-      country = ISO3166::Country.new(code)
-      localized_name = country.translations[with_locale.to_s]
-
-      hash[code] = localized_name || default_name
-      hash
+        hash[code] = localized_name || default_name
+        hash
+      end
     end
   end
 end

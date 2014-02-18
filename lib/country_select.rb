@@ -19,14 +19,7 @@ module ActionView
                                          options = {},
                                          html_options = {})
 
-        tag = if defined?(ActionView::Helpers::InstanceTag) &&
-                ActionView::Helpers::InstanceTag.instance_method(:initialize).arity != 0
-
-                InstanceTag.new(object, method, self, options.delete(:object))
-              else
-                CountrySelect.new(object, method, self, options)
-              end
-
+        tag = CountrySelect.new(object, method, self, options)
         tag.to_country_select_tag(priority_countries, options, html_options)
       end
 
@@ -75,7 +68,7 @@ module ActionView
       # All the countries included in the country_options output.
     end
 
-    module ToCountrySelectTag
+    class CountrySelect < Tags::Base
       def to_country_select_tag(priority_countries, options, html_options)
         use_locale = options.delete(:locale)
         html_options = html_options.stringify_keys
@@ -87,17 +80,6 @@ module ActionView
             options, value
           ), html_options
         )
-      end
-    end
-
-    if defined?(ActionView::Helpers::InstanceTag) &&
-        ActionView::Helpers::InstanceTag.instance_method(:initialize).arity != 0
-      class InstanceTag
-        include ToCountrySelectTag
-      end
-    else
-      class CountrySelect < Tags::Base
-        include ToCountrySelectTag
       end
     end
 
