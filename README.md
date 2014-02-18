@@ -8,6 +8,10 @@ While the ISO 3166 standard is a relatively neutral source of country
 names, it may still offend some users. Developers are strongly advised
 to evaluate the suitability of this list given their user base.
 
+## UPGRADING
+
+[**An important message about upgrading from 1.0**](UPGRADING.md)
+
 ## Installation
 
 Install as a gem using
@@ -64,7 +68,7 @@ resistant to country names changing.
 The locale can be overridden locally:
 
 ```ruby
-country_select("user", "country_code", ['US'], {:locale => 'es'}) 
+country_select("user", "country_code", ['US'], locale: 'es')
 ```
 
 ```ruby
@@ -84,7 +88,7 @@ class User < ActiveRecord::Base
   # This will attempt to translate the country name and use the default
   # (usually English) name if no translation is available
   def country_name
-    country = Country[country_code]
+    country = ISO3166::Country[country_code]
     country.translations[I18n.locale.to_s] || country.name
   end
 

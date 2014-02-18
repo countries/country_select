@@ -1,0 +1,42 @@
+# Upgrading from 1.x
+
+`country_select` 2.0 has brought a few small changes, but these changes
+can have a big impact on existing production systems. Please read these
+points carefully and consider whether upgrading to 2.0 is a good idea.
+
+Please post any implications we may have missed as a GitHub Issue
+or Pull Request.
+
+## ISO codes are always on
+
+If you upgrade to 2.0 and are currently storing countries by the names
+produced by this gem, your setup will break. It is recommended that you
+stick with 1.x until developing a data migration strategy that allows
+you to map your existing country names to country codes.
+
+## i18n country names are always on (when available)
+
+Country names will be generated using `I18n.locale` if a translation
+from the countries gem is available.
+
+## Codes are UPCASED
+
+The official ISO 3166-1 standard uses UPCASED codes. This is an easy
+data change, but may affect areas of code dependent on lowercase country
+codes.
+
+Here's a sample SQL migration that could address a `users` table with
+lowercased country codes stored in the `country_code` column:
+
+```sql
+UPDATE users SET country_code = UPPER(country_code);
+```
+
+## Ruby 1.9+
+
+`country_select` will no longer be tested in Ruby `< 1.9`.
+
+## Rails 4+
+
+`country_select` will no longer be tested in Rails `< 4`.
+
