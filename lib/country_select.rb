@@ -47,6 +47,7 @@ module ActionView
 
         if priority_countries
           priority_countries_options = priority_countries.map do |code|
+            code = code.upcase
             [
               ::CountrySelect::countries(use_locale)[code],
               code

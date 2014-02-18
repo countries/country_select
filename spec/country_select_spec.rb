@@ -25,7 +25,7 @@ module ActionView
         if defined?(Tags::Base)
           content_tag(:option, 'United States of America', selected: :selected, value: "US")
         else
-          "<option value=\"US\" selected=\"selected\">United States of America</option>"
+          "<option value=\"us\" selected=\"selected\">United States of America</option>"
         end
       end
 
