@@ -1,96 +1,106 @@
-# CountrySelect
-#
-# Adds #country_select method to
-# ActionView::FormBuilder
-#
+# encoding: utf-8
+
 require 'country_select/version'
-require 'country_select/countries'
+require 'iso3166'
 
 module ActionView
   module Helpers
-    module FormOptionsHelper
-      #
-      # Return select and option tags
-      # for the given object and method,
-      # using country_options_for_select to
-      # generate the list of option tags.
-      #
-      def country_select(object, method, priority_countries = nil,
-                                         options = {},
-                                         html_options = {})
-
-        tag = CountrySelect.new(object, method, self, options)
-        tag.to_country_select_tag(priority_countries, options, html_options)
+    class FormBuilder
+      def country_select(method, options = {}, html_options = {})
+        @template.country_select(@object_name, method, objectify_options(options), @default_options.merge(html_options))
       end
+    end
 
-      #
-      # Returns a string of option tags for
-      # pretty much any country in the world.
-      #
-      # You can also supply an array of countries as
-      # +priority_countries+ so that they will be
-      # listed above the rest of the (long) list.
-      #
-      # NOTE: Only the option tags are returned, you
-      # have to wrap this call in a regular HTML
-      # select tag.
-      #
-      def country_options_for_select(selected = nil, priority_countries = nil, use_locale = nil)
-        country_options = "".html_safe
+    module FormOptionsHelper
+      def country_select(object, method, options = {}, html_options = {})
+        Tags::CountrySelect.new(object, method, self, options, html_options).render
+      end
+    end
 
-        if priority_countries
-          priority_countries_options = priority_countries.map do |code|
-            code = code.upcase
-            [
-              ::CountrySelect::countries(use_locale)[code],
-              code
-            ]
-          end
+    module Tags
+      class CountrySelect < Base
+        def initialize(object_name, method_name, template_object, options, html_options)
+          @html_options = html_options
 
-          country_options += options_for_select(priority_countries_options, selected)
-          country_options += "<option value=\"\" disabled=\"disabled\">-------------</option>\n".html_safe
-          #
-          # prevents selected from being included
-          # twice in the HTML which causes
-          # some browsers to select the second
-          # selected option (not priority)
-          # which makes it harder to select an
-          # alternative priority country
-          #
-          selected = nil if priority_countries.include?(selected)
+          super(object_name, method_name, template_object, options)
         end
 
-        values = ::CountrySelect::countries(use_locale).invert
+        def render
+          select_content_tag(country_option_tags, @options, @html_options)
+        end
 
-        return country_options + options_for_select(values.sort, selected)
-      end
+        def country_option_tags
+          option_tags_options = {
+            :selected => @options.fetch(:selected) { value(@object) },
+            :disabled => @options[:disabled]
+          }
 
-      # All the countries included in the country_options output.
-    end
+          if priority_countries.present?
+            priority_countries_options = country_options_for(priority_countries)
 
-    class CountrySelect < Tags::Base
-      def to_country_select_tag(priority_countries, options, html_options)
-        use_locale = options.delete(:locale)
-        html_options = html_options.stringify_keys
-        add_default_name_and_id(html_options)
-        value = value(object)
-        content_tag("select",
-          add_options(
-            country_options_for_select(value, priority_countries, use_locale),
-            options, value
-          ), html_options
-        )
-      end
-    end
+            option_tags = options_for_select(priority_countries_options, option_tags_options)
+            option_tags += html_safe_newline + options_for_select([priority_countries_divider], disabled: priority_countries_divider)
 
-    class FormBuilder
-      def country_select(method, priority_countries = nil,
-                                 options = {},
-                                 html_options = {})
+            if priority_countries.include?(option_tags_options[:selected])
+              option_tags_options[:selected] = nil
+            end
 
-        @template.country_select(@object_name, method, priority_countries,
-                                                       options.merge(object: @object),
-                                                       html_options)
+            option_tags += html_safe_newline + options_for_select(country_options, option_tags_options)
+          else
+            option_tags = options_for_select(country_options, option_tags_options)
+          end
+        end
+
+        private
+        def locale
+          @options[:locale]
+        end
+
+        def priority_countries
+          @options[:priority_countries]
+        end
+
+        def priority_countries_divider
+          @options[:priority_countries_divider] || "-"*15
+        end
+
+        def only_country_codes
+          @options[:only]
+        end
+
+        def country_options
+          country_options_for(all_country_codes)
+        end
+
+        def all_country_codes
+          codes = ISO3166::Country.all.map(&:last)
+
+          if only_country_codes.present?
+            codes & only_country_codes
+          else
+            codes
+          end
+        end
+
+        def country_options_for(country_codes)
+          I18n.with_locale(locale) do
+            country_codes.map do |code|
+              code = code.to_s.upcase
+              country = ISO3166::Country.new(code)
+
+              default_name = country.name
+              localized_name = country.translations[I18n.locale.to_s]
+
+              name = localized_name || default_name
+
+              [name,code]
+            end.sort
+          end
+        end
+
+        def html_safe_newline
+          "\n".html_safe
+        end
       end
     end
   end

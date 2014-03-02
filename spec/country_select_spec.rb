@@ -3,81 +3,94 @@ require 'spec_helper'
 require 'action_view'
 require 'country_select'
 
-module ActionView
-  module Helpers
+describe ActionView::Helpers::Tags::CountrySelect do
+  include ActionView::Helpers::TagHelper
+  include ActionView::Helpers::FormOptionsHelper
 
-    describe CountrySelect do
-      include TagHelper
+  class Walrus
+    attr_accessor :country_code
+  end
 
-      class Walrus
-        attr_accessor :country_code
-      end
+  let(:walrus) { Walrus.new }
+  let!(:template) { ActionView::Base.new }
 
-      let(:walrus) { Walrus.new }
+  let(:builder) do
+    ActionView::Helpers::FormBuilder.new(:walrus, walrus, template, {})
+  end
 
-      let!(:template) { ActionView::Base.new }
-
-      let(:select_tag) do
-        <<-EOS.chomp.strip
+  let(:select_tag) do
+    <<-EOS.chomp.strip
         <select id="walrus_country_code" name="walrus[country_code]">
-        EOS
-      end
+    EOS
+  end
 
-      let(:selected_us_option) do
-        content_tag(:option,
-                    'United States of America',
-                    selected: :selected,
-                    value: "US")
-      end
+  it "selects the value of country_code" do
+    tag = content_tag(:option,
+                      'United States of America',
+                      selected: true,
+                      value: "US")
 
-      let(:builder) do
-        FormBuilder.new(:walrus, walrus, template, {})
-      end
+    walrus.country_code = 'US'
+    t = builder.country_select(:country_code)
+    expect(t).to include(tag)
+  end
 
-      it "selects the value of country_code" do
-        walrus.country_code = 'US'
-        t = builder.country_select(:country_code)
-        expect(t).to include(selected_us_option)
-      end
+  it "uses the I18n.locale" do
+    tag = content_tag(:option,
+                      'Estados Unidos',
+                      selected: true,
+                      value: "US")
 
-      describe "#priority_countries" do
-        let(:tag) { builder.country_select(:country_code, ['US']) }
-
-        it "puts the countries at the top" do
-          expect(tag).to include("#{select_tag}<option value=\"US")
-        end
-
-        it "inserts a divider" do
-          divider = <<-EOS.chomp.strip
->United States of America</option><option value="" disabled="disabled">-------------</option>
-          EOS
-
-          expect(tag).to include(divider)
-        end
-
-        it "does not mark two countries as selected" do
-          walrus.country_code = "US"
-          str = <<-EOS.strip.chomp
-              </option>\n<option value="US" selected="selected">United States</option>
-          EOS
-          expect(tag).to_not include(str)
-        end
-      end
-
-      context "different language selected" do
-        describe "'es' selected as the instance language" do
-          let(:tag) { builder.country_select(:country_code, ['US'], locale: 'es') }
-
-          it "displays spanish names" do
-            spanish_name = <<-EOS.strip.chomp
->Estados Unidos</option><option value="" disabled="disabled">-------------</option>
-            EOS
-
-            expect(tag).to include(spanish_name)
-          end
-        end
-      end
+    walrus.country_code = 'US'
+    original_locale = I18n.locale
+    begin
+      I18n.locale = :es
+      t = builder.country_select(:country_code)
+      expect(t).to include(tag)
+    ensure
+      I18n.locale = original_locale
     end
+  end
 
+  it "accepts a locale option" do
+    tag = content_tag(:option,
+                      'États-Unis',
+                      selected: true,
+                      value: "US")
+
+    walrus.country_code = 'US'
+    t = builder.country_select(:country_code, locale: :fr)
+    expect(t).to include(tag)
+  end
+
+  it "accepts priority countries" do
+    tag = options_for_select(
+      [
+        ['Latvia','LV'],
+        ['United States of America','US'],
+        ['-'*15,'-'*15]
+      ],
+      selected: 'US',
+      disabled: '-'*15
+    )
+
+    walrus.country_code = 'US'
+    t = builder.country_select(:country_code, priority_countries: ['LV','US'])
+    expect(t).to include(tag)
+  end
+
+  it "selects only the first matching option" do
+    tag = options_for_select([["United States of America", "US"],["Uruguay", "UY"]], "US")
+    walrus.country_code = 'US'
+    t = builder.country_select(:country_code, priority_countries: ['LV','US'])
+    expect(t).to_not include(tag)
+  end
+
+  it "displays only the chosen countries" do
+    options = [["Denmark", "DK"],["Germany", "DE"]]
+    tag = builder.select(:country_code, options)
+    walrus.country_code = 'US'
+    t = builder.country_select(:country_code, only: ['DK','DE'])
+    expect(t).to eql(tag)
   end
 end

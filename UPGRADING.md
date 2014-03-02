@@ -32,6 +32,26 @@ lowercased country codes stored in the `country_code` column:
 UPDATE users SET country_code = UPPER(country_code);
 ```
 
+## Priority countries are now in the options hash
+
+The priority countries syntax has changed from
+
+```ruby
+  country_select(:user, :country_code, ["GB","FR"])
+```
+
+to
+
+```ruby
+  country_select(:user, :country_code, priority_countries: ["GB","FR"])
+```
+
+## You can choose to only display a chosen set of countries
+
+```ruby
+  country_select(:user, :country_code, only: ["LV","SG"])
+```
+
 ## Ruby 1.9+
 
 `country_select` will no longer be tested in Ruby `< 1.9`.

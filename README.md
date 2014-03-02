@@ -10,7 +10,7 @@ to evaluate the suitability of this list given their user base.
 
 ## UPGRADING
 
-[**An important message about upgrading from 1.0**](UPGRADING.md)
+[**An important message about upgrading from 1.x**](UPGRADING.md)
 
 ## Installation
 
@@ -36,7 +36,13 @@ country_select("user", "country")
 Supplying priority countries to be placed at the top of the list:
 
 ```ruby
-country_select("user", "country", [ "GB", "FR", "DE" ])
+country_select("user", "country", priority_countries: ["GB", "FR", "DE"])
+```
+
+Supplying only certain countries:
+
+```ruby
+country_select("user", "country", only: ["GB", "FR", "DE"])
 ```
 
 ### ISO 3166-1 alpha-2 codes
@@ -68,15 +74,7 @@ resistant to country names changing.
 The locale can be overridden locally:
 
 ```ruby
-country_select("user", "country_code", ['US'], locale: 'es')
-```
-
-```ruby
-country_select("user", "country_code")
-```
-
-```ruby
-country_select("user", "country_code", [ "GB", "FR", "DE" ])
+country_select("user", "country_code", locale: 'es')
 ```
 
 #### Getting the Country Name from the countries gem
@@ -105,13 +103,8 @@ The relevant view file lives [here](https://github.com/scudco/country_select_tes
 
 ```shell
 bundle
-bundle exec rspec
-```
-
-### Running with multiple versions of actionpack
-
-```shell
 bundle exec appraisal
+bundle exec rake appraisal:integration
 ```
 
 Copyright (c) 2008 Michael Koziarski, released under the MIT license
