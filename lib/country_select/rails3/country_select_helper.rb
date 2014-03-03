@@ -19,7 +19,13 @@ module ActionView
         @options = options
         @html_options = html_options
 
-        select_content_tag(country_option_tags, @options, @html_options)
+        if self.respond_to?(:select_content_tag)
+          select_content_tag(country_option_tags, @options, @html_options)
+        else
+          html_options = @html_options.stringify_keys
+          add_default_name_and_id(html_options)
+          content_tag(:select, country_option_tags, html_options)
+        end
       end
     end
   end
