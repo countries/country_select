@@ -55,8 +55,3 @@ to
 ## Ruby 1.9+
 
 `country_select` will no longer be tested in Ruby `< 1.9`.
-
-## Rails 4+
-
-`country_select` will no longer be tested in Rails `< 4`.
-
