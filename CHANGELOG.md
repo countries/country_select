@@ -1,13 +1,14 @@
-== 2.0.0 2014-01-28
+== 2.0.0 2014-03-02
 
-  * Removed support for actionpack < 4.0
   * Removed support for Ruby < 1.9.3
   * ISO-3166 alpha-2 codes are now on by default, stored in uppercase
     (e.g., US)
-  * Localization is always on (work in progress)
+  * Localization is always on
     * The `country_select` method will always attempt to localize
       country names based on the value of `I18n.locale` via translations
       stored in the `countries` gem
+  * Priority countries are now set via the `priority_countries` option
+  * The list of countries can now be limited with the `only` option
 
 == 1.2.0 2013-07-06
 
