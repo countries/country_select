@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'iso3166'
 
 require 'country_select/version'
