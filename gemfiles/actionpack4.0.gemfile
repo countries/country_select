@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-gem "appraisal", :github=>"thoughtbot/appraisal", :ref=>"6d599f"
+gem "appraisal", "~> 1.0.0.beta3"
 gem "actionpack", "~> 4.0.0"
 
 platforms :rbx do

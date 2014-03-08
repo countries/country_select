@@ -4,15 +4,13 @@
 Provides a simple helper to get an HTML select list of countries using the
 [ISO 3166-1 standard](https://en.wikipedia.org/wiki/ISO_3166-1).
 
-It is also configurable to use countries'
-[ISO 3166-1 alpha-2 codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
-as values and
-[ISO 3166-1 names](https://en.wikipedia.org/wiki/ISO_3166-1)
-as display strings.
-
 While the ISO 3166 standard is a relatively neutral source of country
 names, it may still offend some users. Developers are strongly advised
 to evaluate the suitability of this list given their user base.
+
+## UPGRADING
+
+[**An important message about upgrading from 1.x**](UPGRADING.md)
 
 ## Installation
 
@@ -38,50 +36,48 @@ country_select("user", "country")
 Supplying priority countries to be placed at the top of the list:
 
 ```ruby
-country_select("user", "country", [ "Great Britain", "France", "Germany" ])
+country_select("user", "country", priority_countries: ["GB", "FR", "DE"])
 ```
 
-### Using Country Name Localization
+Supplying only certain countries:
+
+```ruby
+country_select("user", "country", only: ["GB", "FR", "DE"])
+```
+
+### ISO 3166-1 alpha-2 codes
+The `option` tags use ISO 3166-1 alpha-2 codes as values and the country
+names as display strings. For example, the United States would appear as
+`<option value="US">United States of America</option>`
+
 Country names are automatically localized based on the value of
 `I18n.locale` thanks to the wonderful
 [countries gem](https://github.com/hexorx/countries/).
 
 Current translations include:
-en, it, de, fr, es, ja, nl, but may not be complete. In the event a translation is 
-not available, it will revert to the globally assigned locale (by default, "en").
+
+  * en
+  * de
+  * es
+  * fr
+  * it
+  * ja
+  * nl
+
+In the event a translation is not available, it will revert to the
+globally assigned locale (by default, "en").
+
+This is the only way to use `country_select` as of version `2.0`. It
+is the recommended way to store your country data since it will be
+resistant to country names changing.
 
 The locale can be overridden locally:
-```ruby
-country_select(:country_name, ['us'], {:iso_codes => true, :locale => 'es'}) 
-```
-
-### Using ISO 3166-1 alpha-2 codes as values
-You can have the `option` tags use ISO 3166-1 alpha-2 codes as values
-and the country names as display strings. For example, the United States
-would appear as `<option value="us">United States</option>`
-
-If you're starting a new project, this is the recommended way to store
-your country data since it will be more resistant to country names
-changing.
-
-Beware that version 1.x converts all codes to lowercase ('us' instead of 'US'). Version 2.x will as per ISO 3166 use uppercase for all codes.
 
 ```ruby
-country_select("user", "country_code", nil, iso_codes: true)
+country_select("user", "country_code", locale: 'es')
 ```
 
-```ruby
-country_select("user", "country_code", [ "gb", "fr", "de" ], iso_codes: true)
-```
-
-#### Global configuration to always use ISO codes
-Add the following configuration to an initializer.
-
-```ruby
-::CountrySelect.use_iso_codes = true
-```
-
-#### Getting the Country from ISO codes
+#### Getting the Country Name from the countries gem
 
 ```ruby
 class User < ActiveRecord::Base
@@ -90,27 +86,25 @@ class User < ActiveRecord::Base
   # This will attempt to translate the country name and use the default
   # (usually English) name if no translation is available
   def country_name
-    country = Country[country_code]
+    country = ISO3166::Country[country_code]
     country.translations[I18n.locale.to_s] || country.name
   end
 
 end
 ```
+
 ## Example Application
 
-An example Rails application demonstrating the different options is available at [scudco/country_select_test](https://github.com/scudco/country_select_test). The relevant view file lives [here](https://github.com/scudco/country_select_test/blob/master/app/views/welcome/index.html.erb).
+An example Rails application demonstrating the different options is 
+available at [scudco/country_select_test](https://github.com/scudco/country_select_test).
+The relevant view file lives [here](https://github.com/scudco/country_select_test/blob/master/app/views/welcome/index.html.erb).
 
 ## Tests
 
 ```shell
 bundle
-bundle exec rspec
-```
-
-### Running with multiple versions of actionpack
-
-```shell
 bundle exec appraisal
+bundle exec rake appraisal:integration
 ```
 
 Copyright (c) 2008 Michael Koziarski, released under the MIT license

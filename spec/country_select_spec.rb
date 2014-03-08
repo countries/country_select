@@ -1,166 +1,93 @@
+# encoding: utf-8
+
 require 'spec_helper'
 
 require 'action_view'
 require 'country_select'
 
-module ActionView
-  module Helpers
+describe "CountrySelect" do
+  include ActionView::Helpers::TagHelper
+  include ActionView::Helpers::FormOptionsHelper
 
-    describe CountrySelect do
-      include TagHelper
+  class Walrus
+    attr_accessor :country_code
+  end
 
-      class Walrus
-        attr_accessor :country_name
-      end
+  let(:walrus) { Walrus.new }
+  let!(:template) { ActionView::Base.new }
 
-      let(:walrus) { Walrus.new }
-
-      let!(:template) { ActionView::Base.new }
-
-      let(:select_tag) do
-        "<select id=\"walrus_country_name\" name=\"walrus[country_name]\">"
-      end
-
-      let(:selected_us_option) do
-        if defined?(Tags::Base)
-          content_tag(:option, 'United States of America', :selected => :selected, :value => "United States of America")
-        else
-          "<option value=\"United States of America\" selected=\"selected\">United States of America</option>"
-        end
-      end
-
-      let(:selected_iso_us_option) do
-        if defined?(Tags::Base)
-          content_tag(:option, 'United States of America', :selected => :selected, :value => 'us')
-        else
-          "<option value=\"us\" selected=\"selected\">United States of America</option>"
-        end
-      end
-
-      let(:builder) do
-        if defined?(Tags::Base)
-          FormBuilder.new(:walrus, walrus, template, {})
-        else
-          FormBuilder.new(:walrus, walrus, template, {}, Proc.new { })
-        end
-      end
-
-      context "iso codes disabled" do
-        describe "#country_select" do
-          let(:tag) { builder.country_select(:country_name) }
-
-          it "creates a select tag" do
-            tag.should include(select_tag)
-          end
-
-          it "creates option tags of the countries" do
-            ::CountrySelect::countries("en").each do |code,name|
-              tag.should include(content_tag(:option, name, :value => name))
-            end
-          end
-
-          it "selects the value of country_name" do
-            walrus.country_name = 'United States of America'
-            t = builder.country_select(:country_name)
-            t.should include(selected_us_option)
-          end
-        end
-
-        describe "#priority_countries" do
-          let(:tag) { builder.country_select(:country_name, ['United States of America']) }
-
-          it "puts the countries at the top" do
-            tag.should include("#{select_tag}<option value=\"United States of America")
-          end
-
-          it "inserts a divider" do
-            tag.should include(">United States of America</option><option value=\"\" disabled=\"disabled\">-------------</option>")
-          end
-
-          it "does not mark two countries as selected" do
-            walrus.country_name = "United States of America"
-            str = <<-EOS.strip
-              </option>\n<option value="United States of America" selected="selected">United States of America</option>
-            EOS
-            tag.should_not include(str)
-          end
-        end
-      end
-
-      context "iso codes enabled" do
-        describe "#country_select" do
-          let(:tag) { builder.country_select(:country_name, nil, :iso_codes => true) }
-
-          it "creates a select tag" do
-            tag.should include(select_tag)
-          end
-
-          it "creates option tags of the countries" do
-            ::CountrySelect::countries("en").each do |code,name|
-              tag.should include(content_tag(:option, name, :value => code))
-            end
-          end
-
-          it "selects the value of country_name" do
-            walrus.country_name = 'us'
-            t = builder.country_select(:country_name, nil, :iso_codes => true)
-            t.should include(selected_iso_us_option)
-          end
-        end
-
-        describe "#country_select with global option" do
-          before do
-            ::CountrySelect.use_iso_codes = true
-          end
-
-          after do
-            ::CountrySelect.use_iso_codes = false
-          end
-
-          let(:tag) { builder.country_select(:country_name, nil) }
-
-          it "creates option tags of the countries" do
-            ::CountrySelect::countries("en").each do |code,name|
-              tag.should include(content_tag(:option, name, :value => code))
-            end
-          end
-
-          it "selects the value of country_name" do
-            walrus.country_name = 'us'
-            t = builder.country_select(:country_name)
-            t.should include(selected_iso_us_option)
-          end
-        end
-
-        describe "#priority_countries" do
-          let(:tag) { builder.country_select(:country_name, ['us'], :iso_codes => true) }
-
-          it "puts the countries at the top" do
-            tag.should include("#{select_tag}<option value=\"us")
-          end
-
-          it "inserts a divider" do
-            tag.should include(">United States of America</option><option value=\"\" disabled=\"disabled\">-------------</option>")
-          end
-
-          it "does not mark two countries as selected" do
-            walrus.country_name = "us"
-            str = <<-EOS.strip
-              </option>\n<option value="us" selected="selected">United States of America</option>
-            EOS
-            tag.should_not include(str)
-          end
-        end
-      end
-      context "different language selected" do
-        describe "'es' selected as the instance language" do
-          let(:tag) { builder.country_select(:country_name, ['us'], {:iso_codes => true, :locale => 'es'}) }
-
-          it "displays spanish names" do
-            tag.should include(">Estados Unidos</option><option value=\"\" disabled=\"disabled\">-------------</option>")
-          end
-        end
-      end
+  let(:builder) do
+    if defined?(ActionView::Helpers::Tags::Base)
+      ActionView::Helpers::FormBuilder.new(:walrus, walrus, template, {})
+    else
+      ActionView::Helpers::FormBuilder.new(:walrus, walrus, template, {}, Proc.new { })
     end
+  end
+
+  let(:select_tag) do
+    <<-EOS.chomp.strip
+      <select id="walrus_country_code" name="walrus[country_code]">
+    EOS
+  end
+
+  it "selects the value of country_code" do
+    tag = options_for_select([['United States of America', 'US']], 'US')
+
+    walrus.country_code = 'US'
+    t = builder.country_select(:country_code)
+    expect(t).to include(tag)
+  end
+
+  it "uses the locale specified by I18n.locale" do
+    tag = options_for_select([['Estados Unidos', 'US']], 'US')
+
+    walrus.country_code = 'US'
+    original_locale = I18n.locale
+    begin
+      I18n.locale = :es
+      t = builder.country_select(:country_code)
+      expect(t).to include(tag)
+    ensure
+      I18n.locale = original_locale
+    end
+  end
+
+  it "accepts a locale option" do
+    tag = options_for_select([['États-Unis', 'US']], 'US')
+
+    walrus.country_code = 'US'
+    t = builder.country_select(:country_code, locale: :fr)
+    expect(t).to include(tag)
+  end
+
+  it "accepts priority countries" do
+    tag = options_for_select(
+      [
+        ['Latvia','LV'],
+        ['United States of America','US'],
+        ['-'*15,'-'*15]
+      ],
+      selected: 'US',
+      disabled: '-'*15
+    )
+
+    walrus.country_code = 'US'
+    t = builder.country_select(:country_code, priority_countries: ['LV','US'])
+    expect(t).to include(tag)
+  end
+
+  it "selects only the first matching option" do
+    tag = options_for_select([["United States of America", "US"],["Uruguay", "UY"]], "US")
+    walrus.country_code = 'US'
+    t = builder.country_select(:country_code, priority_countries: ['LV','US'])
+    expect(t).to_not include(tag)
+  end
+
+  it "displays only the chosen countries" do
+    options = [["Denmark", "DK"],["Germany", "DE"]]
+    tag = builder.select(:country_code, options)
+    walrus.country_code = 'US'
+    t = builder.country_select(:country_code, only: ['DK','DE'])
+    expect(t).to eql(tag)
   end
 end

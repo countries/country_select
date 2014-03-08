@@ -2,8 +2,8 @@
 
 source "https://rubygems.org"
 
-gem "appraisal", :github=>"thoughtbot/appraisal", :ref=>"6d599f"
-gem "actionpack", "~> 3.1.0"
+gem "appraisal", "~> 1.0.0.beta3"
+gem "actionpack", "~> 3.1.12"
 
 platforms :rbx do
   gem "racc"
