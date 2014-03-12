@@ -45,6 +45,12 @@ Supplying only certain countries:
 country_select("user", "country", only: ["GB", "FR", "DE"])
 ```
 
+Supplying additional html options:
+
+```ruby
+country_select("user", "country", { priority_countries: ["GB", "FR"] }, { selected: "GB", class: 'form-control' })
+```
+
 ### ISO 3166-1 alpha-2 codes
 The `option` tags use ISO 3166-1 alpha-2 codes as values and the country
 names as display strings. For example, the United States would appear as
@@ -95,7 +101,7 @@ end
 
 ## Example Application
 
-An example Rails application demonstrating the different options is 
+An example Rails application demonstrating the different options is
 available at [scudco/country_select_test](https://github.com/scudco/country_select_test).
 The relevant view file lives [here](https://github.com/scudco/country_select_test/blob/master/app/views/welcome/index.html.erb).
 
