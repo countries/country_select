@@ -65,6 +65,7 @@ describe "CountrySelect" do
       [
         ['Latvia','LV'],
         ['United States of America','US'],
+        ['Denmark', 'DK'],
         ['-'*15,'-'*15]
       ],
       selected: 'US',
@@ -72,7 +73,7 @@ describe "CountrySelect" do
     )
 
     walrus.country_code = 'US'
-    t = builder.country_select(:country_code, priority_countries: ['LV','US'])
+    t = builder.country_select(:country_code, priority_countries: ['LV','US','DK'])
     expect(t).to include(tag)
   end
 
