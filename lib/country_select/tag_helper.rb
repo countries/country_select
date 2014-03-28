@@ -7,7 +7,7 @@ module CountrySelect
       }
 
       if priority_countries.present?
-        priority_countries_options = country_options_for(priority_countries)
+        priority_countries_options = country_options_for(priority_countries, false)
 
         option_tags = options_for_select(priority_countries_options, option_tags_options)
         option_tags += html_safe_newline + options_for_select([priority_countries_divider], disabled: priority_countries_divider)
@@ -40,7 +40,7 @@ module CountrySelect
     end
 
     def country_options
-      country_options_for(all_country_codes)
+      country_options_for(all_country_codes, true)
     end
 
     def all_country_codes
@@ -53,9 +53,9 @@ module CountrySelect
       end
     end
 
-    def country_options_for(country_codes)
+    def country_options_for(country_codes, sorted=true)
       I18n.with_locale(locale) do
-        country_codes.map do |code|
+        country_list = country_codes.map do |code|
           code = code.to_s.upcase
           country = ISO3166::Country.new(code)
 
@@ -65,7 +65,8 @@ module CountrySelect
           name = localized_name || default_name
 
           [name,code]
-        end.sort
+        end
+        sorted ? country_list.sort : country_list
       end
     end
 
