@@ -36,7 +36,7 @@ country_select("user", "country")
 Supplying priority countries to be placed at the top of the list:
 
 ```ruby
-country_select("user", "country", priority_countries: ["GB", "FR", "DE"])
+country_select("user", "country", ["GB", "FR", "DE"])
 ```
 
 Supplying only certain countries:
@@ -48,7 +48,7 @@ country_select("user", "country", only: ["GB", "FR", "DE"])
 Supplying additional html options:
 
 ```ruby
-country_select("user", "country", { priority_countries: ["GB", "FR"] }, { selected: "GB", class: 'form-control' })
+country_select("user", "country", ["GB", "FR"], { selected: "GB", class: 'form-control' })
 ```
 
 ### ISO 3166-1 alpha-2 codes
