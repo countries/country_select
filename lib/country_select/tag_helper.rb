@@ -39,6 +39,10 @@ module CountrySelect
       @options[:only]
     end
 
+    def except_country_codes
+      @options[:except]
+    end
+
     def country_options
       country_options_for(all_country_codes, true)
     end
@@ -48,6 +52,8 @@ module CountrySelect
 
       if only_country_codes.present?
         codes & only_country_codes
+      elsif except_country_codes.present?
+        codes - except_country_codes
       else
         codes
       end
