@@ -22,7 +22,7 @@ gem install country_select
 Or put the following in your Gemfile
 
 ```ruby
-gem 'country_select'
+gem 'country_select', github: 'stefanpenner/country_select'
 ```
 
 ## Usage
