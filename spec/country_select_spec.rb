@@ -91,4 +91,11 @@ describe "CountrySelect" do
     t = builder.country_select(:country_code, only: ['DK','DE'])
     expect(t).to eql(tag)
   end
+
+  it "discards some countries" do
+    tag = options_for_select([["United States of America", "US"]])
+    walrus.country_code = 'DE'
+    t = builder.country_select(:country_code, except: ['US'])
+    expect(t).to_not include(tag)
+  end
 end
