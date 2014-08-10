@@ -109,7 +109,7 @@ end
 
 An example Rails application demonstrating the different options is
 available at [scudco/country_select_test](https://github.com/scudco/country_select_test).
-The relevant view file lives [here](https://github.com/scudco/country_select_test/blob/master/app/views/welcome/index.html.erb).
+The relevant view files live [here](https://github.com/scudco/country_select_test/tree/master/app/views/welcome).
 
 ## Tests
 
