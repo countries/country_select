@@ -98,4 +98,42 @@ describe "CountrySelect" do
     t = builder.country_select(:country_code, except: ['US'])
     expect(t).to_not include(tag)
   end
+
+  context "using old 1.x syntax" do
+    it "accepts priority countries" do
+      tag = options_for_select(
+        [
+          ['Latvia','LV'],
+          ['United States of America','US'],
+          ['Denmark', 'DK'],
+          ['-'*15,'-'*15]
+        ],
+        selected: 'US',
+        disabled: '-'*15
+      )
+
+      walrus.country_code = 'US'
+      t = builder.country_select(:country_code, ['LV','US','DK'])
+      expect(t).to include(tag)
+    end
+
+    it "selects only the first matching option" do
+      tag = options_for_select([["United States of America", "US"],["Uruguay", "UY"]], "US")
+      walrus.country_code = 'US'
+      t = builder.country_select(:country_code, ['LV','US'])
+      expect(t).to_not include(tag)
+    end
+
+    it "supports the country names as provided by default in Formtastic" do
+      tag = options_for_select([
+        ["Australia", "AU"],
+        ["Canada", "CA"],
+        ["United Kingdom", "GB"],
+        ["United States of America", "US"]
+      ])
+      country_names = ["Australia", "Canada", "United Kingdom", "United States"]
+      t = builder.country_select(:country_code, country_names)
+      expect(t).to include(tag)
+    end
+  end
 end

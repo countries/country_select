@@ -63,8 +63,12 @@ module CountrySelect
       I18n.with_locale(locale) do
         country_list = country_codes.map do |code|
           code = code.to_s.upcase
-          country = ISO3166::Country.new(code)
 
+          unless country = ISO3166::Country.new(code)
+            code = ISO3166::Country.find_by_name(code).first
+          end
+
+          country ||= ISO3166::Country.new(code)
           default_name = country.name
           localized_name = country.translations[I18n.locale.to_s]
 

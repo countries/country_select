@@ -1,7 +1,14 @@
 module ActionView
   module Helpers
     class FormBuilder
-      def country_select(method, options = {}, html_options = {})
+      def country_select(method, priority_or_options = {}, options = {}, html_options = {})
+        if Hash === priority_or_options
+          html_options = options
+          options = priority_or_options
+        else
+          options[:priority_countries] = priority_or_options
+        end
+
         @template.country_select(@object_name, method, objectify_options(options), @default_options.merge(html_options))
       end
     end
