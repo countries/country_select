@@ -1,4 +1,4 @@
-== 2.0.0 2014-03-02
+== 2.0.0 2014-08-10
 
   * Removed support for Ruby < 1.9.3
   * ISO-3166 alpha-2 codes are now on by default, stored in uppercase
@@ -7,8 +7,12 @@
     * The `country_select` method will always attempt to localize
       country names based on the value of `I18n.locale` via translations
       stored in the `countries` gem
-  * Priority countries are now set via the `priority_countries` option
-  * The list of countries can now be limited with the `only` option
+  * Priority countries should now be set via the `priority_countries` option
+    * The original 1.x syntax is still available
+  * The list of countries can now be limited with the `only` and
+    `except` options
+  * Add best-guess support for country names when codes aren't provided
+    in options (e.g., priority_countries)
 
 == 1.2.0 2013-07-06
 
