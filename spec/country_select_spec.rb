@@ -123,5 +123,17 @@ describe "CountrySelect" do
       t = builder.country_select(:country_code, ['LV','US'])
       expect(t).to_not include(tag)
     end
+
+    it "supports the country names as provided by default in Formtastic" do
+      tag = options_for_select([
+        ["Australia", "AU"],
+        ["Canada", "CA"],
+        ["United Kingdom", "GB"],
+        ["United States of America", "US"]
+      ])
+      country_names = ["Australia", "Canada", "United Kingdom", "United States"]
+      t = builder.country_select(:country_code, country_names)
+      expect(t).to include(tag)
+    end
   end
 end
