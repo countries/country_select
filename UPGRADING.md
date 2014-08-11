@@ -46,10 +46,22 @@ to
   country_select(:user, :country_code, priority_countries: ["GB","FR"])
 ```
 
+### A note on 1.x Syntax
+
+In order to seamlessly support popular libraries dependent on
+`country_select`, specifically `formatstic` and `simple_form`, 1.x
+priority syntax is still supported, but will probably be removed in the
+next major release (i.e., 3.0). We'll be working with `simple_form` and
+`formtastic` maintainers to transition away from the old 1.x syntax.
+
 ## You can choose to only display a chosen set of countries
 
 ```ruby
   country_select(:user, :country_code, only: ["LV","SG"])
+```
+
+```ruby
+  country_select(:user, :country_code, except: ["US","GB"])
 ```
 
 ## Ruby 1.9+
