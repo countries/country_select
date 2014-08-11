@@ -19,12 +19,10 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ['lib']
 
-  # specify any dependencies here; for example:
   s.add_development_dependency 'rspec', '~> 2'
-  s.add_development_dependency 'actionpack', '>= 3'
-  # Putting this directly in Gemfile until thoughtbot pushes latest version
-  # that supports Bundler `platform` directive for rbx support in travis-ci
-  s.add_development_dependency 'appraisal'
+  s.add_development_dependency 'actionpack', '~> 3'
+  s.add_development_dependency 'appraisal', '~> 1.0', '>= 1.0.0'
   s.add_development_dependency 'pry', '~> 0'
-  s.add_dependency 'countries', '~> 0.9.3'
+
+  s.add_dependency 'countries', '~> 0.9', '>= 0.9.3'
 end
