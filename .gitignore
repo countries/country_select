@@ -1,6 +1,6 @@
 *.gem
 *.sqlite
 .bundle
-Gemfile.lock
 pkg/*
 .ruby-version
+vendor/bundle

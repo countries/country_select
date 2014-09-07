@@ -2,7 +2,11 @@ source "https://rubygems.org"
 
 gemspec :path => "../"
 
-gem "actionpack", "~> 3.0.20"
+git "https://github.com/rails/rails.git" do
+  gem "actionpack"
+  gem "actionview"
+  gem "activesupport"
+end
 
 platforms :rbx do
   gem "racc"

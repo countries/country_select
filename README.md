@@ -115,8 +115,7 @@ The relevant view files live [here](https://github.com/scudco/country_select_tes
 
 ```shell
 bundle
-bundle exec appraisal
-bundle exec rake appraisal:integration
+bundle exec rake
 ```
 
 Copyright (c) 2008 Michael Koziarski, released under the MIT license

@@ -1,5 +1,5 @@
 language: ruby
-script: "bundle exec rake appraisal:integration"
+script: "bundle exec rspec"
 rvm:
   - 1.9.3
   - 2.0.0
@@ -12,12 +12,9 @@ gemfile:
   - gemfiles/actionpack3.2.gemfile
   - gemfiles/actionpack4.0.gemfile
   - gemfiles/actionpack4.1.gemfile
+  - gemfiles/actionpack4.2.gemfile
+  - gemfiles/actionpack.edge.gemfile
 matrix:
-  exclude:
-    - rvm: 1.9.3
-      gemfile: gemfiles/actionpack4.0.gemfile
-    - rvm: 1.9.3
-      gemfile: gemfiles/actionpack4.1.gemfile
   allow_failures:
     - rvm: ruby-head
     - rvm: jruby-head
