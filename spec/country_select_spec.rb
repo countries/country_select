@@ -164,4 +164,18 @@ describe "CountrySelect" do
       expect(t).to include(tag)
     end
   end
+
+  describe "custom formats" do
+    it "accepts a custom formatter" do
+      ::CountrySelect::FORMATS[:with_alpha2] = lambda do |country|
+        "#{country.name} (#{country.alpha2})"
+      end
+
+      tag = options_for_select([['United States (US)', 'US']], 'US')
+
+      walrus.country_code = 'US'
+      t = builder.country_select(:country_code, format: :with_alpha2)
+      expect(t).to include(tag)
+    end
+  end
 end

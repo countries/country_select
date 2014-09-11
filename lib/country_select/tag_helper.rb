@@ -44,6 +44,10 @@ module CountrySelect
       @options[:except]
     end
 
+    def format
+      @options[:format] || :default
+    end
+
     def country_options
       country_options_for(all_country_codes, true)
     end
@@ -76,10 +80,7 @@ module CountrySelect
             raise CountryNotFoundError.new(msg)
           end
 
-          default_name = country.name
-          localized_name = country.translations[I18n.locale.to_s]
-
-          name = localized_name || default_name
+          name = ::CountrySelect::FORMATS[format].call(country)
 
           [name,code]
         end
