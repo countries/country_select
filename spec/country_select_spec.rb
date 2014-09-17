@@ -135,5 +135,11 @@ describe "CountrySelect" do
       t = builder.country_select(:country_code, country_names)
       expect(t).to include(tag)
     end
+
+    it "supports the select prompt" do
+      tag = '<option value="">Select your country</option>'
+      t   = builder.country_select(:country_code, prompt: 'Select your country')
+      expect(t).to include(tag)
+    end
   end
 end

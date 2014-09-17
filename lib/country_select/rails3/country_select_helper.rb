@@ -31,7 +31,8 @@ module ActionView
         else
           html_options = @html_options.stringify_keys
           add_default_name_and_id(html_options)
-          content_tag(:select, country_option_tags, html_options)
+          options[:include_blank] ||= true unless options[:prompt] || select_not_required?(html_options)
+          content_tag(:select, add_options(country_option_tags, options, value(object)), html_options)
         end
       end
     end
