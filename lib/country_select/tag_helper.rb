@@ -1,4 +1,5 @@
 module CountrySelect
+  class CountryNotFoundError < StandardError;end
   module TagHelper
     def country_option_tags
       option_tags_options = {
@@ -61,14 +62,20 @@ module CountrySelect
 
     def country_options_for(country_codes, sorted=true)
       I18n.with_locale(locale) do
-        country_list = country_codes.map do |code|
-          code = code.to_s.upcase
-
-          unless country = ISO3166::Country.new(code)
-            code = ISO3166::Country.find_by_name(code).first
+        country_list = country_codes.map do |code_or_name|
+          if country = ISO3166::Country.new(code_or_name)
+            code = country.alpha2
+          elsif country = ISO3166::Country.find_by_name(code_or_name)
+            code = country.first
           end
 
-          country ||= ISO3166::Country.new(code)
+          country = ISO3166::Country.new(code)
+
+          unless country.present?
+            msg = "Could not find Country with string '#{code_or_name}'"
+            raise CountryNotFoundError.new(msg)
+          end
+
           default_name = country.name
           localized_name = country.translations[I18n.locale.to_s]
 

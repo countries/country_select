@@ -135,5 +135,21 @@ describe "CountrySelect" do
       t = builder.country_select(:country_code, country_names)
       expect(t).to include(tag)
     end
+
+    it "raises an error when a country code or name is not found" do
+      country_names = [
+        "United States",
+        "Canada",
+        "United Kingdom",
+        "Mexico",
+        "Australia",
+        "South Korea"
+      ]
+      error_msg = "Could not find Country with string 'South Korea'"
+
+      expect do
+        builder.country_select(:country_code, country_names)
+      end.to raise_error(CountrySelect::CountryNotFoundError, error_msg)
+    end
   end
 end
