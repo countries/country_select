@@ -151,5 +151,17 @@ describe "CountrySelect" do
         builder.country_select(:country_code, country_names)
       end.to raise_error(CountrySelect::CountryNotFoundError, error_msg)
     end
+
+    it "supports the select prompt" do
+      tag = '<option value="">Select your country</option>'
+      t = builder.country_select(:country_code, prompt: 'Select your country')
+      expect(t).to include(tag)
+    end
+
+    it "supports the include_blank option" do
+      tag = '<option value=""></option>'
+      t = builder.country_select(:country_code, include_blank: true)
+      expect(t).to include(tag)
+    end
   end
 end
