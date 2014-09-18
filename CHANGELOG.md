@@ -1,10 +1,10 @@
-== 2.0.1 2014-09-18
+## 2.0.1 2014-09-18
 
   * #72 - Fixed `include_blank` and `prompt` in Rails 3.2
   * #75 - Raise `CountrySelect::CountryNotFound` error when given a country
     name or code that is not found in https://github.com/hexorx/countries
 
-== 2.0.0 2014-08-10
+## 2.0.0 2014-08-10
 
   * Removed support for Ruby < 1.9.3
   * ISO-3166 alpha-2 codes are now on by default, stored in uppercase
@@ -20,7 +20,7 @@
   * Add best-guess support for country names when codes aren't provided
     in options (e.g., priority_countries)
 
-== 1.2.0 2013-07-06
+## 1.2.0 2013-07-06
 
   * Country names have been synced with UTF-8 encoding to the list of
     countries on [Wikipedia's page for the ISO-3166 standard](https://en.wikipedia.org/wiki/ISO_3166-1).
