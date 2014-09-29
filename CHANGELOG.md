@@ -1,3 +1,7 @@
+## 2.1.0 2014-09-29
+
+  * #70 - Allow custom formats for option tag text – See README.md
+
 ## 2.0.1 2014-09-18
 
   * #72 - Fixed `include_blank` and `prompt` in Rails 3.2
