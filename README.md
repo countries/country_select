@@ -57,6 +57,21 @@ Supplying additional html options:
 country_select("user", "country", { priority_countries: ["GB", "FR"] }, { selected: "GB", class: 'form-control' })
 ```
 
+Using a custom formatter
+
+You can define a custom formatter which will receive an
+[`ISO3166::Country`](https://github.com/hexorx/countries/blob/master/lib/countries/country.rb)
+```ruby
+# config/initializers/country_select.rb
+CountrySelect::FORMATS[:with_alpha2] = lambda do |country|
+  "#{country.name} (#{country.alpha2})"
+end
+```
+
+```ruby
+country_select("user", "country", format: :with_alpha2)
+```
+
 ### ISO 3166-1 alpha-2 codes
 The `option` tags use ISO 3166-1 alpha-2 codes as values and the country
 names as display strings. For example, the United States would appear as

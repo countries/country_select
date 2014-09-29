@@ -3,6 +3,7 @@
 require 'iso3166'
 
 require 'country_select/version'
+require 'country_select/formats'
 require 'country_select/tag_helper'
 
 if defined?(ActionView::Helpers::Tags::Base)
