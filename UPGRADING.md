@@ -14,6 +14,22 @@ produced by this gem, your setup will break. It is recommended that you
 stick with 1.x until developing a data migration strategy that allows
 you to map your existing country names to country codes.
 
+If you have simple model that stores contry name, simple rake task can
+help you migrate your database.
+
+```ruby
+task :country_name_to_code => :environment do
+  User.all.each do |u|
+    country_name = u.country
+    country = ISO3166::Country.find_country_by_name(country_name)
+    if country
+      puts "#{country_name} to #{country.alpha2}"
+      u.update(country: country.alpha2)
+    end
+  end
+end
+```
+
 ## i18n country names are always on (when available)
 
 Country names will be generated using `I18n.locale` if a translation
