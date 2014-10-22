@@ -3,6 +3,7 @@ PATH
   specs:
     country_select (2.1.1)
       countries (>= 0.9.3, < 0.10.0)
+      sort_alphabetical (~> 1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -260,12 +261,15 @@ GEM
     rubysl-yaml (2.1.0)
     rubysl-zlib (2.0.1)
     slop (3.6.0)
+    sort_alphabetical (1.0.1)
+      unicode_utils (>= 1.2.2)
     sprockets (2.2.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     tilt (1.4.1)
+    unicode_utils (1.4.0)
     wwtd (0.7.0)
 
 PLATFORMS

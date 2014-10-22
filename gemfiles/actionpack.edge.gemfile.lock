@@ -27,6 +27,7 @@ PATH
   specs:
     country_select (2.1.1)
       countries (>= 0.9.3, < 0.10.0)
+      sort_alphabetical (~> 1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -278,9 +279,12 @@ GEM
     rubysl-yaml (2.1.0)
     rubysl-zlib (2.0.1)
     slop (3.6.0)
+    sort_alphabetical (1.0.1)
+      unicode_utils (>= 1.2.2)
     thread_safe (0.3.4)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    unicode_utils (1.4.0)
     wwtd (0.7.0)
 
 PLATFORMS
