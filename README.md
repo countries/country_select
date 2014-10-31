@@ -54,7 +54,7 @@ country_select("user", "country", except: ["GB", "FR", "DE"])
 Supplying additional html options:
 
 ```ruby
-country_select("user", "country", { priority_countries: ["GB", "FR"] }, { selected: "GB", class: 'form-control' })
+country_select("user", "country", { selected: "GB", priority_countries: ["GB", "FR"] }, { class: 'form-control' })
 ```
 
 Using a custom formatter
