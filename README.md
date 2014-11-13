@@ -51,13 +51,19 @@ Discarding certain countries:
 country_select("user", "country", except: ["GB", "FR", "DE"])
 ```
 
+Pre-selecting a particular country:
+
+```ruby
+country_select("user", "country", selected: "GB")
+```
+
 Supplying additional html options:
 
 ```ruby
-country_select("user", "country", { priority_countries: ["GB", "FR"] }, { selected: "GB", class: 'form-control' })
+country_select("user", "country", { priority_countries: ["GB", "FR"], selected: "GB" }, { class: 'form-control', data: { attribute: "value" } })
 ```
 
-Using a custom formatter
+### Using a custom formatter
 
 You can define a custom formatter which will receive an
 [`ISO3166::Country`](https://github.com/hexorx/countries/blob/master/lib/countries/country.rb)
