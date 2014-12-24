@@ -26,4 +26,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'wwtd'
 
   s.add_dependency 'countries', '~> 0.9', '>= 0.9.3'
+  s.add_dependency 'sort_alphabetical'
 end
