@@ -73,7 +73,7 @@ module CountrySelect
             code = country.first
           end
 
-          country = ISO3166::Country.new(code)
+          country = ISO3166::Country.new(code) unless country.kind_of?(ISO3166::Country)
 
           unless country.present?
             msg = "Could not find Country with string '#{code_or_name}'"
