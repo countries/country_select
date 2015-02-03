@@ -83,7 +83,12 @@ module CountrySelect
 
           [name,code]
         end
-        sorted ? country_list.sort : country_list
+
+        if sorted
+          country_list.sort_alphabetical
+        else
+          country_list
+        end
       end
     end
 

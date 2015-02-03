@@ -165,6 +165,12 @@ describe "CountrySelect" do
     end
   end
 
+  it 'sorts unicode' do
+    tag = builder.country_select(:country_code, only: ['AX', 'AL', 'AF', 'ZW'])
+    order = tag.scan(/value="(\w{2})"/).map { |o| o[0] }
+    expect(order).to eq(['AF', 'AX', 'AL', 'ZW'])
+  end
+
   describe "custom formats" do
     it "accepts a custom formatter" do
       ::CountrySelect::FORMATS[:with_alpha2] = lambda do |country|
