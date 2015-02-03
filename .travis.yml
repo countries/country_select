@@ -22,3 +22,10 @@ matrix:
     - rvm: ruby-head
     - rvm: jruby-head
     - rvm: rbx-2
+  exclude:
+    - rvm: 1.9.3
+      gemfile: gemfiles/actionpack.edge.gemfile
+    - rvm: 2.0.0
+      gemfile: gemfiles/actionpack.edge.gemfile
+    - rvm: jruby-19mode
+      gemfile: gemfiles/actionpack.edge.gemfile
