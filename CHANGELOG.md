@@ -1,3 +1,7 @@
+## 2.1.1 2015-02-02
+
+  * #94 - Prevent usage of countries v0.10.0 due to poor performance
+
 ## 2.1.0 2014-09-29
 
   * #70 - Allow custom formats for option tag text – See README.md
