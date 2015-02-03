@@ -71,9 +71,8 @@ module CountrySelect
             code = country.alpha2
           elsif country = ISO3166::Country.find_by_name(code_or_name)
             code = country.first
+            country = ISO3166::Country.new(code)
           end
-
-          country = ISO3166::Country.new(code)
 
           unless country.present?
             msg = "Could not find Country with string '#{code_or_name}'"
