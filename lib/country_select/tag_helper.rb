@@ -86,10 +86,9 @@ module CountrySelect
         end
 
         if sorted
-            require 'sort_alphabetical'
-            next country_list.sort_alphabetical
+          country_list.sort_alphabetical
         else
-            next country_list
+          country_list
         end
       end
     end
