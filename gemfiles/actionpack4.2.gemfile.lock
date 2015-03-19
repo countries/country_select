@@ -1,8 +1,8 @@
 PATH
   remote: ../
   specs:
-    country_select (2.1.1)
-      countries (>= 0.9.3, < 0.10.0)
+    country_select (2.2.0)
+      countries (~> 0.11.0)
       sort_alphabetical (~> 1.0)
 
 GEM
@@ -29,13 +29,15 @@ GEM
       tzinfo (~> 1.1)
     builder (3.2.2)
     coderay (1.1.0)
-    countries (0.9.3)
+    countries (0.11.2)
       currencies (~> 0.4.2)
+      i18n_data (~> 0.6.0)
     currencies (0.4.2)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     ffi2-generators (0.1.1)
     i18n (0.7.0)
+    i18n_data (0.6.2)
     json (1.8.2)
     loofah (2.0.1)
       nokogiri (>= 1.5.9)
