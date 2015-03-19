@@ -1,3 +1,7 @@
+## 2.2.0 2015-03-19
+
+  * #101 - Update countries gem to ~> v0.11.0
+
 ## 2.1.1 2015-02-02
 
   * #94 - Prevent usage of countries v0.10.0 due to poor performance
