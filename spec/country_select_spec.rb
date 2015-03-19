@@ -31,7 +31,7 @@ describe "CountrySelect" do
   end
 
   it "selects the value of country_code" do
-    tag = options_for_select([['United States of America', 'US']], 'US')
+    tag = options_for_select([['United States', 'US']], 'US')
 
     walrus.country_code = 'US'
     t = builder.country_select(:country_code)
@@ -64,7 +64,7 @@ describe "CountrySelect" do
     tag = options_for_select(
       [
         ['Latvia','LV'],
-        ['United States of America','US'],
+        ['United States','US'],
         ['Denmark', 'DK'],
         ['-'*15,'-'*15]
       ],
@@ -78,7 +78,7 @@ describe "CountrySelect" do
   end
 
   it "selects only the first matching option" do
-    tag = options_for_select([["United States of America", "US"],["Uruguay", "UY"]], "US")
+    tag = options_for_select([["United States", "US"],["Uruguay", "UY"]], "US")
     walrus.country_code = 'US'
     t = builder.country_select(:country_code, priority_countries: ['LV','US'])
     expect(t).to_not include(tag)
@@ -93,7 +93,7 @@ describe "CountrySelect" do
   end
 
   it "discards some countries" do
-    tag = options_for_select([["United States of America", "US"]])
+    tag = options_for_select([["United States", "US"]])
     walrus.country_code = 'DE'
     t = builder.country_select(:country_code, except: ['US'])
     expect(t).to_not include(tag)
@@ -104,7 +104,7 @@ describe "CountrySelect" do
       tag = options_for_select(
         [
           ['Latvia','LV'],
-          ['United States of America','US'],
+          ['United States','US'],
           ['Denmark', 'DK'],
           ['-'*15,'-'*15]
         ],
@@ -118,7 +118,7 @@ describe "CountrySelect" do
     end
 
     it "selects only the first matching option" do
-      tag = options_for_select([["United States of America", "US"],["Uruguay", "UY"]], "US")
+      tag = options_for_select([["United States", "US"],["Uruguay", "UY"]], "US")
       walrus.country_code = 'US'
       t = builder.country_select(:country_code, ['LV','US'])
       expect(t).to_not include(tag)
@@ -129,7 +129,7 @@ describe "CountrySelect" do
         ["Australia", "AU"],
         ["Canada", "CA"],
         ["United Kingdom", "GB"],
-        ["United States of America", "US"]
+        ["United States", "US"]
       ])
       country_names = ["Australia", "Canada", "United Kingdom", "United States"]
       t = builder.country_select(:country_code, country_names)
