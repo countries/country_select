@@ -183,5 +183,28 @@ describe "CountrySelect" do
       t = builder.country_select(:country_code, format: :with_alpha2)
       expect(t).to include(tag)
     end
+
+    it "accepts an array for formatter" do
+      ::CountrySelect::FORMATS[:with_alpha3] = lambda do |country|
+        [country.name, country.alpha3]
+      end
+
+      tag = options_for_select([['United States', 'USA']], 'USA')
+      walrus.country_code = 'USA'
+      t = builder.country_select(:country_code, format: :with_alpha3)
+      expect(t).to include(tag)
+    end
+
+    it "accepts an array for formatter + custom formatter" do
+      ::CountrySelect::FORMATS[:with_alpha3] = lambda do |country|
+        ["#{country.name} (#{country.alpha2})", country.alpha3]
+      end
+
+      tag = options_for_select([['United States (US)', 'USA']], 'USA')
+      walrus.country_code = 'USA'
+      t = builder.country_select(:country_code, format: :with_alpha3)
+      expect(t).to include(tag)
+    end
+
   end
 end
