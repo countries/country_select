@@ -79,9 +79,14 @@ module CountrySelect
             raise CountryNotFoundError.new(msg)
           end
 
-          name = ::CountrySelect::FORMATS[format].call(country)
+          formatted_country = ::CountrySelect::FORMATS[format].call(country)
 
-          [name,code]
+          if formatted_country.is_a?(Array)
+            formatted_country
+          else
+            [formatted_country, code]
+          end
+          
         end
 
         if sorted
