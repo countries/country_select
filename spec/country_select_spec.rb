@@ -206,5 +206,15 @@ describe "CountrySelect" do
       expect(t).to include(tag)
     end
 
+    it "marks priority countries as selected only once" do
+      ::CountrySelect::FORMATS[:with_alpha3] = lambda do |country|
+        [country.name, country.alpha3]
+      end
+
+      tag = options_for_select([['United States', 'USA']], 'USA')
+      walrus.country_code = 'USA'
+      t = builder.country_select(:country_code, format: :with_alpha3, priority_countries: ['US'])
+      expect(t.scan(Regexp.new(Regexp.escape(tag))).size).to eq 1
+    end
   end
 end

@@ -13,7 +13,7 @@ module CountrySelect
         option_tags = options_for_select(priority_countries_options, option_tags_options)
         option_tags += html_safe_newline + options_for_select([priority_countries_divider], disabled: priority_countries_divider)
 
-        if priority_countries.include?(option_tags_options[:selected])
+        if priority_countries_options.map(&:second).include?(option_tags_options[:selected])
           option_tags_options[:selected] = nil
         end
 
@@ -86,7 +86,7 @@ module CountrySelect
           else
             [formatted_country, code]
           end
-          
+
         end
 
         if sorted
