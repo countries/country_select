@@ -132,6 +132,10 @@ An example Rails application demonstrating the different options is
 available at [scudco/country_select_test](https://github.com/scudco/country_select_test).
 The relevant view files live [here](https://github.com/scudco/country_select_test/tree/master/app/views/welcome).
 
+## Video Tutorial
+Video demonstration using country_select to build a newsletter signup.
+[GoRails #49](https://gorails.com/episodes/newsletter-sign-up)
+
 ## Tests
 
 ```shell
