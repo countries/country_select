@@ -12,6 +12,10 @@ to evaluate the suitability of this list given their user base.
 
 [**An important message about upgrading from 1.x**](UPGRADING.md)
 
+## Reporting issues
+
+Open an issue on the [issue tracker](https://github.com/stefanpenner/country_select/issues/new). Ideally provide versions used, and code example that demonstrates the issue.
+
 ## Installation
 
 Install as a gem using
