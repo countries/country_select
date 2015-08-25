@@ -143,9 +143,9 @@ describe "CountrySelect" do
         "United Kingdom",
         "Mexico",
         "Australia",
-        "South Korea"
+        "Freedonia"
       ]
-      error_msg = "Could not find Country with string 'South Korea'"
+      error_msg = "Could not find Country with string 'Freedonia'"
 
       expect do
         builder.country_select(:country_code, country_names)

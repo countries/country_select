@@ -2,7 +2,7 @@ PATH
   remote: ../
   specs:
     country_select (2.2.0)
-      countries (~> 0.11.0)
+      countries (~> 1.0.0)
       sort_alphabetical (~> 1.0)
 
 GEM
@@ -22,15 +22,15 @@ GEM
       tzinfo (~> 0.3.37)
     builder (3.1.4)
     coderay (1.1.0)
-    countries (0.11.2)
+    countries (1.0.0)
       currencies (~> 0.4.2)
-      i18n_data (~> 0.6.0)
+      i18n_data (~> 0.7.0)
     currencies (0.4.2)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     ffi2-generators (0.1.1)
     i18n (0.7.0)
-    i18n_data (0.6.2)
+    i18n_data (0.7.0)
     method_source (0.8.2)
     minitest (4.7.5)
     multi_json (1.10.1)
@@ -256,7 +256,7 @@ GEM
     rubysl-yaml (2.1.0)
     rubysl-zlib (2.0.1)
     slop (3.6.0)
-    sort_alphabetical (1.0.1)
+    sort_alphabetical (1.0.2)
       unicode_utils (>= 1.2.2)
     thread_safe (0.3.4)
     tzinfo (0.3.43)
