@@ -53,7 +53,7 @@ module CountrySelect
     end
 
     def all_country_codes
-      codes = ISO3166::Country.all.map(&:last)
+      codes = ISO3166::Country.all.map(&:alpha2)
 
       if only_country_codes.present?
         codes & only_country_codes
