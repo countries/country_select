@@ -136,11 +136,25 @@ An example Rails application demonstrating the different options is
 available at [scudco/country_select_test](https://github.com/scudco/country_select_test).
 The relevant view files live [here](https://github.com/scudco/country_select_test/tree/master/app/views/welcome).
 
-## Tests
+## Contributing
+
+### Tests
 
 ```shell
 bundle
 bundle exec rake
+```
+
+### Updating gemfiles
+The default rake task will run the tests against multiple versions of
+Rails. That means the gemfiles need occasional updating, especially when
+changing the dependencies in the gemspec.
+
+```shell
+for i in gemfiles/*.gemfile
+do
+BUNDLE_GEMFILE=$i bundle install --no-deployment
+done
 ```
 
 Copyright (c) 2008 Michael Koziarski, released under the MIT license
