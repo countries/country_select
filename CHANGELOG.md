@@ -1,3 +1,7 @@
+## 2.4.0 2015-08-25
+
+  * #111 - Update countries gem to ~> v1.1.0
+
 ## 2.3.0 2015-08-25
 
   * #107,#108 - Update countries gem to ~> v1.0.0
