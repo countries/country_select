@@ -26,7 +26,7 @@ PATH
   remote: ../
   specs:
     country_select (2.4.0)
-      countries (~> 1.1.0)
+      countries (~> 1.2.0)
       sort_alphabetical (~> 1.0)
 
 GEM
@@ -34,7 +34,7 @@ GEM
   specs:
     builder (3.2.2)
     coderay (1.1.0)
-    countries (1.1.0)
+    countries (1.2.1)
       currencies (~> 0.4.2)
       i18n_data (~> 0.7.0)
     currencies (0.4.2)
