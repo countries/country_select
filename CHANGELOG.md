@@ -1,3 +1,8 @@
+## 2.5.0 2015-11-10
+
+  * #118 - Fix bad require of countries gem that caused issues if you
+           already had a `Country` class
+
 ## 2.5.0 2015-11-06
 
   * #117 - Update countries gem to ~> v1.2.0
