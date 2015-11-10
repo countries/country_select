@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require 'countries/global'
+require 'countries'
 require 'sort_alphabetical'
 
 require 'country_select/version'
