@@ -61,6 +61,12 @@ Pre-selecting a particular country:
 country_select("user", "country", selected: "GB")
 ```
 
+Using existing `select` options:
+```ruby
+country_select("user", "country", include_blank: true)
+country_select("user", "country", { include_blank: 'Select a country' }, { class: 'country-select-box' })
+```
+
 Supplying additional html options:
 
 ```ruby
