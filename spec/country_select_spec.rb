@@ -44,6 +44,7 @@ describe "CountrySelect" do
     walrus.country_code = 'US'
     original_locale = I18n.locale
     begin
+      I18n.available_locales = [:es]
       I18n.locale = :es
       t = builder.country_select(:country_code)
       expect(t).to include(tag)
@@ -53,6 +54,7 @@ describe "CountrySelect" do
   end
 
   it "accepts a locale option" do
+    I18n.available_locales = [:fr]
     tag = options_for_select([['États-Unis', 'US']], 'US')
 
     walrus.country_code = 'US'
