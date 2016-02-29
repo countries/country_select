@@ -77,11 +77,23 @@ describe "CountrySelect" do
     expect(t).to include(tag)
   end
 
-  it "selects only the first matching option" do
-    tag = options_for_select([["United States", "US"],["Uruguay", "UY"]], "US")
-    walrus.country_code = 'US'
-    t = builder.country_select(:country_code, priority_countries: ['LV','US'])
-    expect(t).to_not include(tag)
+  describe "when selected options is not an array" do
+    it "selects only the first matching option" do
+      tag = options_for_select([["United States", "US"],["Uruguay", "UY"]], "US")
+      walrus.country_code = 'US'
+      t = builder.country_select(:country_code, priority_countries: ['LV','US'])
+      expect(t).to_not include(tag)
+    end
+  end
+
+  describe "when selected options is an array" do
+    it "selects all options but only once" do
+      tag = options_for_select([["United States", "US"],["Uruguay", "UY"],["Spain", "ES"]], "US")
+      walrus.country_code = 'US'
+      t = builder.country_select(:country_code, priority_countries: ['LV','US','ES'], selected: ['UY', 'US'])
+      expect(t.scan(options_for_select([["United States", "US"]], "US")).length).to be(1)
+      expect(t.scan(options_for_select([["Uruguay", "UY"]], "UY")).length).to be(1)
+    end
   end
 
   it "displays only the chosen countries" do

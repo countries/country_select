@@ -15,7 +15,8 @@ module CountrySelect
 
         if priority_countries_options.map(&:second).include?(option_tags_options[:selected])
           option_tags_options[:selected] = nil
-        end
+        end unless option_tags_options[:selected].kind_of?(Array)
+        option_tags_options[:selected].delete_if{|selected| priority_countries_options.map(&:second).include?(selected)} if option_tags_options[:selected].kind_of?(Array)
 
         option_tags += html_safe_newline + options_for_select(country_options, option_tags_options)
       else
