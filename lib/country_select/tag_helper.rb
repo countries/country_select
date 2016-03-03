@@ -13,9 +13,8 @@ module CountrySelect
         option_tags = options_for_select(priority_countries_options, option_tags_options)
         option_tags += html_safe_newline + options_for_select([priority_countries_divider], disabled: priority_countries_divider)
 
-        if priority_countries_options.map(&:second).include?(option_tags_options[:selected])
-          option_tags_options[:selected] = nil
-        end
+        option_tags_options[:selected] = [option_tags_options[:selected]] unless option_tags_options[:selected].kind_of?(Array)
+        option_tags_options[:selected].delete_if{|selected| priority_countries_options.map(&:second).include?(selected)}
 
         option_tags += html_safe_newline + options_for_select(country_options, option_tags_options)
       else
