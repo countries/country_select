@@ -1,4 +1,8 @@
-## 2.5.0 2015-11-10
+## 2.5.2 2015-11-10
+
+  * #127 - Fix multi-selects - @jjballano
+
+## 2.5.1 2015-11-10
 
   * #118 - Fix bad require of countries gem that caused issues if you
            already had a `Country` class
