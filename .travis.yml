@@ -18,6 +18,7 @@ gemfile:
   - gemfiles/actionpack4.1.gemfile
   - gemfiles/actionpack4.2.gemfile
   - gemfiles/actionpack.edge.gemfile
+  - gemfiles/actionpack5.0.beta.gemfile
 matrix:
   allow_failures:
     - rvm: ruby-head
@@ -26,7 +27,21 @@ matrix:
   exclude:
     - rvm: 1.9.3
       gemfile: gemfiles/actionpack.edge.gemfile
+    - rvm: 1.9.3
+      gemfile: gemfiles/actionpack5.0.beta.gemfile
     - rvm: 2.0.0
       gemfile: gemfiles/actionpack.edge.gemfile
+    - rvm: 2.0.0
+      gemfile: gemfiles/actionpack5.0.beta.gemfile
+    - rvm: 2.1.8
+      gemfile: gemfiles/actionpack.edge.gemfile
+    - rvm: 2.1.8
+      gemfile: gemfiles/actionpack5.0.beta.gemfile
     - rvm: jruby-19mode
       gemfile: gemfiles/actionpack.edge.gemfile
+    - rvm: jruby-19mode
+      gemfile: gemfiles/actionpack5.0.beta.gemfile
+    - rvm: rbx-2
+      gemfile: gemfiles/actionpack.edge.gemfile
+    - rvm: rbx-2
+      gemfile: gemfiles/actionpack5.0.beta.gemfile

@@ -1,6 +1,12 @@
-GIT
-  remote: https://github.com/rails/rails.git
-  revision: c577657f6de64b743b12a21108dc9cc5cfc35098
+PATH
+  remote: ../
+  specs:
+    country_select (2.5.2)
+      countries (~> 1.2.0)
+      sort_alphabetical (~> 1.0)
+
+GEM
+  remote: https://rubygems.org/
   specs:
     actionpack (5.0.0.beta3)
       actionview (= 5.0.0.beta3)
@@ -20,17 +26,6 @@ GIT
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-
-PATH
-  remote: ../
-  specs:
-    country_select (2.5.2)
-      countries (~> 1.2.0)
-      sort_alphabetical (~> 1.0)
-
-GEM
-  remote: https://rubygems.org/
-  specs:
     builder (3.2.2)
     coderay (1.1.1)
     concurrent-ruby (1.0.1)
@@ -69,6 +64,12 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    railties (5.0.0.beta3)
+      actionpack (= 5.0.0.beta3)
+      activesupport (= 5.0.0.beta3)
+      method_source
+      rake (>= 0.8.7)
+      thor (>= 0.18.1, < 2.0)
     rake (10.5.0)
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
@@ -288,6 +289,7 @@ GEM
     slop (3.6.0)
     sort_alphabetical (1.0.2)
       unicode_utils (>= 1.2.2)
+    thor (0.19.1)
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
@@ -298,13 +300,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  actionpack!
-  actionview!
-  activesupport!
+  actionpack (~> 5.0.0.beta3)
   country_select!
   pry (~> 0)
   psych
   racc
+  railties (~> 5.0.0.beta3)
   rake
   rspec (~> 3)
   rubysl (~> 2.0)
