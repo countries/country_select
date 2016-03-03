@@ -90,7 +90,7 @@ describe "CountrySelect" do
     it "selects all options but only once" do
       tag = options_for_select([["United States", "US"],["Uruguay", "UY"],["Spain", "ES"]], "US")
       walrus.country_code = 'US'
-      t = builder.country_select(:country_code, priority_countries: ['LV','US','ES'], selected: ['UY', 'US'])
+      t = builder.country_select(:country_code, {priority_countries: ['LV','US','ES'], selected: ['UY', 'US']}, multiple: true)
       expect(t.scan(options_for_select([["United States", "US"]], "US")).length).to be(1)
       expect(t.scan(options_for_select([["Uruguay", "UY"]], "UY")).length).to be(1)
     end
