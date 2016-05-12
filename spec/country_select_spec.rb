@@ -177,10 +177,17 @@ describe "CountrySelect" do
     end
   end
 
-  it 'sorts unicode' do
+  it 'sorts unicode if sort_alphabetical is present' do
     tag = builder.country_select(:country_code, only: ['AX', 'AL', 'AF', 'ZW'])
     order = tag.scan(/value="(\w{2})"/).map { |o| o[0] }
     expect(order).to eq(['AF', 'AX', 'AL', 'ZW'])
+  end
+
+  it 'falls back to regular sort if sort_alphabetical was not loaded' do
+    hide_const("SortAlphabetical")
+    tag = builder.country_select(:country_code, only: ['AX', 'AL', 'AF', 'ZW'])
+    order = tag.scan(/value="(\w{2})"/).map { |o| o[0] }
+    expect(order).to eq(['AF', 'AL', 'ZW', 'AX'])
   end
 
   describe "custom formats" do
