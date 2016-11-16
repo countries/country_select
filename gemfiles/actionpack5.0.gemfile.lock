@@ -2,7 +2,7 @@ PATH
   remote: ../
   specs:
     country_select (3.0.0.alpha1)
-      countries (~> 1.2.0)
+      countries (~> 2.0)
       sort_alphabetical (~> 1.0)
 
 GEM
@@ -29,10 +29,10 @@ GEM
     builder (3.2.2)
     coderay (1.1.1)
     concurrent-ruby (1.0.2)
-    countries (1.2.5)
-      currencies (~> 0.4.2)
+    countries (2.0.1)
       i18n_data (~> 0.7.0)
-    currencies (0.4.2)
+      money (~> 6.0)
+      unicode_utils (~> 1.4)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     ffi2-generators (0.1.1)
@@ -43,6 +43,9 @@ GEM
     method_source (0.8.2)
     mini_portile2 (2.1.0)
     minitest (5.9.1)
+    money (6.7.1)
+      i18n (>= 0.6.4, <= 0.7.0)
+      sixarm_ruby_unaccent (>= 1.1.1, < 2)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
     pry (0.10.4)
@@ -281,6 +284,7 @@ GEM
     rubysl-xmlrpc (2.0.0)
     rubysl-yaml (2.1.0)
     rubysl-zlib (2.0.1)
+    sixarm_ruby_unaccent (1.1.1)
     slop (3.6.0)
     sort_alphabetical (1.0.2)
       unicode_utils (>= 1.2.2)
