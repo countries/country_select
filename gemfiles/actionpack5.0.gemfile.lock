@@ -299,12 +299,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  actionpack (~> 5.0.0.beta3)
+  actionpack (~> 5.0.0)
   country_select!
   pry (~> 0)
   psych
   racc
-  railties (~> 5.0.0.beta3)
+  railties (~> 5.0.0)
   rake
   rspec (~> 3)
   rubysl (~> 2.0)
