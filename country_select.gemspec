@@ -25,6 +25,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec', '~> 3'
   s.add_development_dependency 'wwtd'
 
-  s.add_dependency 'countries', '~> 1.2.0'
+  s.add_dependency 'countries', '~> 2.0'
   s.add_dependency 'sort_alphabetical', '~> 1.0'
 end
