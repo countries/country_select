@@ -9,6 +9,12 @@ describe "CountrySelect" do
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::FormOptionsHelper
 
+  before do
+    I18n.available_locales = [:en]
+    I18n.locale = :en
+    ISO3166.reset
+  end
+
   class Walrus
     attr_accessor :country_code
   end
