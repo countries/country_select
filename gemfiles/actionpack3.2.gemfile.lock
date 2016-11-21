@@ -1,7 +1,7 @@
 PATH
   remote: ../
   specs:
-    country_select (2.5.2)
+    country_select (3.0.0.alpha1)
       countries (~> 1.2.0)
       sort_alphabetical (~> 1.0)
 
@@ -293,4 +293,4 @@ DEPENDENCIES
   wwtd
 
 BUNDLED WITH
-   1.11.2
+   1.13.6

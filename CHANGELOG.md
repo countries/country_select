@@ -1,3 +1,7 @@
+## 3.0.0
+
+  * Drop support for Ruby 1.9.3 as countries 2.0 no longer supports it
+
 ## 2.5.2 2015-11-10
 
   * #127 - Fix multi-selects - @jjballano
