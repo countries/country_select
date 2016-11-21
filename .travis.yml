@@ -3,12 +3,10 @@ cache: bundler
 language: ruby
 script: "bundle exec rspec"
 rvm:
-  - 1.9.3
   - 2.0.0
   - 2.1.10
   - 2.2.6
   - 2.3.2
-  - jruby-19mode
   - jruby-head
   - rbx-2
   - ruby-head
@@ -25,10 +23,6 @@ matrix:
     - rvm: jruby-head
     - rvm: rbx-2
   exclude:
-    - rvm: 1.9.3
-      gemfile: gemfiles/actionpack.edge.gemfile
-    - rvm: 1.9.3
-      gemfile: gemfiles/actionpack5.0.gemfile
     - rvm: 2.0.0
       gemfile: gemfiles/actionpack.edge.gemfile
     - rvm: 2.0.0
@@ -36,10 +30,6 @@ matrix:
     - rvm: 2.1.10
       gemfile: gemfiles/actionpack.edge.gemfile
     - rvm: 2.1.10
-      gemfile: gemfiles/actionpack5.0.gemfile
-    - rvm: jruby-19mode
-      gemfile: gemfiles/actionpack.edge.gemfile
-    - rvm: jruby-19mode
       gemfile: gemfiles/actionpack5.0.gemfile
     - rvm: rbx-2
       gemfile: gemfiles/actionpack.edge.gemfile
