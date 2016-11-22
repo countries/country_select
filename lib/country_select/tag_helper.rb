@@ -89,7 +89,11 @@ module CountrySelect
         end
 
         if sorted
-          country_list.sort_alphabetical
+          if defined?(::SortAlphabetical)
+            country_list.sort_alphabetical
+          else
+            country_list.sort
+          end
         else
           country_list
         end
