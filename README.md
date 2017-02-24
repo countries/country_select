@@ -31,6 +31,14 @@ gem 'country_select'
 
 ## Usage
 
+Within `form_for` you can use this select like other form elements:
+
+```ruby
+<%= form_for User.new, url: root_url do |f| %>
+  <%= f.country_select :country_code %>
+<% end %>
+```
+
 Simple use supplying model and attribute as parameters:
 
 ```ruby
