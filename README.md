@@ -31,6 +31,12 @@ gem 'country_select'
 
 ## Usage
 
+Within `form_for` you can use this select like other form elements:
+
+```ruby
+f.country_select :country
+```
+
 Simple use supplying model and attribute as parameters:
 
 ```ruby
