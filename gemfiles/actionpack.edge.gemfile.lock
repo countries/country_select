@@ -22,7 +22,7 @@ GIT
       tzinfo (~> 1.1)
 
 PATH
-  remote: ../
+  remote: ..
   specs:
     country_select (3.0.0)
       countries (~> 2.0)
@@ -310,4 +310,4 @@ DEPENDENCIES
   wwtd
 
 BUNDLED WITH
-   1.13.6
+   1.14.4
