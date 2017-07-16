@@ -8,8 +8,6 @@ rvm:
   - 2.2.7
   - 2.3.4
   - 2.4.1
-  - jruby-head
-  - rbx-2
   - ruby-head
 gemfile:
   - gemfiles/actionpack3.2.gemfile
@@ -22,8 +20,6 @@ gemfile:
 matrix:
   allow_failures:
     - rvm: ruby-head
-    - rvm: jruby-head
-    - rvm: rbx-2
   exclude:
     - rvm: 2.0.0
       gemfile: gemfiles/actionpack.edge.gemfile
@@ -37,7 +33,3 @@ matrix:
       gemfile: gemfiles/actionpack5.0.gemfile
     - rvm: 2.1.10
       gemfile: gemfiles/actionpack5.1.gemfile
-    - rvm: rbx-2
-      gemfile: gemfiles/actionpack.edge.gemfile
-    - rvm: rbx-2
-      gemfile: gemfiles/actionpack5.0.gemfile
