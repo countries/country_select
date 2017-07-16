@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    country_select (3.0.0.alpha1)
+    country_select (3.0.0)
       countries (~> 2.0)
       sort_alphabetical (~> 1.0)
 
@@ -26,9 +26,10 @@ GEM
       multi_json (~> 1.0)
     builder (3.0.4)
     coderay (1.1.0)
-    countries (2.0.2)
+    countries (2.0.8)
       i18n_data (~> 0.7.0)
       money (~> 6.7)
+      sixarm_ruby_unaccent (~> 1.1)
       unicode_utils (~> 1.4)
     diff-lcs (1.2.5)
     erubis (2.7.0)
@@ -38,9 +39,8 @@ GEM
     i18n_data (0.7.0)
     journey (1.0.4)
     method_source (0.8.2)
-    money (6.7.1)
-      i18n (>= 0.6.4, <= 0.7.0)
-      sixarm_ruby_unaccent (>= 1.1.1, < 2)
+    money (6.9.0)
+      i18n (>= 0.6.4, < 0.9)
     multi_json (1.11.2)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -294,4 +294,4 @@ DEPENDENCIES
   wwtd
 
 BUNDLED WITH
-   1.13.6
+   1.14.4
