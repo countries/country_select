@@ -29,10 +29,14 @@ matrix:
       gemfile: gemfiles/actionpack.edge.gemfile
     - rvm: 2.0.0
       gemfile: gemfiles/actionpack5.0.gemfile
+    - rvm: 2.0.0
+      gemfile: gemfiles/actionpack5.1.gemfile
     - rvm: 2.1.10
       gemfile: gemfiles/actionpack.edge.gemfile
     - rvm: 2.1.10
       gemfile: gemfiles/actionpack5.0.gemfile
+    - rvm: 2.1.10
+      gemfile: gemfiles/actionpack5.1.gemfile
     - rvm: rbx-2
       gemfile: gemfiles/actionpack.edge.gemfile
     - rvm: rbx-2
