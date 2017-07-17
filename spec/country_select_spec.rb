@@ -195,6 +195,23 @@ describe "CountrySelect" do
     expect(order).to eq(['AF', 'AX', 'AL', 'ZW'])
   end
 
+  context "without sort_alphabetical" do
+    before do
+      Enumerable.send(:alias_method, :_sort_alphabetical, :sort_alphabetical)
+      Enumerable.send(:remove_method, :sort_alphabetical)
+    end
+
+    after do
+      Enumerable.send(:alias_method, :sort_alphabetical, :_sort_alphabetical)
+    end
+
+    it 'falls back to regular sort' do
+      tag = builder.country_select(:country_code, only: ['AX', 'AL', 'AF', 'ZW'])
+      order = tag.scan(/value="(\w{2})"/).map { |o| o[0] }
+      expect(order).to eq(['AF', 'AL', 'ZW', 'AX'])
+    end
+  end
+
   describe "custom formats" do
     it "accepts a custom formatter" do
       ::CountrySelect::FORMATS[:with_alpha2] = lambda do |country|
