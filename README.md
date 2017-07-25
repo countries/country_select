@@ -75,6 +75,11 @@ Pre-selecting a particular country:
 country_select("user", "country", selected: "GB")
 ```
 
+Changing the divider when priority_countries is active.
+```ruby
+country_select("user", "country", priority_countries: ["AR", "US"], priority_countries_divider: "~~~~~~")
+```
+
 Using existing `select` options:
 ```ruby
 country_select("user", "country", include_blank: true)
