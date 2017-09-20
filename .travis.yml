@@ -21,15 +21,15 @@ matrix:
   allow_failures:
     - rvm: ruby-head
   exclude:
-    - rvm: 2.0.0
+    - rvm: 2.0
       gemfile: gemfiles/actionpack.edge.gemfile
-    - rvm: 2.0.0
+    - rvm: 2.0
       gemfile: gemfiles/actionpack5.0.gemfile
-    - rvm: 2.0.0
+    - rvm: 2.0
       gemfile: gemfiles/actionpack5.1.gemfile
-    - rvm: 2.1.10
+    - rvm: 2.1
       gemfile: gemfiles/actionpack.edge.gemfile
-    - rvm: 2.1.10
+    - rvm: 2.1
       gemfile: gemfiles/actionpack5.0.gemfile
-    - rvm: 2.1.10
+    - rvm: 2.1
       gemfile: gemfiles/actionpack5.1.gemfile
