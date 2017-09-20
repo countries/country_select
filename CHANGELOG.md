@@ -1,5 +1,9 @@
 ## 3.1.0 2017-07-18
 
+  * #146 - Fix value call on Rails edge (5.2+) - @ybart
+
+## 3.1.0 2017-07-18
+
   * #144 - Provide a possibility to opt out of `sort_alphabetical` - @fschwahn
 
 ## 3.0.0 2016-11-25
