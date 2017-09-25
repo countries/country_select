@@ -1,4 +1,4 @@
-## 3.1.0 2017-07-18
+## 3.1.1 2017-09-20
 
   * #146 - Fix value call on Rails edge (5.2+) - @ybart
 
