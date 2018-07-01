@@ -17,6 +17,7 @@ gemfile:
   - gemfiles/actionpack4.2.gemfile
   - gemfiles/actionpack5.0.gemfile
   - gemfiles/actionpack5.1.gemfile
+  - gemfiles/actionpack5.2.gemfile
   - gemfiles/actionpack.edge.gemfile
 matrix:
   allow_failures:
@@ -28,9 +29,13 @@ matrix:
       gemfile: gemfiles/actionpack5.0.gemfile
     - rvm: 2.0
       gemfile: gemfiles/actionpack5.1.gemfile
+    - rvm: 2.0
+      gemfile: gemfiles/actionpack5.2.gemfile
     - rvm: 2.1
       gemfile: gemfiles/actionpack.edge.gemfile
     - rvm: 2.1
       gemfile: gemfiles/actionpack5.0.gemfile
     - rvm: 2.1
       gemfile: gemfiles/actionpack5.1.gemfile
+    - rvm: 2.1
+      gemfile: gemfiles/actionpack5.2.gemfile
