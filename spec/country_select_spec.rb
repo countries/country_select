@@ -8,6 +8,7 @@ require 'country_select'
 describe "CountrySelect" do
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::FormOptionsHelper
+  include ActionView::Helpers::FormTagHelper
 
   before do
     I18n.available_locales = [:en]
@@ -34,6 +35,15 @@ describe "CountrySelect" do
     <<-EOS.chomp.strip
       <select id="walrus_country_code" name="walrus[country_code]">
     EOS
+  end
+
+  describe '#country_select_tag' do
+    it 'renders a simple tag' do
+      tag = options_for_select([['United States', 'US']], 'US')
+
+      t = country_select_tag(:country_code, selected: 'US')
+      expect(t).to include(tag)
+    end
   end
 
   it "selects the value of country_code" do

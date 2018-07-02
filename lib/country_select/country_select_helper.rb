@@ -19,6 +19,12 @@ module ActionView
       end
     end
 
+    module FormTagHelper
+      def country_select_tag(method, options = {}, html_options = {})
+        Tags::CountrySelect.new(nil, method, self, options, html_options).render
+      end
+    end
+
     module Tags
       class CountrySelect < Base
         include ::CountrySelect::TagHelper
