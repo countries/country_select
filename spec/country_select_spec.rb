@@ -280,5 +280,53 @@ describe "CountrySelect" do
       t = builder.country_select(:country_code, include_data: ['country_code', 'alpha3'])
       expect(t).to include(tag)
     end
+
+    it "accepts country code with priority countries" do
+      tag = options_for_select(
+        [
+          ['Philippines','PH', {'data-country-code' => '63'}],
+          ['United States','US', {'data-country-code' => '1'}],
+          ['-'*15,'-'*15]
+        ],
+        selected: 'US',
+        disabled: '-'*15
+      )
+
+      walrus.country_code = 'US'
+      t = builder.country_select(:country_code, priority_countries: ['PH', 'US'], include_data: ['country_code'])
+      expect(t).to include(tag)
+    end
+
+    it "accepts alpha3 with priority countries" do
+      tag = options_for_select(
+        [
+          ['Philippines','PH', {'data-alpha3' => 'PHL'}],
+          ['United States','US', {'data-alpha3' => 'USA'}],
+          ['-'*15,'-'*15]
+        ],
+        selected: 'US',
+        disabled: '-'*15
+      )
+
+      walrus.country_code = 'US'
+      t = builder.country_select(:country_code, priority_countries: ['PH', 'US'], include_data: ['alpha3'])
+      expect(t).to include(tag)
+    end
+
+    it "accepts country code and alpha3 with priority countries" do
+      tag = options_for_select(
+        [
+          ['Philippines','PH', {'data-country-code' => '63'}, {'data-alpha3' => 'PHL'}],
+          ['United States','US', {'data-country-code' => '1'}, {'data-alpha3' => 'USA'}],
+          ['-'*15,'-'*15]
+        ],
+        selected: 'US',
+        disabled: '-'*15
+      )
+
+      walrus.country_code = 'US'
+      t = builder.country_select(:country_code, priority_countries: ['PH', 'US'], include_data: ['country_code', 'alpha3'])
+      expect(t).to include(tag)
+    end
   end
 end
