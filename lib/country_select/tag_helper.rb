@@ -79,9 +79,11 @@ module CountrySelect
         country_list = country_codes.map do |code_or_name|
           if country = ISO3166::Country.new(code_or_name)
             code = country.alpha2
+            country_code = country.country_code
           elsif country = ISO3166::Country.find_by_name(code_or_name)
             code = country.first
             country = ISO3166::Country.new(code)
+            country_code = country.country_code
           end
 
           unless country.present?
@@ -94,7 +96,7 @@ module CountrySelect
           if formatted_country.is_a?(Array)
             formatted_country
           else
-            [formatted_country, code]
+            [formatted_country, code, {'data-country-code' => country_code}]
           end
 
         end
