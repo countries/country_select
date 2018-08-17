@@ -28,6 +28,16 @@ module CountrySelect
         option_tags_options[:selected].delete_if{|selected| priority_countries_options.map(&:second).include?(selected)}
 
         option_tags += html_safe_newline + options_for_select(country_options, option_tags_options)
+      elsif include_data.present?
+        if include_data.include?('country_code') && include_data.exclude?('alpha3')
+          country_options_with_attr = country_options.map{|country_option| [country_option[0], country_option[1], {'data-country-code' => country_option[2]}]}
+        elsif include_data.include?('alpha3') && include_data.exclude?('country_code')
+          country_options_with_attr = country_options.map{|country_option| [country_option[0], country_option[1], {'data-alpha3' => country_option[3]}]}
+        else
+          country_options_with_attr = country_options.map{|country_option| [country_option[0], country_option[1], {'data-country-code' => country_option[2]}, {'data-alpha3' => country_option[3]}]}
+        end
+
+        option_tags = options_for_select(country_options_with_attr, option_tags_options)
       else
         option_tags = options_for_select(country_options, option_tags_options)
       end
@@ -40,6 +50,10 @@ module CountrySelect
 
     def priority_countries
       @options[:priority_countries]
+    end
+
+    def include_data
+      @options[:include_data]
     end
 
     def priority_countries_divider
@@ -80,10 +94,12 @@ module CountrySelect
           if country = ISO3166::Country.new(code_or_name)
             code = country.alpha2
             country_code = country.country_code
+            alpha3 = country.alpha3
           elsif country = ISO3166::Country.find_by_name(code_or_name)
             code = country.first
             country = ISO3166::Country.new(code)
             country_code = country.country_code
+            alpha3 = country.alpha3
           end
 
           unless country.present?
@@ -96,7 +112,7 @@ module CountrySelect
           if formatted_country.is_a?(Array)
             formatted_country
           else
-            [formatted_country, code, {'data-country-code' => country_code}]
+            include_data.present? ? [formatted_country, code, country_code, alpha3] : [formatted_country, code]
           end
 
         end

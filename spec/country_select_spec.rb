@@ -37,7 +37,7 @@ describe "CountrySelect" do
   end
 
   it "selects the value of country_code" do
-    tag = options_for_select([['United States', 'US', {'data-country-code' => '1'}]], 'US')
+    tag = options_for_select([['United States', 'US']], 'US')
 
     walrus.country_code = 'US'
     t = builder.country_select(:country_code)
@@ -48,7 +48,7 @@ describe "CountrySelect" do
     I18n.available_locales = [:en, :es]
     ISO3166.reset
 
-    tag = options_for_select([['Estados Unidos', 'US', {'data-country-code' => '1'}]], 'US')
+    tag = options_for_select([['Estados Unidos', 'US']], 'US')
 
     walrus.country_code = 'US'
     original_locale = I18n.locale
@@ -65,7 +65,7 @@ describe "CountrySelect" do
     I18n.available_locales = [:fr]
     ISO3166.reset
 
-    tag = options_for_select([['États-Unis', 'US', {'data-country-code' => '1'}]], 'US')
+    tag = options_for_select([['États-Unis', 'US']], 'US')
 
     walrus.country_code = 'US'
     t = builder.country_select(:country_code, locale: :fr)
@@ -75,10 +75,10 @@ describe "CountrySelect" do
   it "accepts priority countries" do
     tag = options_for_select(
       [
-        ['Latvia','LV', {'data-country-code' => '371'}],
-        ['United States','US', {'data-country-code' => '1'}],
-        ['Denmark', 'DK', {'data-country-code' => '45'}],
-        ['-'*15,'-'*15,'-'*15]
+        ['Latvia','LV'],
+        ['United States','US'],
+        ['Denmark', 'DK'],
+        ['-'*15,'-'*15]
       ],
       selected: 'US',
       disabled: '-'*15
@@ -91,7 +91,7 @@ describe "CountrySelect" do
 
   describe "when selected options is not an array" do
     it "selects only the first matching option" do
-      tag = options_for_select([["United States", "US", {'data-country-code' => '1'}],["Uruguay", "UY", {'data-country-code' => '598'}]], "US")
+      tag = options_for_select([["United States", "US"],["Uruguay", "UY"]], "US")
       walrus.country_code = 'US'
       t = builder.country_select(:country_code, priority_countries: ['LV','US'])
       expect(t).to_not include(tag)
@@ -100,16 +100,16 @@ describe "CountrySelect" do
 
   describe "when selected options is an array" do
     it "selects all options but only once" do
-      tag = options_for_select([["United States", "US", {'data-country-code' => '1'}],["Uruguay", "UY", {'data-country-code' => '598'}],["Spain", "ES", {'data-country-code' => '34'}]], "US")
+      tag = options_for_select([["United States", "US"],["Uruguay", "UY"],["Spain", "ES"]], "US")
       walrus.country_code = 'US'
       t = builder.country_select(:country_code, {priority_countries: ['LV','US','ES'], selected: ['UY', 'US']}, multiple: true)
-      expect(t.scan(options_for_select([["United States", "US", {'data-country-code' => '1'}]], "US")).length).to be(1)
-      expect(t.scan(options_for_select([["Uruguay", "UY", {'data-country-code' => '598'}]], "UY")).length).to be(1)
+      expect(t.scan(options_for_select([["United States", "US"]], "US")).length).to be(1)
+      expect(t.scan(options_for_select([["Uruguay", "UY"]], "UY")).length).to be(1)
     end
   end
 
   it "displays only the chosen countries" do
-    options = [["Denmark", "DK", {'data-country-code' => '45'}],["Germany", "DE", {'data-country-code' => '49'}]]
+    options = [["Denmark", "DK"],["Germany", "DE"]]
     tag = builder.select(:country_code, options)
     walrus.country_code = 'US'
     t = builder.country_select(:country_code, only: ['DK','DE'])
@@ -117,7 +117,7 @@ describe "CountrySelect" do
   end
 
   it "discards some countries" do
-    tag = options_for_select([["United States", "US", {'data-country-code' => '1'}]])
+    tag = options_for_select([["United States", "US"]])
     walrus.country_code = 'DE'
     t = builder.country_select(:country_code, except: ['US'])
     expect(t).to_not include(tag)
@@ -127,10 +127,10 @@ describe "CountrySelect" do
     it "accepts priority countries" do
       tag = options_for_select(
         [
-          ['Latvia','LV', {'data-country-code' => '371'}],
-          ['United States','US', {'data-country-code' => '1'}],
-          ['Denmark', 'DK', {'data-country-code' => '45'}],
-          ['-'*15,'-'*15,'-'*15]
+          ['Latvia','LV'],
+          ['United States','US'],
+          ['Denmark', 'DK'],
+          ['-'*15,'-'*15]
         ],
         selected: 'US',
         disabled: '-'*15
@@ -142,7 +142,7 @@ describe "CountrySelect" do
     end
 
     it "selects only the first matching option" do
-      tag = options_for_select([["United States", "US", {'data-country-code' => '1'}],["Uruguay", "UY", {'data-country-code' => '598'}]], "US")
+      tag = options_for_select([["United States", "US"],["Uruguay", "UY"]], "US")
       walrus.country_code = 'US'
       t = builder.country_select(:country_code, ['LV','US'])
       expect(t).to_not include(tag)
@@ -150,10 +150,10 @@ describe "CountrySelect" do
 
     it "supports the country names as provided by default in Formtastic" do
       tag = options_for_select([
-        ["Australia", "AU", {'data-country-code' => '61'}],
-        ["Canada", "CA", {'data-country-code' => '1'}],
-        ["United Kingdom", "GB", {'data-country-code' => '44'}],
-        ["United States", "US", {'data-country-code' => '1'}]
+        ["Australia", "AU"],
+        ["Canada", "CA"],
+        ["United Kingdom", "GB"],
+        ["United States", "US"]
       ])
       country_names = ["Australia", "Canada", "United Kingdom", "United States"]
       t = builder.country_select(:country_code, country_names)
@@ -218,7 +218,7 @@ describe "CountrySelect" do
         "#{country.name} (#{country.alpha2})"
       end
 
-      tag = options_for_select([['United States of America (US)', 'US', {'data-country-code' => '1'}]], 'US')
+      tag = options_for_select([['United States of America (US)', 'US']], 'US')
 
       walrus.country_code = 'US'
       t = builder.country_select(:country_code, format: :with_alpha2)
@@ -227,10 +227,10 @@ describe "CountrySelect" do
 
     it "accepts an array for formatter" do
       ::CountrySelect::FORMATS[:with_alpha3] = lambda do |country|
-        [country.name, country.alpha3, {'data-country-code' => country.country_code}]
+        [country.name, country.alpha3]
       end
 
-      tag = options_for_select([['United States of America', 'USA', {'data-country-code' => '1'}]], 'USA')
+      tag = options_for_select([['United States of America', 'USA']], 'USA')
       walrus.country_code = 'USA'
       t = builder.country_select(:country_code, format: :with_alpha3)
       expect(t).to include(tag)
@@ -238,10 +238,10 @@ describe "CountrySelect" do
 
     it "accepts an array for formatter + custom formatter" do
       ::CountrySelect::FORMATS[:with_alpha3] = lambda do |country|
-        ["#{country.name} (#{country.alpha2})", country.alpha3, {'data-country-code' => country.country_code}]
+        ["#{country.name} (#{country.alpha2})", country.alpha3]
       end
 
-      tag = options_for_select([['United States of America (US)', 'USA', {'data-country-code' => '1'}]], 'USA')
+      tag = options_for_select([['United States of America (US)', 'USA']], 'USA')
       walrus.country_code = 'USA'
       t = builder.country_select(:country_code, format: :with_alpha3)
       expect(t).to include(tag)
@@ -249,13 +249,36 @@ describe "CountrySelect" do
 
     it "marks priority countries as selected only once" do
       ::CountrySelect::FORMATS[:with_alpha3] = lambda do |country|
-        [country.name, country.alpha3, {'data-country-code' => country.country_code}]
+        [country.name, country.alpha3]
       end
 
-      tag = options_for_select([['United States of America', 'USA', {'data-country-code' => '1'}]], 'USA')
+      tag = options_for_select([['United States of America', 'USA']], 'USA')
       walrus.country_code = 'USA'
       t = builder.country_select(:country_code, format: :with_alpha3, priority_countries: ['US'])
       expect(t.scan(Regexp.new(Regexp.escape(tag))).size).to eq 1
+    end
+  end
+
+  describe "include data" do
+    it "accepts country code" do
+      tag = options_for_select([["United States", "US", {'data-country-code' => '1'}],["Uruguay", "UY", {'data-country-code' => '598'}]], "US")
+      walrus.country_code = 'US'
+      t = builder.country_select(:country_code, include_data: ['country_code'])
+      expect(t).to include(tag)
+    end
+
+    it "accepts alpha3" do
+      tag = options_for_select([["United States", "US", {'data-alpha3' => 'USA'}],["Uruguay", "UY", {'data-alpha3' => 'URY'}]], "US")
+      walrus.country_code = 'US'
+      t = builder.country_select(:country_code, include_data: ['alpha3'])
+      expect(t).to include(tag)
+    end
+
+    it "accepts country code and alpha3" do
+      tag = options_for_select([["United States", "US", {'data-country-code' => '1'}, {'data-alpha3' => 'USA'}],["Uruguay", "UY", {'data-country-code' => '598'}, {'data-alpha3' => 'URY'}]], "US")
+      walrus.country_code = 'US'
+      t = builder.country_select(:country_code, include_data: ['country_code', 'alpha3'])
+      expect(t).to include(tag)
     end
   end
 end
