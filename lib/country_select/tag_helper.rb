@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CountrySelect
   class CountryNotFoundError < StandardError;end
   module TagHelper
