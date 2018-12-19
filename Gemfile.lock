@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     country_select (3.1.1)
-      countries (~> 2.0)
+      countries (~> 3.0)
       sort_alphabetical (~> 1.0)
 
 GEM
@@ -29,9 +29,8 @@ GEM
     builder (3.2.3)
     coderay (1.1.0)
     concurrent-ruby (1.0.5)
-    countries (2.1.2)
+    countries (3.0.0)
       i18n_data (~> 0.8.0)
-      money (~> 6.9)
       sixarm_ruby_unaccent (~> 1.1)
       unicode_utils (~> 1.4)
     diff-lcs (1.2.5)
@@ -44,8 +43,6 @@ GEM
     method_source (0.8.2)
     mini_portile2 (2.3.0)
     minitest (5.10.3)
-    money (6.9.0)
-      i18n (>= 0.6.4, < 0.9)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
     pry (0.10.1)
@@ -300,4 +297,4 @@ DEPENDENCIES
   wwtd
 
 BUNDLED WITH
-   1.15.4
+   1.17.1
