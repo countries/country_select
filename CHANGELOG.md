@@ -1,3 +1,8 @@
+## 4.0.0 2018-12-20
+
+  * #160 - Upgrade to countries 3.0 - @gssbzn
+    * https://github.com/hexorx/countries/blob/master/CHANGELOG.md#v220-yanked-and-re-released-as-300-20181217-1020-0000
+
 ## 3.1.1 2017-09-20
 
   * #146 - Fix value call on Rails edge (5.2+) - @ybart
