@@ -1,7 +1,7 @@
 PATH
   remote: ..
   specs:
-    country_select (3.1.1)
+    country_select (4.0.0)
       countries (~> 3.0)
       sort_alphabetical (~> 1.0)
 
@@ -259,7 +259,7 @@ GEM
     rubysl-singleton (2.0.0)
     rubysl-socket (2.2.1)
       rubysl-fcntl (~> 2.0)
-    rubysl-stringio (2.1)
+    rubysl-stringio (2.1.0)
     rubysl-strscan (2.0.0)
     rubysl-sync (2.0.0)
     rubysl-syslog (2.1.0)
