@@ -18,7 +18,14 @@ module CountrySelect
         :disabled => @options[:disabled]
       }
 
-      if priority_countries.present?
+      if group_by_continent?
+        groups = countries_grouped_per_continent.map { |continent, country_codes|
+          [continent, country_options_for(country_codes, sorted=true)]
+        }
+
+        option_tags = grouped_options_for_select(groups, selected_option, option_tags_options)
+
+      elsif priority_countries.present?
         priority_countries_options = country_options_for(priority_countries, false)
 
         option_tags = options_for_select(priority_countries_options, option_tags_options)
@@ -36,6 +43,10 @@ module CountrySelect
     private
     def locale
       @options[:locale]
+    end
+
+    def group_by_continent?
+      @options[:group_by_continent]
     end
 
     def priority_countries
@@ -60,6 +71,14 @@ module CountrySelect
 
     def country_options
       country_options_for(all_country_codes, true)
+    end
+
+    def countries_grouped_per_continent
+      all_countries = ISO3166::Country.all
+      groups = all_countries.group_by(&:continent).map do |continent, countries|
+        [continent, countries.map(&:alpha2)]
+      end
+      Hash[groups]
     end
 
     def all_country_codes
