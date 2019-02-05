@@ -76,9 +76,16 @@ module CountrySelect
     def countries_grouped_per_continent
       all_countries = ISO3166::Country.all
       groups = all_countries.group_by(&:continent).map do |continent, countries|
-        [continent, countries.map(&:alpha2)]
+        [continent_name(continent), countries.map(&:alpha2)]
       end
       Hash[groups]
+    end
+
+    def continent_name(continent)
+      continent_key = continent.gsub(" ", "").underscore
+      I18n.with_locale(locale) do
+        I18n.t("continents.#{continent_key}")
+      end
     end
 
     def all_country_codes
