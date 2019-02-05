@@ -20,7 +20,7 @@ module CountrySelect
 
       if group_by_continent?
         groups = countries_grouped_per_continent.map { |continent, country_codes|
-          [continent, country_options_for(country_codes, sorted=true)]
+          [continent, country_options_for(country_codes, true)]
         }
 
         option_tags = grouped_options_for_select(groups, selected_option, option_tags_options)
@@ -78,11 +78,16 @@ module CountrySelect
       groups = all_countries.group_by(&:continent).map do |continent, countries|
         [continent_name(continent), countries.map(&:alpha2)]
       end
-      Hash[groups]
+      if groups.respond_to?(:sort_alphabetical)
+        ordered_groups = groups.sort_alphabetical
+      else
+        ordered_groups = groups.sort
+      end
+      Hash[ordered_groups]
     end
 
     def continent_name(continent)
-      continent_key = continent.gsub(" ", "").underscore
+      continent_key = continent.gsub(' ', '').underscore
       I18n.with_locale(locale) do
         I18n.t("continents.#{continent_key}")
       end

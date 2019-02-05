@@ -98,7 +98,7 @@ Builds a select with countries grouped by country
 
 Add to gemfile
 ```ruby
-gem 'i18n-continent-translations'
+gem 'i18n-continent-translations', '~> 0.1.1'
 ```
 
 ```ruby
