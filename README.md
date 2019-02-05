@@ -92,6 +92,20 @@ Supplying additional html options:
 country_select("user", "country", { priority_countries: ["GB", "FR"], selected: "GB" }, { class: 'form-control', data: { attribute: "value" } })
 ```
 
+Group by continent
+
+Builds a select with countries grouped by country
+
+Add to gemfile
+```ruby
+gem 'i18n-continent-translations'
+```
+
+```ruby
+country_select("user", "country", { group_by_continent: true, selected: "GB" }, { class: 'form-control', data: { attribute: "value" } })
+```
+
+
 ### Using a custom formatter
 
 You can define a custom formatter which will receive an
