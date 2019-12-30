@@ -20,7 +20,7 @@ describe "CountrySelect" do
   end
 
   let(:walrus) { Walrus.new }
-  let!(:template) { ActionView::Base.new }
+  let!(:template) { ActionView::Base.new(ActionView::LookupContext.new([])) }
 
   let(:builder) do
     if defined?(ActionView::Helpers::Tags::Base)

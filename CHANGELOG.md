@@ -1,3 +1,8 @@
+## 5.0.0 2020-01-02
+
+  * #164,#172 - Remove support for EOL versions of Ruby and ruby on rails
+    * Ruby >= 2.5, Rails >= 5.2
+
 ## 4.0.0 2018-12-20
 
   * #160 - Upgrade to countries 3.0 - @gssbzn
