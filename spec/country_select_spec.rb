@@ -100,7 +100,6 @@ describe "CountrySelect" do
 
   describe "when selected options is an array" do
     it "selects all options but only once" do
-      tag = options_for_select([["United States", "US"],["Uruguay", "UY"],["Spain", "ES"]], "US")
       walrus.country_code = 'US'
       t = builder.country_select(:country_code, {priority_countries: ['LV','US','ES'], selected: ['UY', 'US']}, multiple: true)
       expect(t.scan(options_for_select([["United States", "US"]], "US")).length).to be(1)
@@ -183,7 +182,14 @@ describe "CountrySelect" do
     end
 
     it "supports the include_blank option" do
-      tag = '<option value=""></option>'
+      # Rails 6.1 more closely follows the HTML spec for
+      # empty option tags.
+      # https://github.com/rails/rails/pull/39808
+      tag = if ActionView::VERSION::STRING >= '6.1'
+              '<option value="" label=" "></option>'
+            else
+              '<option value=""></option>'
+            end
       t = builder.country_select(:country_code, include_blank: true)
       expect(t).to include(tag)
     end
