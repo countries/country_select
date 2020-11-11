@@ -38,6 +38,10 @@ module CountrySelect
       @options[:locale]
     end
 
+    def value_as
+      @options[:value_as]
+    end
+
     def priority_countries
       @options[:priority_countries]
     end
@@ -94,7 +98,11 @@ module CountrySelect
           if formatted_country.is_a?(Array)
             formatted_country
           else
-            [formatted_country, code]
+            if(value_as == :name)
+              [formatted_country, formatted_country]
+            else
+              [formatted_country, code]
+            end
           end
 
         end
