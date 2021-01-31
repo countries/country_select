@@ -10,6 +10,7 @@ rvm:
 gemfile:
   - gemfiles/actionpack5.2.gemfile
   - gemfiles/actionpack6.0.gemfile
+  - gemfiles/actionpack6.1.gemfile
   - gemfiles/actionpack.edge.gemfile
 jobs:
   allow_failures:
