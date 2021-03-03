@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    country_select (5.0.0)
+    country_select (5.0.0.pre)
       countries (~> 3.0)
       sort_alphabetical (~> 1.1)
 
@@ -300,10 +300,10 @@ DEPENDENCIES
   pry (~> 0)
   psych
   racc
-  rake
+  rake (~> 13)
   rspec (~> 3)
   rubysl (~> 2.0)
-  wwtd
+  wwtd (~> 1)
 
 BUNDLED WITH
    2.1.4
