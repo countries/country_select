@@ -193,7 +193,7 @@ changing the dependencies in the gemspec.
 ```shell
 for i in gemfiles/*.gemfile
 do
-BUNDLE_GEMFILE=$i bundle install --no-deployment
+BUNDLE_GEMFILE=$i bundle install --local
 done
 ```
 
