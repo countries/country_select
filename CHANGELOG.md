@@ -1,7 +1,8 @@
-## 5.0.0 2020-01-02
+## 5.0.0 2021-03-02
 
   * #164,#172 - Remove support for EOL versions of Ruby and ruby on rails
     * Ruby >= 2.5, Rails >= 5.2
+  * #175 - Add Rails 6.1 Support
 
 ## 4.0.0 2018-12-20
 
