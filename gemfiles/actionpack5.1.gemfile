@@ -4,9 +4,3 @@ gemspec :path => "../"
 
 gem "railties", "~> 5.1.1"
 gem "actionpack", "~> 5.1.1"
-
-platforms :rbx do
-  gem "racc"
-  gem "rubysl", "~> 2.0"
-  gem "psych"
-end
