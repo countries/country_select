@@ -14,5 +14,10 @@ gemfile:
   - gemfiles/actionpack6.1.gemfile
   - gemfiles/actionpack.edge.gemfile
 jobs:
+  exclude:
+    - rvm: 2.5
+      gemfile: gemfiles/actionpack.edge.gemfile
+    - rvm: 2.6
+      gemfile: gemfiles/actionpack.edge.gemfile
   allow_failures:
     - rvm: ruby-head
