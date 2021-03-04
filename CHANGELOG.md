@@ -1,6 +1,6 @@
-## 5.0.0 2021-03-03
+## 5.0.0 2021-03-04
 
-  * #164,#172 - Remove support for EOL versions of Ruby and ruby on rails
+  * #164,#172 - Remove support for EOL versions of Ruby and Ruby on Rails
     * Ruby >= 2.5, Rails >= 5.2
   * #175 - Add Rails 6.1 Support *(@andrehjr)
   * #173 - Fallback even if translations cannot be loaded (@mikepluquin)
