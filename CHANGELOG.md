@@ -4,6 +4,7 @@
     * Ruby >= 2.5, Rails >= 5.2
   * #175 - Add Rails 6.1 Support *(@andrehjr)
   * #173 - Fallback even if translations cannot be loaded (@mikepluquin)
+  * #164 - Fixup travis build matrix (@olleolleolle)
 
 ## 4.0.0 2018-12-20
 
