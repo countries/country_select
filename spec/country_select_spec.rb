@@ -61,6 +61,23 @@ describe "CountrySelect" do
     end
   end
 
+  it 'falls back when given a country-specific locale' do
+    I18n.available_locales = [:en, :de, :'de-AT']
+    ISO3166.reset
+
+    tag = options_for_select([['Deutschland', 'DE']], 'DE')
+
+    walrus.country_code = 'DE'
+    original_locale = I18n.locale
+    begin
+      I18n.locale = :'de-AT'
+      t = builder.country_select(:country_code)
+      expect(t).to include(tag)
+    ensure
+      I18n.locale = original_locale
+    end
+  end
+
   it "accepts a locale option" do
     I18n.available_locales = [:fr]
     ISO3166.reset
