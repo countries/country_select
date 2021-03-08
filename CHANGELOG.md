@@ -1,3 +1,7 @@
+## 5.0.1 2021-03-08
+
+  * #181 - Fix i18n fallback in country translations (@lavaturtle)
+
 ## 5.0.0 2021-03-04
 
   * #164,#172 - Remove support for EOL versions of Ruby and Ruby on Rails
