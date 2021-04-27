@@ -3,10 +3,10 @@ cache: bundler
 language: ruby
 bundler_args: ""
 rvm:
-  - 2.5
-  - 2.6
-  - 2.7
-  - 3.0
+  - "2.5"
+  - "2.6"
+  - "2.7"
+  - "3.0"
   - ruby-head
 gemfile:
   - gemfiles/actionpack5.2.gemfile
@@ -15,9 +15,9 @@ gemfile:
   - gemfiles/actionpack.edge.gemfile
 jobs:
   exclude:
-    - rvm: 2.5
+    - rvm: "2.5"
       gemfile: gemfiles/actionpack.edge.gemfile
-    - rvm: 2.6
+    - rvm: "2.6"
       gemfile: gemfiles/actionpack.edge.gemfile
   allow_failures:
     - rvm: ruby-head
