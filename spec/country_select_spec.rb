@@ -139,6 +139,23 @@ describe "CountrySelect" do
     expect(t).to_not include(tag)
   end
 
+  context "when there is a default except configured" do
+    around do |example|
+      old_value = ::CountrySelect::DEFAULTS[:except]
+      example.run
+      ::CountrySelect::DEFAULTS[:except] = old_value
+    end
+
+    it "discards countries when configured to" do
+      ::CountrySelect::DEFAULTS[:except] = ['US']
+
+      tag = options_for_select([['United States', 'US']])
+      walrus.country_code = 'DE'
+      t = builder.country_select(:country_code)
+      expect(t).to_not include(tag)
+    end
+  end
+
   context "using old 1.x syntax" do
     it "accepts priority countries" do
       tag = options_for_select(
