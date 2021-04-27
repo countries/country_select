@@ -35,27 +35,28 @@ module CountrySelect
 
     private
     def locale
-      @options[:locale]
+      @options[:locale] || ::CountrySelect::DEFAULTS[:locale]
     end
 
     def priority_countries
-      @options[:priority_countries]
+      @options[:priority_countries] || ::CountrySelect::DEFAULTS[:priority_countries]
+
     end
 
     def priority_countries_divider
-      @options[:priority_countries_divider] || "-"*15
+      @options[:priority_countries_divider] || ::CountrySelect::DEFAULTS[:priority_countries_divider]
     end
 
     def only_country_codes
-      @options[:only]
+      @options[:only] || ::CountrySelect::DEFAULTS[:only]
     end
 
     def except_country_codes
-      @options[:except]
+      @options[:except] || ::CountrySelect::DEFAULTS[:except]
     end
 
     def format
-      @options[:format] || :default
+      @options[:format] || ::CountrySelect::DEFAULTS[:format]
     end
 
     def country_options
