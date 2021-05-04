@@ -139,7 +139,7 @@ describe "CountrySelect" do
     expect(t).to_not include(tag)
   end
 
-  context "when there is a default except configured" do
+  context "when there is a default 'except' configured" do
     around do |example|
       old_value = ::CountrySelect::DEFAULTS[:except]
       example.run
