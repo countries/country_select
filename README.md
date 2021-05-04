@@ -122,6 +122,19 @@ country_select("user", "country", format: :with_alpha2)
 country_select("user", "country", format: :with_data_attrs)
 ```
 
+### Using customized defaults
+
+You can configure overridable defaults for `except`, `format`, `locale`,
+`only`, `priority_countries` and `priority_countries_divider` in an initializer.
+
+````ruby
+# config/initializers/country_select.rb
+
+CountrySelect::DEFAULTS[:except] = [ "ZZ" ]
+````
+
+The example would exclude "ZZ" from every `country_select` tag, where no `except` option is given.
+
 ### ISO 3166-1 alpha-2 codes
 The `option` tags use ISO 3166-1 alpha-2 codes as values and the country
 names as display strings. For example, the United States would appear as
