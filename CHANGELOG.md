@@ -1,3 +1,8 @@
+## 5.1.0 2021-05-18
+
+  * #184 - Add ability to configure defaults (@p-wall)
+  * Upgrade to countries 3.1.0
+
 ## 5.0.1 2021-03-08
 
   * #181 - Fix i18n fallback in country translations (@lavaturtle)
