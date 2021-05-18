@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/rails/rails.git
-  revision: 14f35cde18de77cd7ab5d6f17d83fa8bc92ba383
+  revision: a34d64d82e213a4054fbb69ad5cd7a5137a5a252
   specs:
     actionpack (7.0.0.alpha)
       actionview (= 7.0.0.alpha)
@@ -25,7 +25,7 @@ GIT
 PATH
   remote: ..
   specs:
-    country_select (5.0.1)
+    country_select (5.1.0)
       countries (~> 3.0)
       sort_alphabetical (~> 1.1)
 
@@ -35,8 +35,8 @@ GEM
     builder (3.2.4)
     coderay (1.1.3)
     concurrent-ruby (1.1.8)
-    countries (3.0.1)
-      i18n_data (~> 0.10.0)
+    countries (3.1.0)
+      i18n_data (~> 0.11.0)
       sixarm_ruby_unaccent (~> 1.1)
       unicode_utils (~> 1.4)
     crass (1.0.6)
@@ -44,7 +44,7 @@ GEM
     erubi (1.10.0)
     i18n (1.8.9)
       concurrent-ruby (~> 1.0)
-    i18n_data (0.10.0)
+    i18n_data (0.11.0)
     loofah (2.9.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
