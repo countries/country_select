@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    country_select (5.1.0)
+    country_select (6.0.0)
       countries (~> 4.0)
       sort_alphabetical (~> 1.1)
 

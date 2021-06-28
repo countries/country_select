@@ -1,3 +1,7 @@
+## 6.0.0 2021-06-28
+
+  * #186 - Upgrade to countries 4.0.0 (@pmor)
+
 ## 5.1.0 2021-05-18
 
   * #184 - Add ability to configure defaults (@p-wall)
