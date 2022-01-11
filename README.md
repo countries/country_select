@@ -95,19 +95,19 @@ country_select("user", "country", { priority_countries: ["GB", "FR"], selected: 
 ### Using a custom formatter
 
 You can define a custom formatter which will receive an
-[`ISO3166::Country`](https://github.com/hexorx/countries/blob/master/lib/countries/country.rb)
+[`ISO3166::Country`](https://github.com/countries/countries/blob/master/lib/countries/country.rb)
 ```ruby
 # config/initializers/country_select.rb
 
 # Return a string to customize the text in the <option> tag, `value` attribute will remain unchanged
 CountrySelect::FORMATS[:with_alpha2] = lambda do |country|
-  "#{country.name} (#{country.alpha2})"
+  "#{country.iso_short_name} (#{country.alpha2})"
 end
 
 # Return an array to customize <option> text, `value` and other HTML attributes
 CountrySelect::FORMATS[:with_data_attrs] = lambda do |country|
   [
-    country.name,
+    country.iso_short_name,
     country.alpha2,
     {
       'data-country-code' => country.country_code,
@@ -142,7 +142,7 @@ names as display strings. For example, the United States would appear as
 
 Country names are automatically localized based on the value of
 `I18n.locale` thanks to the wonderful
-[countries gem](https://github.com/hexorx/countries/).
+[countries gem](https://github.com/countries/countries/).
 
 Current translations include:
 
@@ -177,7 +177,7 @@ class User < ActiveRecord::Base
   # (usually English) name if no translation is available
   def country_name
     country = ISO3166::Country[country_code]
-    country.translations[I18n.locale.to_s] || country.name
+    country.translations[I18n.locale.to_s] || country.iso_short_name
   end
 
 end
