@@ -255,7 +255,7 @@ describe "CountrySelect" do
   describe "custom formats" do
     it "accepts a custom formatter" do
       ::CountrySelect::FORMATS[:with_alpha2] = lambda do |country|
-        "#{country.name} (#{country.alpha2})"
+        "#{country.iso_short_name} (#{country.alpha2})"
       end
 
       tag = options_for_select([['United States of America (US)', 'US']], 'US')
@@ -267,7 +267,7 @@ describe "CountrySelect" do
 
     it "accepts an array for formatter" do
       ::CountrySelect::FORMATS[:with_alpha3] = lambda do |country|
-        [country.name, country.alpha3]
+        [country.iso_short_name, country.alpha3]
       end
 
       tag = options_for_select([['United States of America', 'USA']], 'USA')
@@ -278,7 +278,7 @@ describe "CountrySelect" do
 
     it "accepts an array for formatter + custom formatter" do
       ::CountrySelect::FORMATS[:with_alpha3] = lambda do |country|
-        ["#{country.name} (#{country.alpha2})", country.alpha3]
+        ["#{country.iso_short_name} (#{country.alpha2})", country.alpha3]
       end
 
       tag = options_for_select([['United States of America (US)', 'USA']], 'USA')
@@ -289,7 +289,7 @@ describe "CountrySelect" do
 
     it "marks priority countries as selected only once" do
       ::CountrySelect::FORMATS[:with_alpha3] = lambda do |country|
-        [country.name, country.alpha3]
+        [country.iso_short_name, country.alpha3]
       end
 
       tag = options_for_select([['United States of America', 'USA']], 'USA')
