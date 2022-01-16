@@ -7,11 +7,13 @@ rvm:
   - "2.6"
   - "2.7"
   - "3.0"
+  - "3.1"
   - ruby-head
 gemfile:
   - gemfiles/actionpack5.2.gemfile
   - gemfiles/actionpack6.0.gemfile
   - gemfiles/actionpack6.1.gemfile
+  - gemfiles/actionpack7.0.gemfile
   - gemfiles/actionpack.edge.gemfile
 jobs:
   exclude:
