@@ -1,5 +1,5 @@
 # Rails – Country Select
-[![Build Status](https://travis-ci.org/stefanpenner/country_select.svg?branch=master)](https://travis-ci.org/stefanpenner/country_select)
+[![build](https://github.com/stefanpenner/country_select/actions/workflows/build.yml/badge.svg)](https://github.com/stefanpenner/country_select/actions/workflows/build.yml)
 
 Provides a simple helper to get an HTML select list of countries using the
 [ISO 3166-1 standard](https://en.wikipedia.org/wiki/ISO_3166-1).
