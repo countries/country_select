@@ -1,3 +1,7 @@
+## 6.1.0 2022-01-16
+
+  * #190 - Upgrade to countries 4.2 (@pmor)
+
 ## 6.0.0 2021-06-28
 
   * #186 - Upgrade to countries 4.0.0 (@pmor)

@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.5'
 
-  s.add_development_dependency 'actionpack', '~> 6.1'
+  s.add_development_dependency 'actionpack', '~> 7.0'
   s.add_development_dependency 'pry', '~> 0'
   s.add_development_dependency 'rake', '~> 13'
   s.add_development_dependency 'rspec', '~> 3'
