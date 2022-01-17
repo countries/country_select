@@ -1,6 +1,7 @@
 ## 6.1.0 2022-01-16
 
   * #190 - Upgrade to countries 4.2 (@pmor)
+  * #191 - Add Rails 7 + Ruby 3.1 to build (@scudco)
 
 ## 6.0.0 2021-06-28
 
