@@ -1,3 +1,7 @@
+## 6.1.1 2022-01-20
+
+  * #195 - Fix deprecation warning on find_by_name (@filipemendespi)
+
 ## 6.1.0 2022-01-16
 
   * #190 - Upgrade to countries 4.2 (@pmor)

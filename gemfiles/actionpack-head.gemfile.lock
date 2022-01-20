@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/rails/rails.git
-  revision: 83a4fa414bc9e5008825f47857fdd80e85c82033
+  revision: 10ef5321c1e0f783b58f26d238cd61145bc3cb96
   specs:
     actionpack (7.1.0.alpha)
       actionview (= 7.1.0.alpha)
@@ -24,7 +24,7 @@ GIT
 PATH
   remote: ..
   specs:
-    country_select (6.1.0)
+    country_select (6.1.1)
       countries (~> 4.2)
       sort_alphabetical (~> 1.1)
 
