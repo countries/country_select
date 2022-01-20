@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.licenses    = ['MIT']
   s.authors     = ['Stefan Penner']
   s.email       = ['stefan.penner@gmail.com']
-  s.homepage    = 'https://github.com/stefanpenner/country_select'
+  s.homepage    = 'https://github.com/countries/country_select'
   s.summary     = %q{Country Select Plugin}
   s.description = %q{Provides a simple helper to get an HTML select list of countries. The list of countries comes from the ISO 3166 standard. While it is a relatively neutral source of country names, it will still offend some users.}
 
