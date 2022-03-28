@@ -1,7 +1,7 @@
 # Rails – Country Select
 [![build](https://github.com/countries/country_select/actions/workflows/build.yml/badge.svg)](https://github.com/countries/country_select/actions/workflows/build.yml)
 [![Code Climate](https://codeclimate.com/github/countries/country_select.svg)](https://codeclimate.com/github/countries/country_select)
-[![CodeQL](https://github.com/countries/country_select/actions/workflows/codeql-analysis.yml)](https://github.com/countries/country_select/actions/workflows/codeql-analysis.yml/badge.svg)
+[![CodeQL](https://github.com/countries/country_select/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/countries/country_select/actions/workflows/codeql-analysis.yml)
 
 
 Provides a simple helper to get an HTML select list of countries using the
