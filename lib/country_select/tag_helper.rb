@@ -79,9 +79,8 @@ module CountrySelect
         country_list = country_codes.map do |code_or_name|
           if country = ISO3166::Country.new(code_or_name)
             code = country.alpha2
-          elsif country = ISO3166::Country.find_by_unofficial_names(code_or_name)
-            code = country.first
-            country = ISO3166::Country.new(code)
+          elsif country = ISO3166::Country.find_country_by_any_name(code_or_name)
+            code = country.alpha2
           end
 
           unless country.present?
