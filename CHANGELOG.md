@@ -1,3 +1,8 @@
+## 7.0.0 2022-04-03
+
+ * #200 - Drop support for Ruby 2.5 and 2.6 (@pmor)
+ * #201 - Upgrade countries gem to 5.0.0 (@pmor)
+
 ## 6.1.1 2022-01-20
 
   * #195 - Fix deprecation warning on find_by_name (@filipemendespi)
