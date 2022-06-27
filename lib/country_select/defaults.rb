@@ -6,6 +6,6 @@ module CountrySelect
     only: nil,
     priority_countries: nil,
     priority_countries_divider: "-" * 15,
-    sort_only: true
+    sort_provided: true
   }
 end
