@@ -92,6 +92,40 @@ describe "CountrySelect" do
   it "accepts priority countries" do
     tag = options_for_select(
       [
+        ['Denmark', 'DK'],
+        ['Latvia','LV'],
+        ['United States','US'],
+        ['-'*15,'-'*15]
+      ],
+      selected: 'US',
+      disabled: '-'*15
+    )
+
+    walrus.country_code = 'US'
+    t = builder.country_select(:country_code, priority_countries: ['LV','US','DK'])
+    expect(t).to include(tag)
+  end
+
+  it "priority countries are sorted by name by default" do
+    tag = options_for_select(
+      [
+        ['Denmark', 'DK'],
+        ['Latvia','LV'],
+        ['United States','US'],
+        ['-'*15,'-'*15]
+      ],
+      selected: 'US',
+      disabled: '-'*15
+    )
+
+    walrus.country_code = 'US'
+    t = builder.country_select(:country_code, priority_countries: ['LV','US','DK'])
+    expect(t).to include(tag)
+  end
+
+  it "priority countries with `sort_provided: false` preserves the provided order" do
+    tag = options_for_select(
+      [
         ['Latvia','LV'],
         ['United States','US'],
         ['Denmark', 'DK'],
@@ -102,7 +136,7 @@ describe "CountrySelect" do
     )
 
     walrus.country_code = 'US'
-    t = builder.country_select(:country_code, priority_countries: ['LV','US','DK'])
+    t = builder.country_select(:country_code, priority_countries: ['LV','US','DK'], sort_provided: false)
     expect(t).to include(tag)
   end
 
@@ -139,6 +173,18 @@ describe "CountrySelect" do
     expect(t).to_not include(tag)
   end
 
+  it "countries provided in `only` are sorted by name by default" do
+    t = builder.country_select(:country_code, only: ['PT','DE','AR'])
+    order = t.scan(/value="(\w{2})"/).map { |o| o[0] }
+    expect(order).to eq(['AR', 'DE', 'PT'])
+  end
+
+  it "countries provided in `only` with `sort_provided` to false keeps the order of the provided countries" do
+    t = builder.country_select(:country_code, only: ['PT','DE','AR'], sort_provided: false)
+    order = t.scan(/value="(\w{2})"/).map { |o| o[0] }
+    expect(order).to eq(['PT','DE','AR'])
+  end
+
   context "when there is a default 'except' configured" do
     around do |example|
       old_value = ::CountrySelect::DEFAULTS[:except]
@@ -160,9 +206,9 @@ describe "CountrySelect" do
     it "accepts priority countries" do
       tag = options_for_select(
         [
+          ['Denmark', 'DK'],
           ['Latvia','LV'],
           ['United States','US'],
-          ['Denmark', 'DK'],
           ['-'*15,'-'*15]
         ],
         selected: 'US',

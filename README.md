@@ -57,13 +57,17 @@ country_select("user", "country")
 Supplying priority countries to be placed at the top of the list:
 
 ```ruby
-country_select("user", "country", priority_countries: ["GB", "FR", "DE"])
+country_select("user", "country", priority_countries: ["GB", "FR", "DE"]) # Countries will be sorted by name according to the current locale
+# or
+country_select("user", "country", priority_countries: ["GB", "FR", "DE"], sort_provided: false) # Countries will be displayed is the provided order
 ```
 
 Supplying only certain countries:
 
 ```ruby
-country_select("user", "country", only: ["GB", "FR", "DE"])
+country_select("user", "country", only: ["GB", "FR", "DE"]) # Countries will be sorted by name according to the current locale
+# or
+country_select("user", "country", only: ["GB", "FR", "DE"], sort_provided: false) # Countries will be displayed is the provided order
 ```
 
 Discarding certain countries:

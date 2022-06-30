@@ -19,7 +19,7 @@ module CountrySelect
       }
 
       if priority_countries.present?
-        priority_countries_options = country_options_for(priority_countries, false)
+        priority_countries_options = country_options_for(priority_countries, @options.fetch(:sort_provided, ::CountrySelect::DEFAULTS[:sort_provided]))
 
         option_tags = options_for_select(priority_countries_options, option_tags_options)
         option_tags += html_safe_newline + options_for_select([priority_countries_divider], disabled: priority_countries_divider)
@@ -59,14 +59,14 @@ module CountrySelect
     end
 
     def country_options
-      country_options_for(all_country_codes, true)
+      country_options_for(all_country_codes, @options.fetch(:sort_provided, ::CountrySelect::DEFAULTS[:sort_provided]))
     end
 
     def all_country_codes
       codes = ISO3166::Country.codes
 
       if only_country_codes.present?
-        codes & only_country_codes
+        only_country_codes & codes
       elsif except_country_codes.present?
         codes - except_country_codes
       else
