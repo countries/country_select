@@ -1,3 +1,10 @@
+## 8.0.0 2022-06-30
+
+* Update countries gem to 5.1.0 (@pmor)
+* Add deprecation warning for old priority country syntax (@pmor)
+* Allow option to preserve the sort order as inputted in the `only` array of countries (@pmor)
+* Remove `sort_alphabetical` dependency (@pmor)
+
 ## 7.0.0 2022-04-03
 
  * #200 - Drop support for Ruby 2.5 and 2.6 (@pmor)
