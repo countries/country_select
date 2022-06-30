@@ -99,11 +99,7 @@ module CountrySelect
         end
 
         if sorted
-          if country_list.respond_to?(:sort_alphabetical)
-            country_list.sort_alphabetical
-          else
-            country_list.sort
-          end
+          country_list.sort_by { |name, code| [I18n.transliterate(name), name] }
         else
           country_list
         end

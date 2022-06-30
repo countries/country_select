@@ -2,8 +2,7 @@ PATH
   remote: .
   specs:
     country_select (7.0.0)
-      countries (~> 5.1)
-      sort_alphabetical (~> 1.1)
+      countries (~> 5.0)
 
 GEM
   remote: https://rubygems.org/
@@ -70,11 +69,8 @@ GEM
       rspec-support (~> 3.11.0)
     rspec-support (3.11.0)
     sixarm_ruby_unaccent (1.2.0)
-    sort_alphabetical (1.1.0)
-      unicode_utils (>= 1.2.2)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    unicode_utils (1.4.0)
 
 PLATFORMS
   x86_64-darwin-21
