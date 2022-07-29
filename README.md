@@ -29,13 +29,7 @@ gem install country_select
 Or put the following in your Gemfile
 
 ```ruby
-gem 'country_select', '~> 6.0'
-```
-
-If you don't want to require `sort_alphabetical` (it depends on `unicode_utils` which is known to use lots of memory) you can opt out of using it as follows:
-
-```ruby
-gem 'country_select', require: 'country_select_without_sort_alphabetical'
+gem 'country_select', '~> 8.0'
 ```
 
 ## Usage
