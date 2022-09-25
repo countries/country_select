@@ -102,7 +102,7 @@ describe "CountrySelect" do
     )
 
     walrus.country_code = 'US'
-    t = builder.country_select(:country_code, priority_countries: ['LV','US','DK'])
+    t = builder.country_select(:country_code, priority_countries: ['DK','LV','US'])
     expect(t).to include(tag)
   end
 
@@ -119,7 +119,7 @@ describe "CountrySelect" do
     )
 
     walrus.country_code = 'US'
-    t = builder.country_select(:country_code, priority_countries: ['LV','US','DK'])
+    t = builder.country_select(:country_code, priority_countries: ['DK','LV','US'])
     expect(t).to include(tag)
   end
 
@@ -216,7 +216,7 @@ describe "CountrySelect" do
       )
 
       walrus.country_code = 'US'
-      t = builder.country_select(:country_code, ['LV','US','DK'])
+      t = builder.country_select(:country_code, ['DK','LV','US'])
       expect(t).to include(tag)
     end
 

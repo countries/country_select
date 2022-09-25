@@ -19,7 +19,7 @@ module CountrySelect
       }
 
       if priority_countries.present?
-        priority_countries_options = country_options_for(priority_countries, @options.fetch(:sort_provided, ::CountrySelect::DEFAULTS[:sort_provided]))
+        priority_countries_options = country_options_for(priority_countries, false)
 
         option_tags = options_for_select(priority_countries_options, option_tags_options)
         option_tags += html_safe_newline + options_for_select([priority_countries_divider], disabled: priority_countries_divider)
