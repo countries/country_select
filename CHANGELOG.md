@@ -1,3 +1,11 @@
+## 8.0.1 2023-01-03
+
+* Update README.md by (@ron-shinall)
+* Update installation instructions by (@henrik)
+* Fix deprecated File.exists? on ruby 3.2.0 by (@JNajera212)
+* Fix priority country sorting bug by (@pmor)
+* Update countries gem to 5.3.0 (@pmor)
+
 ## 8.0.0 2022-06-30
 
 * Update countries gem to 5.1.0 (@pmor)
