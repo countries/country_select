@@ -140,6 +140,24 @@ describe "CountrySelect" do
     expect(t).to include(tag)
   end
 
+  it "priority countries with `sort_provided: false` still sorts the non-priority countries by name" do
+    tag = options_for_select(
+      [
+        ['Latvia','LV'],
+        ['United States','US'],
+        ['Denmark', 'DK'],
+        ['-'*15,'-'*15],
+        ['Afghanistan','AF']
+      ],
+      selected: 'AF',
+      disabled: '-'*15
+    )
+
+    walrus.country_code = 'AF'
+    t = builder.country_select(:country_code, priority_countries: ['LV','US','DK'], sort_provided: false)
+    expect(t).to include(tag)
+  end
+
   describe "when selected options is not an array" do
     it "selects only the first matching option" do
       tag = options_for_select([["United States", "US"],["Uruguay", "UY"]], "US")

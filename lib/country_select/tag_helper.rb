@@ -59,19 +59,18 @@ module CountrySelect
     end
 
     def country_options
-      country_options_for(all_country_codes, @options.fetch(:sort_provided, ::CountrySelect::DEFAULTS[:sort_provided]))
-    end
-
-    def all_country_codes
-      codes = ISO3166::Country.codes
-
       if only_country_codes.present?
-        only_country_codes & codes
+        codes = only_country_codes & ISO3166::Country.codes
+        sort = @options.fetch(:sort_provided, ::CountrySelect::DEFAULTS[:sort_provided])
       elsif except_country_codes.present?
-        codes - except_country_codes
+        codes = ISO3166::Country.codes - except_country_codes
+        sort = true
       else
-        codes
+        codes = ISO3166::Country.codes
+        sort = true
       end
+
+      country_options_for(codes, sort)
     end
 
     def country_options_for(country_codes, sorted=true)
