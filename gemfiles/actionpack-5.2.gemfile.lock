@@ -89,6 +89,7 @@ PLATFORMS
 DEPENDENCIES
   actionpack (~> 5.2.0)
   country_select!
+  nokogiri (= 1.14.0.rc1)
   pry (~> 0)
   railties (~> 5.2.0)
   rake (~> 13)
