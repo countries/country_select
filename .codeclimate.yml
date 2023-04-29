@@ -43,8 +43,6 @@ plugins:
         enabled: false
   flog:
     enabled: true
-  brakeman:
-    enabled: true
   bundler-audit:
     enabled: true
 exclude_patterns:
