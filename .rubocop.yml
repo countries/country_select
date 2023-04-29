@@ -1,0 +1,12 @@
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.2
+
+Metrics/MethodLength:
+  enabled: false
+
+Metrics/LineLength:
+  Max: 120
+
+Style/Documentation:
+  enabled: false
