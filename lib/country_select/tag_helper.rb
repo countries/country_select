@@ -97,6 +97,7 @@ module CountrySelect
       option_tags += "\n".html_safe +
                      options_for_select([priority_countries_divider], disabled: priority_countries_divider)
     end
+
     def get_formatted_country(code_or_name)
       country = ISO3166::Country.new(code_or_name) ||
                 ISO3166::Country.find_country_by_any_name(code_or_name)
