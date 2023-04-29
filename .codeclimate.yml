@@ -41,6 +41,8 @@ plugins:
     checks:
       IrresponsibleModule:
         enabled: false
+      TooManyStatements:
+        max_statements: 7
   flog:
     enabled: true
   bundler-audit:

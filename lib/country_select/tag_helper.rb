@@ -55,13 +55,13 @@ module CountrySelect
     end
 
     def country_options
+      codes = ISO3166::Country.codes
+
       if only_country_codes.present?
-        codes = only_country_codes & ISO3166::Country.codes
+        codes = only_country_codes & codes
         sort = @options.fetch(:sort_provided, ::CountrySelect::DEFAULTS[:sort_provided])
       else
-        codes = ISO3166::Country.codes
         codes -= except_country_codes if except_country_codes.present?
-
         sort = true
       end
 
@@ -81,26 +81,27 @@ module CountrySelect
       sorted = @options.fetch(:sort_provided, ::CountrySelect::DEFAULTS[:sort_provided])
       priority_countries_options = country_options_for(priority_countries, sorted: sorted)
 
-      option_tags = options_for_select(priority_countries_options, tags_options)
-      option_tags += "\n".html_safe +
-                     options_for_select([priority_countries_divider], disabled: priority_countries_divider)
+      option_tags = priority_options_for_select(priority_countries_options, tags_options)
 
-      tags_options[:selected] = [tags_options[:selected]] unless tags_options[:selected].is_a?(Array)
-      tags_options[:selected].delete_if { |selected| priority_countries_options.map(&:second).include?(selected) }
+      tags_options[:selected] = Array(tags_options[:selected]).delete_if do |selected|
+        priority_countries_options.map(&:second).include?(selected)
+      end
 
       option_tags += "\n".html_safe + options_for_select(country_options, tags_options)
 
       option_tags
     end
 
+    def priority_options_for_select(priority_countries_options, tags_options)
+      option_tags = options_for_select(priority_countries_options, tags_options)
+      option_tags += "\n".html_safe +
+                     options_for_select([priority_countries_divider], disabled: priority_countries_divider)
+    end
     def get_formatted_country(code_or_name)
       country = ISO3166::Country.new(code_or_name) ||
                 ISO3166::Country.find_country_by_any_name(code_or_name)
 
-      unless country.present?
-        msg = "Could not find Country with string '#{code_or_name}'"
-        raise CountryNotFoundError, msg
-      end
+      raise(CountryNotFoundError, "Could not find Country with string '#{code_or_name}'") unless country.present?
 
       code = country.alpha2
       formatted_country = ::CountrySelect::FORMATS[format].call(country)
