@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'pry', '~> 0'
   s.add_development_dependency 'rake', '~> 13'
   s.add_development_dependency 'rspec', '~> 3'
+  s.add_development_dependency 'simplecov', '~> 0.22'
 
   s.add_dependency 'countries', '~> 5.0'
 end
