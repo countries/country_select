@@ -2,7 +2,7 @@ module ActionView
   module Helpers
     class FormBuilder
       def country_select(method, priority_or_options = {}, options = {}, html_options = {})
-        if Hash === priority_or_options
+        if priority_or_options.is_a? Hash
           html_options = options
           options = priority_or_options
         else

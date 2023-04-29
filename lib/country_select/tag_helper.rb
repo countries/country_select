@@ -69,15 +69,10 @@ module CountrySelect
 
     def country_options_for(country_codes, sorted=true)
       I18n.with_locale(locale) do
-        country_list = country_codes.map do |code_or_name|
-          get_formatted_country(code_or_name)
-        end
+        country_list = country_codes.map { |code_or_name| get_formatted_country(code_or_name) }
 
-        if sorted
-          country_list.sort_by { |name, _| [I18n.transliterate(name), name] }
-        else
-          country_list
-        end
+        country_list.sort_by! { |name, _| [I18n.transliterate(name), name] } if sorted
+        country_list
       end
     end
 
@@ -88,7 +83,7 @@ module CountrySelect
       option_tags += "\n".html_safe + options_for_select([priority_countries_divider], disabled: priority_countries_divider)
 
       option_tags_options[:selected] = [option_tags_options[:selected]] unless option_tags_options[:selected].kind_of?(Array)
-      option_tags_options[:selected].delete_if{|selected| priority_countries_options.map(&:second).include?(selected)}
+      option_tags_options[:selected].delete_if { |selected| priority_countries_options.map(&:second).include?(selected) }
 
       option_tags += "\n".html_safe + options_for_select(country_options, option_tags_options)
 
@@ -101,7 +96,7 @@ module CountrySelect
 
       unless country.present?
         msg = "Could not find Country with string '#{code_or_name}'"
-        raise CountryNotFoundError.new(msg)
+        raise CountryNotFoundError, msg
       end
 
       code = country.alpha2
