@@ -7,9 +7,9 @@ module ActionView
           options = priority_or_options
         else
           if RUBY_VERSION =~ /^3\.\d\.\d/
-            warn "DEPRECATION WARNING: Setting priority countries with the 1.x syntax is deprecated. Please use the `priority_countries:` option.", uplevel: 1, category: :deprecated
+            warn 'DEPRECATION WARNING: Setting priority countries with the 1.x syntax is deprecated. Please use the `priority_countries:` option.', uplevel: 1, category: :deprecated
           else
-            warn "DEPRECATION WARNING: Setting priority countries with the 1.x syntax is deprecated. Please use the `priority_countries:` option.", uplevel: 1
+            warn 'DEPRECATION WARNING: Setting priority countries with the 1.x syntax is deprecated. Please use the `priority_countries:` option.', uplevel: 1
           end
           options[:priority_countries] = priority_or_options
         end

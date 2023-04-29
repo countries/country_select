@@ -14,7 +14,7 @@ task :update_gemfiles do
   require 'pry'
   Dir.glob('gemfiles/*.gemfile').each do |gemfile|
     puts "Updating #{gemfile}...\n\n"
-    ENV['BUNDLE_GEMFILE']=gemfile
+    ENV['BUNDLE_GEMFILE'] = gemfile
     puts `bundle install --gemfile=#{gemfile} --no-cache`
     puts `bundle update --gemfile=#{gemfile}`
 
@@ -28,7 +28,7 @@ task :update_gemfiles do
         puts `bundle lock --add-platform x86_64-linux --gemfile=#{gemfile}`
       end
 
-      puts ""
+      puts ''
     else
       raise StandardError.new("Expected #{lockfile} to exist.")
     end
