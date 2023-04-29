@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-$:.push File.expand_path('../lib', __FILE__)
+$LOAD_PATH.push File.expand_path('lib', __dir__)
 require 'country_select/version'
 
 Gem::Specification.new do |s|
@@ -11,14 +11,16 @@ Gem::Specification.new do |s|
   s.email       = ['stefan.penner@gmail.com']
   s.homepage    = 'https://github.com/countries/country_select'
   s.summary     = 'Country Select Plugin'
-  s.description = 'Provides a simple helper to get an HTML select list of countries. The list of countries comes from the ISO 3166 standard. While it is a relatively neutral source of country names, it will still offend some users.'
+  s.description = 'Provides a simple helper to get an HTML select list of countries. \
+                   The list of countries comes from the ISO 3166 standard. \
+                   While it is a relatively neutral source of country names, it will still offend some users.'
 
   s.metadata      = { 'bug_tracker_uri' => 'http://github.com/countries/country_select/issues',
-                      'changelog_uri' =>  'https://github.com/countries/country_select/blob/master/CHANGELOG.md',
-                      'source_code_uri' =>  'https://github.com/countries/country_select' }
+                      'changelog_uri' => 'https://github.com/countries/country_select/blob/master/CHANGELOG.md',
+                      'source_code_uri' => 'https://github.com/countries/country_select',
+                      'rubygems_mfa_required' => 'true' }
 
   s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
   s.require_paths = ['lib']
 

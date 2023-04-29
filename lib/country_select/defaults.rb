@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CountrySelect
   DEFAULTS = {
     except: nil,

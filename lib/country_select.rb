@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'countries'
 
 require 'country_select/version'

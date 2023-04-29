@@ -9,7 +9,6 @@ RSpec::Core::RakeTask.new(:spec)
 
 task default: 'spec'
 
-
 task :update_gemfiles do
   require 'pry'
   Dir.glob('gemfiles/*.gemfile').each do |gemfile|
@@ -24,7 +23,7 @@ task :update_gemfiles do
 
     parsed_lockfile = Bundler::LockfileParser.new(Bundler.read_file(lockfile))
     # Ensure lockfile has x86_64-linux
-    if parsed_lockfile.platforms.map(&:to_s).none? {|p| p == 'x86_64-linux' }
+    if parsed_lockfile.platforms.map(&:to_s).none? { |p| p == 'x86_64-linux' }
       puts "Adding platform x86_64-linux to #{lockfile}\n\n"
       puts `bundle lock --add-platform x86_64-linux --gemfile=#{gemfile}`
     end

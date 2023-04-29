@@ -2,6 +2,7 @@
 
 module CountrySelect
   class CountryNotFoundError < StandardError; end
+
   module TagHelper
     def country_option_tags
       # In Rails 5.2+, `value` accepts no arguments and must also be called
@@ -64,10 +65,10 @@ module CountrySelect
         sort = true
       end
 
-      country_options_for(codes, sort)
+      country_options_for(codes, sorted: sort)
     end
 
-    def country_options_for(country_codes, sorted=true)
+    def country_options_for(country_codes, sorted: rue)
       I18n.with_locale(locale) do
         country_list = country_codes.map { |code_or_name| get_formatted_country(code_or_name) }
 
@@ -76,18 +77,20 @@ module CountrySelect
       end
     end
 
-    def options_for_select_with_priority_countries(country_options, option_tags_options)
-      priority_countries_options = country_options_for(priority_countries, @options.fetch(:sort_provided, ::CountrySelect::DEFAULTS[:sort_provided]))
+    def options_for_select_with_priority_countries(country_options, tags_options)
+      sorted = @options.fetch(:sort_provided, ::CountrySelect::DEFAULTS[:sort_provided])
+      priority_countries_options = country_options_for(priority_countries, sorted: sorted)
 
-      option_tags = options_for_select(priority_countries_options, option_tags_options)
-      option_tags += "\n".html_safe + options_for_select([priority_countries_divider], disabled: priority_countries_divider)
+      option_tags = options_for_select(priority_countries_options, tags_options)
+      option_tags += "\n".html_safe +
+                     options_for_select([priority_countries_divider], disabled: priority_countries_divider)
 
-      option_tags_options[:selected] = [option_tags_options[:selected]] unless option_tags_options[:selected].kind_of?(Array)
-      option_tags_options[:selected].delete_if { |selected| priority_countries_options.map(&:second).include?(selected) }
+      tags_options[:selected] = [tags_options[:selected]] unless tags_options[:selected].is_a?(Array)
+      tags_options[:selected].delete_if { |selected| priority_countries_options.map(&:second).include?(selected) }
 
-      option_tags += "\n".html_safe + options_for_select(country_options, option_tags_options)
+      option_tags += "\n".html_safe + options_for_select(country_options, tags_options)
 
-      return option_tags
+      option_tags
     end
 
     def get_formatted_country(code_or_name)
