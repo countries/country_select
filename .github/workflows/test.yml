@@ -20,6 +20,7 @@ jobs:
         gemfile: [5.2, '6.0', 6.1, '7.0']
     env: # $BUNDLE_GEMFILE must be set at the job level, so it is set for all steps
       BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/actionpack-${{ matrix.gemfile }}.gemfile
+      CC_TEST_REPORTER_ID: 0d09e6611c01dedd75511b1c60f62329d01729289e06375cfe67cefe67013d9f
     steps:
     - uses: actions/checkout@v3
     - name: Set up Ruby ${{ matrix.ruby-version }}
@@ -28,8 +29,8 @@ jobs:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true
     - name: Run tests
+    
       run: bundle exec rake
     - name: Publish code coverage
       uses: paambaati/codeclimate-action@v4.0.0
-      env:
-        CC_TEST_REPORTER_ID: 0d09e6611c01dedd75511b1c60f62329d01729289e06375cfe67cefe67013d9f
+
