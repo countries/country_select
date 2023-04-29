@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CountrySelect
   DEFAULTS = {
     except: nil,
@@ -5,7 +7,7 @@ module CountrySelect
     locale: nil,
     only: nil,
     priority_countries: nil,
-    priority_countries_divider: "-" * 15,
+    priority_countries_divider: '-' * 15,
     sort_provided: true
   }
 end
