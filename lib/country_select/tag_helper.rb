@@ -4,6 +4,11 @@ module CountrySelect
   class CountryNotFoundError < StandardError; end
 
   module TagHelper
+    unless respond_to?(:options_for_select)
+      include ActionView::Helpers::FormOptionsHelper
+      include ActionView::Helpers::Tags::SelectRenderer if defined?(ActionView::Helpers::Tags::SelectRenderer)
+    end
+
     def country_option_tags
       # In Rails 5.2+, `value` accepts no arguments and must also be called
       # with parens to avoid the local variable of the same name
