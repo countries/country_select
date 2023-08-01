@@ -187,8 +187,8 @@ end
 ## Example Application
 
 An example Rails application demonstrating the different options is
-available at [scudco/country_select_test](https://github.com/scudco/country_select_test).
-The relevant view files live [here](https://github.com/scudco/country_select_test/tree/master/app/views/welcome).
+available at [countries/country_select_demo](https://github.com/countries/country_select_demo) and deployed to [country-select-demo.onrender.com](https://country-select-demo.onrender.com).
+The relevant view files live [here](https://github.com/countries/country_select_demo/tree/master/app/views/demo).
 
 ## Contributing
 
