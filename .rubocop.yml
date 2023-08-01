@@ -5,8 +5,9 @@ AllCops:
 Metrics/MethodLength:
   Enabled: false
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 120
+  AllowedPatterns: ['^ *# ']
 
 Style/Documentation:
   Enabled: false

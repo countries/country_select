@@ -1,3 +1,9 @@
+## 8.0.2 2023-08-01
+
+* Code cleanup (@pmor)
+* Update CodeQL to V2 (@scudco)
+* Adding support for Rails 7.1 after recent Form Options helper changes (@ron-shinall)
+
 ## 8.0.1 2023-01-03
 
 * Update README.md by (@ron-shinall)
