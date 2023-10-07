@@ -1,3 +1,7 @@
+## 8.0.3 2023-10-07
+
+* Fix when country name is nil. (@zerobearing2)
+
 ## 8.0.2 2023-08-01
 
 * Code cleanup (@pmor)
