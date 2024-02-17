@@ -1,5 +1,5 @@
 # Rails – Country Select
-[![Gem Version](https://badge.fury.io/rb/country_select.svg)](https://badge.fury.io/rb/countries) [![build](https://github.com/countries/country_select/actions/workflows/test.yml/badge.svg)](https://github.com/countries/country_select/actions/workflows/test.yml)
+[![Gem Version](https://badge.fury.io/rb/country_select.svg)](https://badge.fury.io/rb/country_select) [![build](https://github.com/countries/country_select/actions/workflows/test.yml/badge.svg)](https://github.com/countries/country_select/actions/workflows/test.yml)
 [![Code Climate](https://codeclimate.com/github/countries/country_select.svg)](https://codeclimate.com/github/countries/country_select)
 [![CodeQL](https://github.com/countries/country_select/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/countries/country_select/actions/workflows/codeql-analysis.yml)
 
