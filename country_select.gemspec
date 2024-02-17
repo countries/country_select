@@ -32,5 +32,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec', '~> 3'
   s.add_development_dependency 'simplecov', '~> 0.22'
 
-  s.add_dependency 'countries', '~> 5.0'
+  s.add_dependency 'countries', '> 5.0', '< 7.0'
 end
