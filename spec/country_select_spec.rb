@@ -223,73 +223,11 @@ describe 'CountrySelect' do
   end
 
   context 'using old 1.x syntax' do
-    it 'accepts priority countries' do
-      tag = options_for_select(
-        [
-          ['Denmark', 'DK'],
-          ['Latvia', 'LV'],
-          ['United States', 'US'],
-          ['-' * 15, '-' * 15]
-        ],
-        selected: 'US',
-        disabled: '-' * 15
-      )
-
+    it 'raises ArgumentError' do
       walrus.country_code = 'US'
-      t = builder.country_select(:country_code, %w[LV US DK])
-      expect(t).to include(tag)
-    end
-
-    it 'selects only the first matching option' do
-      tag = options_for_select([['United States', 'US'], ['Uruguay', 'UY']], 'US')
-      walrus.country_code = 'US'
-      t = builder.country_select(:country_code, %w[LV US])
-      expect(t).to_not include(tag)
-    end
-
-    it 'supports the country names as provided by default in Formtastic' do
-      tag = options_for_select([['Australia', 'AU'],
-                                ['Canada', 'CA'],
-                                ['United Kingdom', 'GB'],
-                                ['United States', 'US']])
-      country_names = ['Australia', 'Canada', 'United Kingdom', 'United States']
-      t = builder.country_select(:country_code, country_names)
-      expect(t).to include(tag)
-    end
-
-    it 'raises an error when a country code or name is not found' do
-      country_names = [
-        'United States',
-        'Canada',
-        'United Kingdom',
-        'Mexico',
-        'Australia',
-        'Freedonia'
-      ]
-      error_msg = "Could not find Country with string 'Freedonia'"
-
-      expect do
-        builder.country_select(:country_code, country_names)
-      end.to raise_error(CountrySelect::CountryNotFoundError, error_msg)
-    end
-
-    it 'supports the select prompt' do
-      tag = '<option value="">Select your country</option>'
-      t = builder.country_select(:country_code, prompt: 'Select your country')
-      expect(t).to include(tag)
-    end
-
-    it 'supports the include_blank option' do
-      # Rails 6.1 more closely follows the HTML spec for
-      # empty option tags.
-      # https://github.com/rails/rails/pull/39808
-      tag = if ActionView::VERSION::STRING >= '6.1'
-              '<option value="" label=" "></option>'
-            else
-              '<option value=""></option>'
-            end
-      t = builder.country_select(:country_code, include_blank: true)
-      expect(t).to include(tag)
+      expect {
+        builder.country_select(:country_code, %w[LV US DK])
+      }.to raise_error(ArgumentError, 'Invalid syntax for country_select method. options must be a hash')
     end
   end
 
