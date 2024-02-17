@@ -3,21 +3,8 @@
 module ActionView
   module Helpers
     class FormBuilder
-      def country_select(method, priority_or_options = {}, options = {}, html_options = {})
-        if priority_or_options.is_a? Hash
-          html_options = options
-          options = priority_or_options
-        else
-          if RUBY_VERSION =~ /^3\.\d\.\d/
-            warn 'DEPRECATION WARNING: Setting priority countries with the 1.x syntax is deprecated. \
-                  Please use the `priority_countries:` option.', uplevel: 1, category: :deprecated
-          else
-            warn 'DEPRECATION WARNING: Setting priority countries with the 1.x syntax is deprecated. \
-                  Please use the `priority_countries:` option.', uplevel: 1
-          end
-          options[:priority_countries] = priority_or_options
-        end
-
+      def country_select(method, options = {}, html_options = {})
+        raise ArgumentError, "Invalid syntax for country_select method. options must be a hash" unless options.is_a?(Hash)
         @template.country_select(@object_name, method, objectify_options(options), @default_options.merge(html_options))
       end
     end
