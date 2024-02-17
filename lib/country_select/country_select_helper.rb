@@ -4,7 +4,10 @@ module ActionView
   module Helpers
     class FormBuilder
       def country_select(method, options = {}, html_options = {})
-        raise ArgumentError, "Invalid syntax for country_select method. options must be a hash" unless options.is_a?(Hash)
+        unless options.is_a?(Hash)
+          raise ArgumentError, 'Invalid syntax for country_select method. options must be a hash'
+        end
+
         @template.country_select(@object_name, method, objectify_options(options), @default_options.merge(html_options))
       end
     end
