@@ -1,3 +1,7 @@
+## 9.0.0 2024-02-17
+
+* Drop support for Ruby 2.7, Rails 5.2 and 6.0 (@pmor)
+
 ## 8.0.3 2023-10-07
 
 * Fix when country name is nil. (@zerobearing2)
