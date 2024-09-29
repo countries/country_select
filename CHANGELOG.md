@@ -1,3 +1,9 @@
+## 10.0.0 2024-09-29
+
+* Drop support for Ruby 3.0 (EOL 2024-04-23) (@pmor)
+* Add Rails 7.2 to the test matrix (@pmor)
+* Update countries gem to 7.0.0 (@pmor)
+
 ## 9.0.0 2024-02-17
 
 * Drop support for Ruby 2.7, Rails 5.2 and 6.0 (@pmor)
