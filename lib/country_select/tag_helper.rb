@@ -84,7 +84,7 @@ module CountrySelect
 
     def options_for_select_with_priority_countries(country_options, tags_options)
       sorted = @options.fetch(:sort_provided, ::CountrySelect::DEFAULTS[:sort_provided])
-      priority_countries_options = country_options_for(priority_countries, sorted: sorted)
+      priority_countries_options = country_options_for(priority_countries, sorted:)
 
       option_tags = priority_options_for_select(priority_countries_options, tags_options)
 
