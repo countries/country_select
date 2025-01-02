@@ -2,6 +2,7 @@
 
 require 'spec_helper'
 
+require 'uri'
 require 'action_view'
 require 'country_select'
 
