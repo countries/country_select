@@ -6,4 +6,4 @@ gemspec path: '../'
 
 gem 'railties', '~> 8.0.0'
 gem 'actionpack', '~> 8.0.0'
-gem 'nokogiri', '~> 1.16'
+gem 'nokogiri', '~> 1.18'

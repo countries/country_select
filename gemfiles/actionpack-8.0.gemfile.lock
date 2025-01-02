@@ -1,5 +1,5 @@
 PATH
-  remote: .
+  remote: ..
   specs:
     country_select (10.0.0)
       countries (> 5.0, < 8.0)
@@ -62,16 +62,22 @@ GEM
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     method_source (1.1.0)
-    mini_portile2 (2.8.8)
     minitest (5.25.4)
-    nokogiri (1.18.1)
-      mini_portile2 (~> 2.8.2)
+    nokogiri (1.18.1-aarch64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.1-aarch64-linux-musl)
+      racc (~> 1.4)
+    nokogiri (1.18.1-arm-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.1-arm-linux-musl)
       racc (~> 1.4)
     nokogiri (1.18.1-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.18.1-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.18.1-x86_64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.1-x86_64-linux-musl)
       racc (~> 1.4)
     pry (0.15.2)
       coderay (~> 1.1)
@@ -137,15 +143,19 @@ GEM
     zeitwerk (2.7.1)
 
 PLATFORMS
-  arm64-darwin-22
-  ruby
-  x86_64-darwin-22
-  x86_64-linux
+  aarch64-linux-gnu
+  aarch64-linux-musl
+  arm-linux-gnu
+  arm-linux-musl
+  arm64-darwin
+  x86_64-darwin
+  x86_64-linux-gnu
+  x86_64-linux-musl
 
 DEPENDENCIES
   actionpack (~> 8.0.0)
   country_select!
-  nokogiri (~> 1.16)
+  nokogiri (~> 1.18)
   pry (~> 0)
   railties (~> 8.0.0)
   rake (~> 13)
@@ -153,4 +163,4 @@ DEPENDENCIES
   simplecov (~> 0.22)
 
 BUNDLED WITH
-   2.5.11
+   2.6.2
