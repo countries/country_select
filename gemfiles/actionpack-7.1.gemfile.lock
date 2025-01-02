@@ -64,11 +64,21 @@ GEM
     method_source (1.1.0)
     minitest (5.25.4)
     mutex_m (0.3.0)
+    nokogiri (1.18.1-aarch64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.1-aarch64-linux-musl)
+      racc (~> 1.4)
+    nokogiri (1.18.1-arm-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.1-arm-linux-musl)
+      racc (~> 1.4)
     nokogiri (1.18.1-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.18.1-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.18.1-x86_64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.1-x86_64-linux-musl)
       racc (~> 1.4)
     pry (0.15.2)
       coderay (~> 1.1)
@@ -132,11 +142,15 @@ GEM
     zeitwerk (2.7.1)
 
 PLATFORMS
-  arm64-darwin-22
-  arm64-darwin-23
-  arm64-darwin-24
-  x86_64-darwin-22
+  aarch64-linux-gnu
+  aarch64-linux-musl
+  arm-linux-gnu
+  arm-linux-musl
+  arm64-darwin
+  x86_64-darwin
   x86_64-linux
+  x86_64-linux-gnu
+  x86_64-linux-musl
 
 DEPENDENCIES
   actionpack (~> 7.1.0)
