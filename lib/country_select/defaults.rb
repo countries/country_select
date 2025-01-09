@@ -7,7 +7,6 @@ module CountrySelect
     locale: nil,
     only: nil,
     priority_countries: nil,
-    priority_countries_divider: '-' * 15,
     sort_provided: true
   }
 end

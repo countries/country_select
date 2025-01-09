@@ -95,12 +95,10 @@ describe 'CountrySelect' do
       [
         ['Denmark', 'DK'],
         ['Latvia', 'LV'],
-        ['United States', 'US'],
-        ['-' * 15, '-' * 15]
+        ['United States', 'US']
       ],
-      selected: 'US',
-      disabled: '-' * 15
-    )
+      selected: 'US'
+    ) + "\n<hr>".html_safe
 
     walrus.country_code = 'US'
     t = builder.country_select(:country_code, priority_countries: %w[LV US DK])
@@ -112,12 +110,10 @@ describe 'CountrySelect' do
       [
         ['Denmark', 'DK'],
         ['Latvia', 'LV'],
-        ['United States', 'US'],
-        ['-' * 15, '-' * 15]
+        ['United States', 'US']
       ],
-      selected: 'US',
-      disabled: '-' * 15
-    )
+      selected: 'US'
+    ) + "\n<hr>".html_safe
 
     walrus.country_code = 'US'
     t = builder.country_select(:country_code, priority_countries: %w[LV US DK])
@@ -129,12 +125,10 @@ describe 'CountrySelect' do
       [
         ['Latvia', 'LV'],
         ['United States', 'US'],
-        ['Denmark', 'DK'],
-        ['-' * 15, '-' * 15]
+        ['Denmark', 'DK']
       ],
       selected: 'US',
-      disabled: '-' * 15
-    )
+    ) + "\n<hr>".html_safe
 
     walrus.country_code = 'US'
     t = builder.country_select(:country_code, priority_countries: %w[LV US DK], sort_provided: false)
@@ -146,12 +140,13 @@ describe 'CountrySelect' do
       [
         ['Latvia', 'LV'],
         ['United States', 'US'],
-        ['Denmark', 'DK'],
-        ['-' * 15, '-' * 15],
+        ['Denmark', 'DK']
+      ]
+    ) + "\n<hr>\n".html_safe + options_for_select(
+      [
         ['Afghanistan', 'AF']
       ],
-      selected: 'AF',
-      disabled: '-' * 15
+      selected: 'AF'
     )
 
     walrus.country_code = 'AF'
