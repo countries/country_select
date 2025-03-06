@@ -77,7 +77,14 @@ module CountrySelect
       I18n.with_locale(locale) do
         country_list = country_codes.map { |code_or_name| get_formatted_country(code_or_name) }
 
-        country_list.sort_by! { |name, _| [I18n.transliterate(name.to_s), name] } if sorted
+        country_list.sort_by! { |name, _|
+          transliterated_name = I18n.transliterate(name.to_s)
+          if transliterated_name.include?('?') # For languages that cannot be transliterated (e.g. languages with non-Latin scripts)
+            [name, name] # If transliteration fails, duplicate the original name to maintain a consistent two-element array structure.
+          else
+            [transliterated_name, name]
+          end
+        } if sorted
         country_list
       end
     end

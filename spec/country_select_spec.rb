@@ -238,6 +238,16 @@ describe 'CountrySelect' do
     expect(order).to eq(%w[AF AX AL ZW])
   end
 
+  it 'sorts non-Latin strings' do
+    I18n.available_locales = [:ja]
+    I18n.locale = :ja
+    ISO3166.reset
+
+    tag = builder.country_select(:country_code, only: %w[US CN JP KR])
+    order = tag.scan(/value="(\w{2})"/).map { |o| o[0] }
+    expect(order).to eq(%w[CN KR JP US])
+  end
+
   describe 'custom formats' do
     it 'accepts a custom formatter' do
       CountrySelect::FORMATS[:with_alpha2] = lambda do |country|
