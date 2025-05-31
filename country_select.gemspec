@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
   s.require_paths = ['lib']
 
-  s.required_ruby_version = '>= 3.1'
+  s.required_ruby_version = '>= 3.2'
 
   s.add_development_dependency 'actionpack', '> 7.0'
   s.add_development_dependency 'pry', '~> 0'
@@ -32,5 +32,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec', '~> 3'
   s.add_development_dependency 'simplecov', '~> 0.22'
 
-  s.add_dependency 'countries', '> 5.0', '< 8.0'
+  s.add_dependency 'countries', '> 6.0', '< 9.0'
 end
