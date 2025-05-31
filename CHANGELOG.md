@@ -1,3 +1,9 @@
+## 11.0.0 2025-05-31
+
+* fix: Improve sorting for non-Latin country names by @kiyohara in https://github.com/countries/country_select/pull/230
+* Drop support for Ruby 3.1, Rails 7.0 and countries gem 5.x. Allow countries gem 8.x by @pmor in https://github.com/countries/country_select/pull/232
+* Use <hr> as divider by @ursm in https://github.com/countries/country_select/pull/229
+
 ## 10.0.1 2025-01-04
 
 * Add Ruby 3.4 and Rails 8.0 to the test matrix and drop Rails 6.1 tests. by @pmor in https://github.com/countries/country_select/pull/228
