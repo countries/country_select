@@ -76,11 +76,6 @@ Pre-selecting a particular country:
 country_select("user", "country", selected: "GB")
 ```
 
-Changing the divider when priority_countries is active.
-```ruby
-country_select("user", "country", priority_countries: ["AR", "US"], priority_countries_divider: "~~~~~~")
-```
-
 Using existing `select` options:
 ```ruby
 country_select("user", "country", include_blank: true)
@@ -126,7 +121,7 @@ country_select("user", "country", format: :with_data_attrs)
 ### Using customized defaults
 
 You can configure overridable defaults for `except`, `format`, `locale`,
-`only`, `priority_countries` and `priority_countries_divider` in an initializer.
+`only` and `priority_countries` in an initializer.
 
 ````ruby
 # config/initializers/country_select.rb

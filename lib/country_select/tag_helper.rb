@@ -43,10 +43,6 @@ module CountrySelect
       @options.fetch(:priority_countries, ::CountrySelect::DEFAULTS[:priority_countries])
     end
 
-    def priority_countries_divider
-      @options.fetch(:priority_countries_divider, ::CountrySelect::DEFAULTS[:priority_countries_divider])
-    end
-
     def only_country_codes
       @options.fetch(:only, ::CountrySelect::DEFAULTS[:only])
     end
@@ -105,9 +101,7 @@ module CountrySelect
     end
 
     def priority_options_for_select(priority_countries_options, tags_options)
-      option_tags = options_for_select(priority_countries_options, tags_options)
-      option_tags += "\n".html_safe +
-                     options_for_select([priority_countries_divider], disabled: priority_countries_divider)
+      options_for_select(priority_countries_options, tags_options) + "\n<hr>".html_safe
     end
 
     def get_formatted_country(code_or_name)
