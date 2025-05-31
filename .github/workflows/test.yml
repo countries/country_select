@@ -28,7 +28,7 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true
-        cache-version: 9
+        cache-version: 10
     - name: Run tests
 
       run: bundle exec rake
