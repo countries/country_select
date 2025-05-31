@@ -3,3 +3,5 @@
 source 'https://rubygems.org'
 
 gemspec
+
+gem 'actionpack', '> 7.0'
