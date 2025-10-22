@@ -246,10 +246,10 @@ describe 'CountrySelect' do
   describe 'custom formats' do
     it 'accepts a custom formatter' do
       CountrySelect::FORMATS[:with_alpha2] = lambda do |country|
-        "#{country.iso_short_name} (#{country.alpha2})"
+        "#{country.common_name} (#{country.alpha2})"
       end
 
-      tag = options_for_select([['United States of America (US)', 'US']], 'US')
+      tag = options_for_select([['United States (US)', 'US']], 'US')
 
       walrus.country_code = 'US'
       t = builder.country_select(:country_code, format: :with_alpha2)
@@ -258,10 +258,10 @@ describe 'CountrySelect' do
 
     it 'accepts an array for formatter' do
       CountrySelect::FORMATS[:with_alpha3] = lambda do |country|
-        [country.iso_short_name, country.alpha3]
+        [country.common_name, country.alpha3]
       end
 
-      tag = options_for_select([['United States of America', 'USA']], 'USA')
+      tag = options_for_select([['United States', 'USA']], 'USA')
       walrus.country_code = 'USA'
       t = builder.country_select(:country_code, format: :with_alpha3)
       expect(t).to include(tag)
@@ -269,10 +269,10 @@ describe 'CountrySelect' do
 
     it 'accepts an array for formatter + custom formatter' do
       CountrySelect::FORMATS[:with_alpha3] = lambda do |country|
-        ["#{country.iso_short_name} (#{country.alpha2})", country.alpha3]
+        ["#{country.common_name} (#{country.alpha2})", country.alpha3]
       end
 
-      tag = options_for_select([['United States of America (US)', 'USA']], 'USA')
+      tag = options_for_select([['United States (US)', 'USA']], 'USA')
       walrus.country_code = 'USA'
       t = builder.country_select(:country_code, format: :with_alpha3)
       expect(t).to include(tag)
@@ -280,10 +280,10 @@ describe 'CountrySelect' do
 
     it 'marks priority countries as selected only once' do
       CountrySelect::FORMATS[:with_alpha3] = lambda do |country|
-        [country.iso_short_name, country.alpha3]
+        [country.common_name, country.alpha3]
       end
 
-      tag = options_for_select([['United States of America', 'USA']], 'USA')
+      tag = options_for_select([['United States', 'USA']], 'USA')
       walrus.country_code = 'USA'
       t = builder.country_select(:country_code, format: :with_alpha3, priority_countries: ['US'])
       expect(t.scan(Regexp.new(Regexp.escape(tag))).size).to eq 1
