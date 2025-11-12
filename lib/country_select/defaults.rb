@@ -7,6 +7,7 @@ module CountrySelect
     locale: nil,
     only: nil,
     priority_countries: nil,
-    sort_provided: true
+    sort_provided: true,
+    icons: true,
   }
 end
