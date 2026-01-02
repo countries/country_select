@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: [3.2, 3.3, 3.4]
+        ruby: [3.2, 3.3, 3.4, '4.0']
         gemfile: [7.1, 7.2, '8.0', 8.1]
     env: # $BUNDLE_GEMFILE must be set at the job level, so it is set for all steps
       BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/actionpack-${{ matrix.gemfile }}.gemfile
