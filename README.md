@@ -28,7 +28,7 @@ gem install country_select
 Or put the following in your Gemfile
 
 ```ruby
-gem 'country_select', '~> 8.0'
+gem 'country_select', '~> 11.0'
 ```
 
 ## Usage
