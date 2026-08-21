@@ -55,6 +55,26 @@ country_select("user", "country", priority_countries: ["GB", "FR", "DE"]) # Coun
 country_select("user", "country", priority_countries: ["GB", "FR", "DE"], sort_provided: false) # Countries will be displayed is the provided order
 ```
 
+Suggesting one context-specific country without pre-selecting it:
+
+```ruby
+country_hint = @country_hint # An optional, validated ISO alpha-2 country code
+suggested = country_hint.present? ? [country_hint] : []
+
+country_select(
+  "user",
+  "country",
+  priority_countries: suggested,
+  except: suggested,
+  include_blank: "Select a country"
+)
+```
+
+This displays a usable hint once at the top while leaving the blank option
+selected until the user chooses. If there is no hint, `suggested` is empty and
+the ordinary country list is unchanged. Resolve and validate the hint in the
+application; do not pass `selected` unless a value has already been chosen.
+
 Supplying only certain countries:
 
 ```ruby
