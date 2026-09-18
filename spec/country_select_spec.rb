@@ -37,6 +37,18 @@ describe 'CountrySelect' do
     HTML
   end
 
+  it 'does not render FormBuilder options as HTML attributes' do
+    form_builder = ActionView::Helpers::FormBuilder.new(
+      :walrus, walrus, template,
+      { skip_default_ids: false, allow_method_names_outside_object: false }
+    )
+
+    t = form_builder.country_select(:country_code)
+
+    expect(t).to_not include('skip_default_ids')
+    expect(t).to_not include('allow_method_names_outside_object')
+  end
+
   it 'selects the value of country_code' do
     tag = options_for_select([['United States', 'US']], 'US')
 

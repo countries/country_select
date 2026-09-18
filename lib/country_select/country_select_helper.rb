@@ -8,7 +8,12 @@ module ActionView
           raise ArgumentError, 'Invalid syntax for country_select method. options must be a hash'
         end
 
-        @template.country_select(@object_name, method, objectify_options(options), @default_options.merge(html_options))
+        @template.country_select(
+          @object_name,
+          method,
+          objectify_options(options),
+          @default_html_options.merge(html_options)
+        )
       end
     end
 
